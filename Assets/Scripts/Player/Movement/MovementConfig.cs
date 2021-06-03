@@ -4,43 +4,47 @@ using UnityEngine;
 
 public class MovementConfig : MonoBehaviour
 {
+    public bool IsGrounded { get; set; }
+    public bool IsJumping { get; set; }
+    public bool CanJump { get; set; }
+    /// <summary>
+    /// e.g. walking on ice, closer to 0 the more movment slides
+    /// </summary>
+    public float MovementSharpness { get { return _movementSharpness; } set { _movementSharpness = value; } }
     public float WalkingSpeed => _walkingSpeed;
     public float RunningSpeed => _runningSpeed;
-    public bool IsRunning { get; set; }
-    public bool IsJumping { get; set; }
-    public bool IsGrounded { get; set; }
-    public bool CanJump => _jumpCount > 0;
+    public float JumpForce => _jumpForce;
+    public float Gravity => Physics.gravity.y;
     public int MaxJumps => _maxJumps;
-    public int JumpsLeft => _maxJumps - _jumpCount;
+    public int JumpsLeft => _maxJumps - _jumpsLeft;
 
     [SerializeField] private float _walkingSpeed;
     [SerializeField] private float _runningSpeed;
+    [SerializeField] private float _jumpForce;
+    [SerializeField] private float _movementSharpness;
     [SerializeField] private int _maxJumps;
-    [SerializeField] private bool _isRunning;
-    [SerializeField] private bool _isGrounded;
-    [SerializeField] private bool _isJumping;
-    [SerializeField] private int _jumpCount;
+    [SerializeField] private int _jumpsLeft;
 
     public void Init()
     {
-
     }
 
     public void Jump()
     {
-        if (CanJump)
-        {
-            _jumpCount++;
-            IsJumping = true;
-            IsGrounded = false;
-        }
+        _jumpsLeft++;
+        IsJumping = true;
+        IsGrounded = false;
     }
 
-    public void Land()
+    public void ResetJumps()
     {
-        _jumpCount = 0;
+        _jumpsLeft = 0;
         IsJumping = false;
-        IsGrounded = true;
+    }
+
+    public void IncreaseMaxJumps(int additionalJumps)
+    {
+        _maxJumps += additionalJumps;
     }
 
 }
