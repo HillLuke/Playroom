@@ -9,6 +9,7 @@ public abstract class PlayerMovement : MonoBehaviour
 
     protected MovementConfig _movementData;
     protected PlayerInput _playerInput;
+    protected Camera _camera;
 
     protected virtual void Start()
     {
@@ -18,6 +19,7 @@ public abstract class PlayerMovement : MonoBehaviour
     {
         _playerInput = GetComponent<PlayerInput>();
         _movementData = GetComponent<MovementConfig>();
+        _camera = Camera.main;
 
         _movementData.Init();
         _playerInput.ReleaseControl();
@@ -25,7 +27,7 @@ public abstract class PlayerMovement : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        Move(_playerInput.MovementVector);
+        CalculateMove();
     }
 
     protected virtual void Update()
@@ -38,18 +40,11 @@ public abstract class PlayerMovement : MonoBehaviour
         if (_movementData.CanJump)
         {
             _movementData.CanJump = false;
-            Jump();
+            CalculateJump();
         }
     }
 
-    /// <summary>
-    ///Makes the player jump
-    /// </summary>
-    protected abstract void Jump();
+    protected abstract void CalculateJump();
 
-    /// <summary>
-    /// Move the player
-    /// </summary>
-    /// <param name="MovementVector">Input vector for directional movement</param>
-    protected abstract void Move(Vector2 MovementVector);
+    protected abstract void CalculateMove();
 }

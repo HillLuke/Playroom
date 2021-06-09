@@ -7,6 +7,7 @@ public class PlayerMovementCharacterController : PlayerMovement
 {
     private CharacterController _characterController;
     [SerializeField] private Vector3 _playerVelocity;
+    [SerializeField] private float TurnSpeed;
 
     protected override void Awake()
     {
@@ -23,6 +24,8 @@ public class PlayerMovementCharacterController : PlayerMovement
     {
         base.FixedUpdate();
 
+        UpdateOrientation();
+
         _characterController.Move(_playerVelocity * Time.deltaTime);
         _movementData.IsGrounded = _characterController.isGrounded;
 
@@ -32,30 +35,29 @@ public class PlayerMovementCharacterController : PlayerMovement
         }
     }
 
-    protected override void Jump()
+    protected override void CalculateJump()
     {
         _playerVelocity.y = _movementData.JumpForce;
 
         _movementData.Jump();
     }
 
-    protected override void Move(Vector2 MovementVector)
+    protected override void CalculateMove()
     {
-        if (_movementData.MovementSharpness == 0)
+        //Get worldspace input to handle movment based off of current rotation
+        var moveinput = new Vector3(_playerInput.MovementVector.x, 0, _playerInput.MovementVector.y);
+        moveinput = Vector3.ClampMagnitude(moveinput, 1);
+        Vector3 worldspaceMoveInput = transform.TransformVector(moveinput);
+        Vector3 targetVelocity = worldspaceMoveInput * (_playerInput.Run ? _movementData.RunningSpeed : _movementData.WalkingSpeed);
+
+        if (_movementData.MovementSharpness <= 0)
         {
-            var moveinput = new Vector3(MovementVector.x, 0, MovementVector.y);
-            var moveVector = moveinput * (_playerInput.Run ? _movementData.RunningSpeed : _movementData.WalkingSpeed);
-            _playerVelocity.x = moveVector.x;
-            _playerVelocity.z = moveVector.z;
+            _playerVelocity.x = targetVelocity.x;
+            _playerVelocity.z = targetVelocity.z;
         }
         else
         {
             //Moving on slidy surface 
-            var moveinput = new Vector3(MovementVector.x, 0, MovementVector.y);
-            moveinput = Vector3.ClampMagnitude(moveinput, 1);
-            Vector3 worldspaceMoveInput = transform.TransformVector(moveinput);
-
-            Vector3 targetVelocity = worldspaceMoveInput * (_playerInput.Run ? _movementData.RunningSpeed : _movementData.WalkingSpeed);
             var moveVector = Vector3.Lerp(_playerVelocity, targetVelocity, _movementData.MovementSharpness * Time.deltaTime);
             _playerVelocity.x = moveVector.x;
             _playerVelocity.z = moveVector.z;
@@ -83,5 +85,13 @@ public class PlayerMovementCharacterController : PlayerMovement
                 _playerVelocity.y += _movementData.Gravity * 1f * Time.deltaTime;
             }
         }
+    }
+    
+    void UpdateOrientation()
+    {
+        //Make the player always face forward
+        float yaw = _camera.transform.rotation.eulerAngles.y;
+        //Use 1 in Slerp to make rotation instant
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, yaw, 0), 1);
     }
 }
