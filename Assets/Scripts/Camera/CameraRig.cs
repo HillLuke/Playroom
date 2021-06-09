@@ -27,7 +27,7 @@ public class CameraRig : MonoBehaviour
     {
         if (Follow == null && LookAt == null)
         {
-            var player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+            var player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovementBase>();
             Follow = player.gameObject.transform;
             LookAt = player.LookAt.transform;
         }
