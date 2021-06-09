@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMovementCharacterController : PlayerMovement
+public class PlayerMovementCharacterController : PlayerMovementBase
 {
     private CharacterController _characterController;
     [SerializeField] private Vector3 _playerVelocity;

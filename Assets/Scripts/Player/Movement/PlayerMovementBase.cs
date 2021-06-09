@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(MovementConfig))]
-public abstract class PlayerMovement : MonoBehaviour
+public abstract class PlayerMovementBase : MonoBehaviour
 {
     public bool DebugLogging;
     // Where the camera will centre on
