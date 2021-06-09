@@ -6,6 +6,8 @@ using UnityEngine;
 public abstract class PlayerMovement : MonoBehaviour
 {
     public bool DebugLogging;
+    // Where the camera will centre on
+    public GameObject LookAt;
 
     protected MovementConfig _movementData;
     protected PlayerInput _playerInput;

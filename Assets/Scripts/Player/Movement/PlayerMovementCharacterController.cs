@@ -7,7 +7,6 @@ public class PlayerMovementCharacterController : PlayerMovement
 {
     private CharacterController _characterController;
     [SerializeField] private Vector3 _playerVelocity;
-    [SerializeField] private float TurnSpeed;
 
     protected override void Awake()
     {
