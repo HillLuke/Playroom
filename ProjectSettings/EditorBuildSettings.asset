@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GunRange.unity
     guid: 3fbc522be586ea941ae461f8db67ee1d
+  - enabled: 1
+    path: Assets/Scenes/ObstacleCourse.unity
+    guid: 6bf06fc60b59e534f95a8f50b2b89cf0
   m_configObjects: {}
