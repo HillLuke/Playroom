@@ -28,8 +28,12 @@ public class CameraRig : MonoBehaviour
         if (Follow == null && LookAt == null)
         {
             var player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovementBase>();
-            Follow = player.gameObject.transform;
-            LookAt = player.LookAt.transform;
+
+            if (player != null)
+            {
+                Follow = player.gameObject.transform;
+                LookAt = player.LookAt.transform;
+            }
         }
     }
 }
