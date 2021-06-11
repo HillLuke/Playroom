@@ -11,8 +11,10 @@ public class MovementConfig : MonoBehaviour
     /// e.g. walking on ice, closer to 0 the more movment slides
     /// </summary>
     public float MovementSharpness { get { return _movementSharpness; } set { _movementSharpness = value; } }
-    public float WalkingSpeed => _walkingSpeed;
-    public float RunningSpeed => _runningSpeed;
+    public float WalkingSpeedModifier { get; set; }
+    public float RunningSpeedModifier { get; set; }
+    public float WalkingSpeed => WalkingSpeedModifier == 0 ? _walkingSpeed : _walkingSpeed * WalkingSpeedModifier;
+    public float RunningSpeed => RunningSpeedModifier == 0 ? _runningSpeed : _runningSpeed * RunningSpeedModifier;
     public float JumpForce => _jumpForce;
     public float Gravity => Physics.gravity.y;
     public int MaxJumps => _maxJumps;
@@ -27,6 +29,8 @@ public class MovementConfig : MonoBehaviour
 
     public void Init()
     {
+        WalkingSpeedModifier = 0f;
+        RunningSpeedModifier = 0f;
     }
 
     public void Jump()
