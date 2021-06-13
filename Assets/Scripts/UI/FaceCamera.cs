@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Assets.Scripts.UI
+{
 public class FaceCamera : MonoBehaviour
 {
     Camera _camera;
@@ -15,4 +17,5 @@ public class FaceCamera : MonoBehaviour
     {
         transform.rotation = Quaternion.LookRotation(_camera.transform.forward);
     }
+}
 }

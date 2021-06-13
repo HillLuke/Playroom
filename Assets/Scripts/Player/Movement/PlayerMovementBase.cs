@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Assets.Scripts.Player.Movement
+{
 [RequireComponent(typeof(MovementConfig))]
 public abstract class PlayerMovementBase : MonoBehaviour
 {
@@ -49,4 +51,5 @@ public abstract class PlayerMovementBase : MonoBehaviour
     protected abstract void CalculateJump();
 
     protected abstract void CalculateMove();
+}
 }

@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+namespace Assets.Scripts.Interactable.Listener
+{
 [RequireComponent(typeof(Collider))]
 public class ColliderListener : MonoBehaviour
 {
@@ -10,4 +12,5 @@ public class ColliderListener : MonoBehaviour
     {
         CollisionEnterEvent.Invoke();
     }
+}
 }

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Assets.Scripts.Player
+{
 /// <summary>
 /// Handles player input
 /// </summary>
@@ -56,4 +58,5 @@ public class PlayerInput : MonoBehaviour
     {
         Debug.Log($"Movement - {_movment}");
     }
+}
 }

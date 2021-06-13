@@ -1,6 +1,8 @@
 using Cinemachine;
 using UnityEngine;
 
+namespace Assets.Scripts.Camera
+{
 [ExecuteInEditMode]
 public class CameraRig : MonoBehaviour
 {
@@ -36,4 +38,5 @@ public class CameraRig : MonoBehaviour
             }
         }
     }
+}
 }

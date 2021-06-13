@@ -1,7 +1,8 @@
-
 using UnityEngine;
 using UnityEngine.Events;
 
+namespace Assets.Scripts.Interactable.Listener
+{
 [RequireComponent(typeof(Collider))]
 public class TriggerListener : MonoBehaviour
 {
@@ -11,4 +12,5 @@ public class TriggerListener : MonoBehaviour
     {
         TriggerEnterEvent.Invoke();
     }
+}
 }

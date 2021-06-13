@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Assets.Scripts.Player.Movement
+{
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovementCharacterController : PlayerMovementBase
 {
@@ -93,4 +95,5 @@ public class PlayerMovementCharacterController : PlayerMovementBase
         //Use 1 in Slerp to make rotation instant
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, yaw, 0), 1);
     }
+}
 }

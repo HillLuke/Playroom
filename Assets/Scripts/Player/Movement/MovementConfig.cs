@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Assets.Scripts.Player.Movement
+{
 public class MovementConfig : MonoBehaviour
 {
     public bool IsGrounded { get; set; }
@@ -51,4 +53,5 @@ public class MovementConfig : MonoBehaviour
         _maxJumps += additionalJumps;
     }
 
+}
 }

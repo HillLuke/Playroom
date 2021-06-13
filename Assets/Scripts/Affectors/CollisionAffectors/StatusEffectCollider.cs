@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Assets.Scripts.Affectors.CollisionAffectors
+{
 public class StatusEffectCollider : CollisionAffectorBase
 {
     public StatusEffectBase statusEffect;
@@ -27,4 +29,5 @@ public class StatusEffectCollider : CollisionAffectorBase
             t.Remove();
         }
     }
+}
 }
