@@ -1,3 +1,4 @@
+using Assets.Scripts.Player.Movement;
 using Cinemachine;
 using UnityEngine;
 

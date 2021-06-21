@@ -13,7 +13,7 @@ public abstract class PlayerMovementBase : MonoBehaviour
 
     protected MovementConfig _movementData;
     protected PlayerInput _playerInput;
-    protected Camera _camera;
+    protected UnityEngine.Camera _camera;
 
     protected virtual void Start()
     {
@@ -23,7 +23,7 @@ public abstract class PlayerMovementBase : MonoBehaviour
     {
         _playerInput = GetComponent<PlayerInput>();
         _movementData = GetComponent<MovementConfig>();
-        _camera = Camera.main;
+        _camera = UnityEngine.Camera.main;
 
         _movementData.Init();
         _playerInput.ReleaseControl();
