@@ -13,7 +13,7 @@ namespace Assets.Scripts.Affectors.CollisionAffectors
 
             if (BuffableEntity != null)
             {
-                BuffableEntity.effects.Add(Effect);
+                BuffableEntity.AddEffect(Instantiate<EffectBase>(Effect));
             }
         }
 

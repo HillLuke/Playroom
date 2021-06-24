@@ -6,6 +6,16 @@ namespace Assets.Scripts.Effects.Debuffs
 {
     public class Debuff : EffectBase
     {
-        protected override EffectType EffectType { get => EffectType.Debuff; }
+        public override EffectType EffectType { get => EffectType.Debuff; }
+
+        protected override void ApplyEffect()
+        {
+            base.ApplyEffect();
+        }
+
+        protected override void End()
+        {
+            base.End();
+        }
     }
 }
