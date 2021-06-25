@@ -38,3 +38,4 @@ sysinfo.txt
 *.log
 Logs/*
 Assets/Plugins.meta
+Assets/Plugins/*
