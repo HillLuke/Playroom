@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Effects.Buffs
 {
-    public class Buff : EffectBase
+    public abstract class Buff : EffectBase
     {
-        public override EffectType EffectType { get => EffectType.Buff; }
+        public override Effect EffectType { get => Effect.Buff; }
 
         protected override void ApplyEffect()
         {

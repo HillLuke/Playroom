@@ -1,12 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Effects.Debuffs
 {
-    public class Debuff : EffectBase
+    [Serializable]
+    public abstract class Debuff : EffectBase
     {
-        public override EffectType EffectType { get => EffectType.Debuff; }
+        public override Effect EffectType { get => Effect.Debuff; }
 
         protected override void ApplyEffect()
         {

@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Effects.Passive
 {
-    public class Passive : EffectBase
+    public abstract class Passive : EffectBase
     {
-        public override EffectType EffectType { get => EffectType.Passive; }
+        public override Effect EffectType { get => Effect.Passive; }
 
         protected override void ApplyEffect()
         {

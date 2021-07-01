@@ -1,4 +1,7 @@
 using Assets.Scripts.Effects;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,11 +9,12 @@ using UnityEngine;
 
 namespace Assets.Scripts.Effects
 {
+    [Serializable]
     public class BuffableEntity : MonoBehaviour
     {
         public List<EffectBase> Effects { get { return _effects; } }
 
-        [SerializeField]
+        [SerializeReference]
         private List<EffectBase> _effects;
 
         public void AddEffect(EffectBase effect)
@@ -25,11 +29,9 @@ namespace Assets.Scripts.Effects
             foreach (var effect in _effects.Where(x => x.IsActive))
             {
                 effect.Tick(Time.deltaTime);
-                if (effect.IsFinished)
-                {
-                    _effects.Remove(effect);
-                }
             }
+
+            _effects.RemoveAll(x => x.IsFinished);
         }
 
         private void Awake()

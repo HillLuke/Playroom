@@ -1,11 +1,19 @@
+using Sirenix.Serialization;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Effects
 {
-    public abstract class EffectBase : ScriptableObject
+    /// <summary>
+    /// Base class for status effects (buffs, debuffs, passives)
+    /// Inheritance allows for more customizable effects such as using the same effect in multiple places with difference strengths
+    /// Striptable Object may be better in instances where effect data never changes e.g. Fire damage will always do 5hp damage
+    /// </summary>
+    public abstract class EffectBase
     {
+        [Header("Effect Base Settings")]
         public string EffectName;
         public string Description;
         public float Duration;   
@@ -15,7 +23,7 @@ namespace Assets.Scripts.Effects
         public int Stacks { get { return _stacks; } }
         public bool IsActive { get {return _isActive; } }
         public bool IsFinished { get { return _isFinished; } }
-        public abstract EffectType EffectType { get; }
+        public virtual Effect EffectType { get; }
 
         private protected bool _isActive;
         private protected bool _isFinished;
@@ -60,12 +68,33 @@ namespace Assets.Scripts.Effects
             _isActive = false;
             _isFinished = true;
         }
+
+        public abstract EffectBase Copy();
     }
 
-    public enum EffectType
+    public enum Effect
     {
         Buff,
         Debuff,
         Passive
+    }
+
+    public enum EffectBehaviour
+    {
+        DamageOverTime,
+        HealingOverTime,
+        CrowdControl,
+        StatChange
+    }
+
+    public enum EffectType
+    {
+        None,
+        Disease,
+        Poison,
+        Bleed,
+        Fire,
+        Holy,
+        Aura
     }
 }
