@@ -132,7 +132,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 307683961521714109, guid: deff9067bf8e45a48a512176e17c8f39, type: 3}
       propertyPath: m_text
-      value: Obstacle Course
+      value: Status Effects
       objectReference: {fileID: 0}
     - target: {fileID: 307683961735526313, guid: deff9067bf8e45a48a512176e17c8f39, type: 3}
       propertyPath: m_Mesh
@@ -150,6 +150,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneLoadingPortal_ObstacleCourse
       objectReference: {fileID: 0}
+    - target: {fileID: 7555585665181738156, guid: deff9067bf8e45a48a512176e17c8f39, type: 3}
+      propertyPath: SceneData
+      value: 
+      objectReference: {fileID: 11400000, guid: ee1216986f990734ca05c12d9f357db4, type: 2}
     - target: {fileID: 7555585665181738156, guid: deff9067bf8e45a48a512176e17c8f39, type: 3}
       propertyPath: SceneToLoad
       value: ObstacleCourse
@@ -409,7 +413,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2138
+  m_Name: pb_Mesh-6474
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -669,7 +673,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2518
+  m_Name: pb_Mesh-6364
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -882,7 +886,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
 --- !u!114 &1354579140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1049,15 +1053,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1163735225960740919, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.030805657
+      value: -0.03080566
       objectReference: {fileID: 0}
     - target: {fileID: 1163735225960740919, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000001726536
+      value: -0.000000017164691
       objectReference: {fileID: 0}
     - target: {fileID: 1163735225960740919, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 5.321233e-10
+      value: -5.290207e-10
       objectReference: {fileID: 0}
     - target: {fileID: 1244352099083041407, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1085,15 +1089,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1244352100455064940, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.030805659
+      value: -0.030805662
       objectReference: {fileID: 0}
     - target: {fileID: 1244352100455064940, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000034480344
+      value: -0.000000034379678
       objectReference: {fileID: 0}
     - target: {fileID: 1244352100455064940, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000001062694
+      value: -0.0000000010595916
       objectReference: {fileID: 0}
     - target: {fileID: 1244352100523682328, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_RootOrder
@@ -1197,15 +1201,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8814980960058649104, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.062325213
+      value: -0.06232521
       objectReference: {fileID: 0}
     - target: {fileID: 8814980960058649104, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000001703981
+      value: -0.00000001730657
       objectReference: {fileID: 0}
     - target: {fileID: 8814980960058649104, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000010640785
+      value: -0.0000000010807367
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
@@ -1236,6 +1240,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneLoadingPortal_GunRange
       objectReference: {fileID: 0}
+    - target: {fileID: 7555585665181738156, guid: deff9067bf8e45a48a512176e17c8f39, type: 3}
+      propertyPath: SceneData
+      value: 
+      objectReference: {fileID: 11400000, guid: 5c812b18ee48b0d4ab3006683e111bba, type: 2}
     - target: {fileID: 7555585665181738156, guid: deff9067bf8e45a48a512176e17c8f39, type: 3}
       propertyPath: SceneToLoad
       value: GunRange
