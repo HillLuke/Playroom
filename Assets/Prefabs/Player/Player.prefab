@@ -195,6 +195,8 @@ MonoBehaviour:
   _runningSpeed: 10
   _jumpForce: 5
   _movementSharpness: 0
+  _walkingSpeedModifier: 0
+  _runningSpeedModifier: 0
   _maxJumps: 2
   _jumpsLeft: 0
 --- !u!143 &9183795812435189033
@@ -227,6 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5527f55052fea24f8d00595b1f570db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerInputData: {fileID: 11400000, guid: 4618377e8e6e6c24ab3e53b7c21f7d8d, type: 2}
   DebugLogging: 0
 --- !u!114 &2134928051671863414
 MonoBehaviour:
@@ -240,7 +243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30135ab375d544c43836c977586963d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effects: []
+  _effects: []
+  references:
+    version: 1
 --- !u!1 &9183795812951253087
 GameObject:
   m_ObjectHideFlags: 0

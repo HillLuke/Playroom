@@ -4,40 +4,43 @@ using UnityEngine;
 
 namespace Assets.Scripts.Camera
 {
-[ExecuteInEditMode]
-public class CameraRig : MonoBehaviour
-{
-    public Transform Follow;
-    public Transform LookAt;
-    public CinemachineFreeLook FreeLookMovement;
-
-    void Start()
+    [ExecuteInEditMode]
+    public class CameraRig : MonoBehaviour
     {
-        FollowAndLookCheck();
-        UpdateSettings();
-    }
+        public Transform Follow;
+        public Transform LookAt;
+        public CinemachineFreeLook FreeLookMovement;
 
-    public void UpdateSettings()
-    {
-        FreeLookMovement.Follow = Follow;
-        FreeLookMovement.LookAt = LookAt;
-    }
-
-    /// <summary>
-    /// Auto follow and look at the player if not set
-    /// </summary>
-    private void FollowAndLookCheck()
-    {
-        if (Follow == null && LookAt == null)
+        void Start()
         {
-            var player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovementBase>();
+            FollowAndLookCheck();
+            UpdateSettings();
+        }
 
-            if (player != null)
+        public void UpdateSettings()
+        {
+            FreeLookMovement.Follow = Follow;
+            FreeLookMovement.LookAt = LookAt;
+        }
+
+        /// <summary>
+        /// Auto follow and look at the player if not set
+        /// </summary>
+        private void FollowAndLookCheck()
+        {
+            if (Follow == null && LookAt == null)
             {
-                Follow = player.gameObject.transform;
-                LookAt = player.LookAt.transform;
+                var player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovementBase>();
+
+                if (player != null)
+                {
+                    Follow = player.gameObject.transform;
+                    LookAt = player.LookAt.transform;
+
+                    FreeLookMovement.m_XAxis.m_MaxSpeed = player.PlayerInput.PlayerInputData.HorizontalSensitivity;
+                    FreeLookMovement.m_YAxis.m_MaxSpeed = player.PlayerInput.PlayerInputData.VerticalSensitivity;
+                }
             }
         }
     }
-}
 }

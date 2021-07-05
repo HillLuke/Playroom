@@ -4,52 +4,54 @@ using UnityEngine;
 
 namespace Assets.Scripts.Player.Movement
 {
-[RequireComponent(typeof(MovementConfig))]
-public abstract class PlayerMovementBase : MonoBehaviour
-{
-    public bool DebugLogging;
-    // Where the camera will centre on
-    public GameObject LookAt;
-
-    protected MovementConfig _movementData;
-    protected PlayerInput _playerInput;
-    protected UnityEngine.Camera _camera;
-
-    protected virtual void Start()
+    [RequireComponent(typeof(MovementConfig))]
+    public abstract class PlayerMovementBase : MonoBehaviour
     {
-    }
+        public bool DebugLogging;
+        // Where the camera will centre on
+        public GameObject LookAt;
 
-    protected virtual void Awake()
-    {
-        _playerInput = GetComponent<PlayerInput>();
-        _movementData = GetComponent<MovementConfig>();
-        _camera = UnityEngine.Camera.main;
+        public PlayerInput PlayerInput => _playerInput;
 
-        _movementData.Init();
-        _playerInput.ReleaseControl();
-    }
+        protected MovementConfig _movementData;
+        protected PlayerInput _playerInput;
+        protected UnityEngine.Camera _camera;
 
-    protected virtual void FixedUpdate()
-    {
-        CalculateMove();
-    }
-
-    protected virtual void Update()
-    {
-        if (_playerInput.Jump && _movementData.JumpsLeft > 0 && !_movementData.CanJump)
+        protected virtual void Start()
         {
-            _movementData.CanJump = true;
         }
 
-        if (_movementData.CanJump)
+        protected virtual void Awake()
         {
-            _movementData.CanJump = false;
-            CalculateJump();
+            _playerInput = GetComponent<PlayerInput>();
+            _movementData = GetComponent<MovementConfig>();
+            _camera = UnityEngine.Camera.main;
+
+            _movementData.Init();
+            _playerInput.ReleaseControl();
         }
+
+        protected virtual void FixedUpdate()
+        {
+            CalculateMove();
+        }
+
+        protected virtual void Update()
+        {
+            if (_playerInput.Jump && _movementData.JumpsLeft > 0 && !_movementData.CanJump)
+            {
+                _movementData.CanJump = true;
+            }
+
+            if (_movementData.CanJump)
+            {
+                _movementData.CanJump = false;
+                CalculateJump();
+            }
+        }
+
+        protected abstract void CalculateJump();
+
+        protected abstract void CalculateMove();
     }
-
-    protected abstract void CalculateJump();
-
-    protected abstract void CalculateMove();
-}
 }
