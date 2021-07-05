@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,14 +9,14 @@ namespace Assets.Scripts.Effects.Debuffs
     [Serializable]
     public abstract class Debuff : EffectBase
     {
-        public override Effect EffectType { get => Effect.Debuff; }
+        public override Effect Effect { get => Effect.Debuff; }
 
         protected override void ApplyEffect()
         {
             base.ApplyEffect();
         }
 
-        protected override void End()
+        public override void End()
         {
             base.End();
         }

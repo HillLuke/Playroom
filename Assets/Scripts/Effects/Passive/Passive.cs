@@ -6,14 +6,14 @@ namespace Assets.Scripts.Effects.Passive
 {
     public abstract class Passive : EffectBase
     {
-        public override Effect EffectType { get => Effect.Passive; }
+        public override Effect Effect { get => Effect.Passive; }
 
         protected override void ApplyEffect()
         {
             base.ApplyEffect();
         }
 
-        protected override void End()
+        public override void End()
         {
             base.End();
         }

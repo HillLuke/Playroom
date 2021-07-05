@@ -14,6 +14,10 @@ namespace Assets.Scripts.Effects.Debuffs
 
         private MovementConfig _movementconfig;
 
+        public override EffectBehaviour EffectBehaviour => EffectBehaviour.CrowdControl;
+
+        public override EffectType EffectType => EffectType.None;
+
         protected override void ApplyEffect()
         {
             base.ApplyEffect();
@@ -27,7 +31,7 @@ namespace Assets.Scripts.Effects.Debuffs
             }
         }
 
-        protected override void End()
+        public override void End()
         {
             base.End();
 
@@ -40,7 +44,7 @@ namespace Assets.Scripts.Effects.Debuffs
 
         public override EffectBase Copy()
         {
-            return new Slow
+            return new Slow()
             {
                 EffectName = EffectName,
                 Description = Description,

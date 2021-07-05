@@ -6,14 +6,14 @@ namespace Assets.Scripts.Effects.Buffs
 {
     public abstract class Buff : EffectBase
     {
-        public override Effect EffectType { get => Effect.Buff; }
+        public override Effect Effect { get => Effect.Buff; }
 
         protected override void ApplyEffect()
         {
             base.ApplyEffect();
         }
 
-        protected override void End()
+        public override void End()
         {
             base.End();
         }
