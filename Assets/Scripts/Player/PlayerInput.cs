@@ -26,7 +26,9 @@ namespace Assets.Scripts.Player
         private bool _jump;
         private bool _run;
         private bool _showMouse;
-        private bool _mouseLocked;
+        private bool _mouseLocked = true;
+
+        
 
         private void Update()
         {            
@@ -34,8 +36,14 @@ namespace Assets.Scripts.Player
             _camera.Set(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
             _jump = Input.GetKeyDown(PlayerInputData.Jump);
-            _run = Input.GetKey(PlayerInputData.Run);
-            _showMouse = Input.GetKey(PlayerInputData.ShowMouse);
+            _run = Input.GetKeyDown(PlayerInputData.Run);
+            _showMouse = Input.GetKeyDown(PlayerInputData.ShowMouse);
+
+            if (_showMouse)
+            {
+                _mouseLocked = !_mouseLocked;
+                LockMouse();
+            }
 
             if (DebugLogging)
             {
@@ -74,13 +82,20 @@ namespace Assets.Scripts.Player
                 Debug.LogError("PlayerInputData is null");
             }
 
+            LockMouse();
         }
 
         private void LockMouse()
         {
-            if (_mouseLocked && _showMouse)
+            if (_mouseLocked)
             {
-
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
             }
         }
     }
