@@ -22,6 +22,7 @@ namespace Assets.Scripts.Effects
         public string EffectName;
         public string Description;
         public float Duration;
+        public bool IsPermanent;
         public bool IsDurationStacked;
         public bool IsEffectStacked;
         public PropertyType ApplyTo;
@@ -70,10 +71,13 @@ namespace Assets.Scripts.Effects
 
         public void Tick(float delta)
         {
-            Duration -= delta;
-            if (Duration <= 0)
+            if (!IsPermanent)
             {
-                End();
+                Duration -= delta;
+                if (Duration <= 0)
+                {
+                    End();
+                }
             }
         }
 

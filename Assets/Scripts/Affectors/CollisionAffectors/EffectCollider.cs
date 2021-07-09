@@ -34,13 +34,12 @@ namespace Assets.Scripts.Affectors.CollisionAffectors
 
             if (BuffableEntity != null)
             {
-                if (!Entities.ContainsKey(BuffableEntity) && RemoveOnExit)
+                if (!Entities.ContainsKey(BuffableEntity))
                 {
                     _effect = Instantiate(Effect);
                     Entities.Add(BuffableEntity, _effect);
+                    BuffableEntity.AddEffect(_effect);
                 }
-
-                BuffableEntity.AddEffect(_effect);
             }
         }
 
