@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,13 +23,21 @@ namespace Assets.Scripts.Player
 
         private Vector2 _movment;
         private Vector2 _camera;
+        [ReadOnly]
+        [ShowInInspector]
         private bool _hasControl;
+        [ReadOnly]
+        [ShowInInspector]
         private bool _jump;
+        [ReadOnly]
+        [ShowInInspector]
         private bool _run;
+        [ReadOnly]
+        [ShowInInspector]
         private bool _showMouse;
-        private bool _mouseLocked = true;
-
-        
+        [ReadOnly]
+        [ShowInInspector]
+        private bool _mouseLocked = true;        
 
         private void Update()
         {            
@@ -36,7 +45,7 @@ namespace Assets.Scripts.Player
             _camera.Set(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
             _jump = Input.GetKeyDown(PlayerInputData.Jump);
-            _run = Input.GetKeyDown(PlayerInputData.Run);
+            _run = Input.GetKey(PlayerInputData.Run);
             _showMouse = Input.GetKeyDown(PlayerInputData.ShowMouse);
 
             if (_showMouse)

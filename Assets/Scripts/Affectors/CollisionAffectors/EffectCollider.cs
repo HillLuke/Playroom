@@ -21,6 +21,8 @@ namespace Assets.Scripts.Affectors.CollisionAffectors
         [SerializeReference]
         public Dictionary<BuffableEntity, EffectBase> Entities;
 
+        private EffectBase _effect;
+
         private void Awake()
         {
             Entities = new Dictionary<BuffableEntity, EffectBase>();
@@ -32,15 +34,19 @@ namespace Assets.Scripts.Affectors.CollisionAffectors
 
             if (BuffableEntity != null)
             {
-                var effect = Effect.Copy();
-
                 if (!Entities.ContainsKey(BuffableEntity) && RemoveOnExit)
                 {
-                    Entities.Add(BuffableEntity, effect);
+                    _effect = Instantiate(Effect);
+                    Entities.Add(BuffableEntity, _effect);
                 }
 
-                BuffableEntity.AddEffect(effect);
+                BuffableEntity.AddEffect(_effect);
             }
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            Debug.Log("collision");
         }
 
         private void OnTriggerExit(Collider other)
@@ -66,9 +72,9 @@ namespace Assets.Scripts.Affectors.CollisionAffectors
                 //todo: investigate memory managment for removing from the effect list
                 if (Entities.ContainsKey(BuffableEntity) && Entities[BuffableEntity].IsFinished)
                 {
-                    var effect = Effect.Copy();
-                    Entities[BuffableEntity] = effect;
-                    BuffableEntity.AddEffect(effect);
+                    _effect = Instantiate(Effect);
+                    Entities[BuffableEntity] = _effect;
+                    BuffableEntity.AddEffect(_effect);
                 }
             }
         }

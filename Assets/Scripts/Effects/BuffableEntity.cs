@@ -1,8 +1,6 @@
-using Assets.Scripts.Effects;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,11 +15,18 @@ namespace Assets.Scripts.Effects
         [SerializeReference]
         private List<EffectBase> _effects;
 
-        public void AddEffect(EffectBase effect)
+        /// <summary>
+        /// Adds an effect - expects an instantiated EffectBase
+        /// </summary>
+        /// <param name="effect">Expects instantiated</param>
+        /// <returns></returns>
+        public EffectBase AddEffect(EffectBase effect)
         {
             _effects.Add(effect);
             effect.Initialize(gameObject);
             effect.Activate();
+
+            return effect;
         }
 
         private void Update()
@@ -30,7 +35,6 @@ namespace Assets.Scripts.Effects
             {
                 effect.Tick(Time.deltaTime);
             }
-
             _effects.RemoveAll(x => x.IsFinished);
         }
 

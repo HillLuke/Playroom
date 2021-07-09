@@ -1,9 +1,12 @@
+using Assets.Scripts.Character;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Assets.Scripts.Character.CharacterProperties;
+using static Assets.Scripts.Character.CharacterProperties.Property;
 
 namespace Assets.Scripts.Effects
 {
@@ -13,33 +16,34 @@ namespace Assets.Scripts.Effects
     /// Striptable Object may be better in instances where effect data never changes e.g. Fire damage will always do 5hp damage
     /// </summary>
     [Serializable]
-    public abstract class EffectBase
+    public abstract class EffectBase : ScriptableObject
     {
-        [Header("Effect Base Settings")]
+        [Title("Base data")]
         public string EffectName;
         public string Description;
         public float Duration;
         public bool IsDurationStacked;
         public bool IsEffectStacked;
-                       
+        public PropertyType ApplyTo;
+        public Modifier Modifier;
+
+        [Title("Show in inspector fields")]
         [ShowInInspector]
         public abstract Effect Effect { get; }
         [ShowInInspector]
-        public abstract EffectType EffectType { get; }
+        public abstract EffectType EffectType { get; set; }
         [ShowInInspector]
-        public abstract EffectBehaviour EffectBehaviour { get; }
+        public abstract EffectBehaviour EffectBehaviour { get; set; }
 
         public int Stacks { get { return _stacks; } }
+        [ShowInInspector]
         public bool IsActive { get {return _isActive; } }
+        [ShowInInspector]
         public bool IsFinished { get { return _isFinished; } }
 
-        [SerializeField]
         private protected bool _isActive;
-        [SerializeField]
         private protected bool _isFinished;
-        [SerializeField]
         private protected int _stacks;
-        [SerializeField]
         private protected GameObject _target;
 
         public void Activate()
@@ -74,14 +78,21 @@ namespace Assets.Scripts.Effects
         }
 
         public virtual void Initialize(GameObject Target) { _target = Target; }
-        protected virtual void ApplyEffect() { }
+
+        protected virtual void ApplyEffect() 
+        {
+            var characterProperties = _target.GetComponent<CharacterStats>().CharacterProperties;
+            characterProperties.ApplyModifierToProperty(ApplyTo, Modifier);
+        }
+
         public virtual void End() 
         {
             _isActive = false;
             _isFinished = true;
-        }
 
-        public abstract EffectBase Copy();
+            var characterProperties = _target.GetComponent<CharacterStats>().CharacterProperties;
+            characterProperties.RemoveModifierFromProperty(ApplyTo, Modifier);
+        }
     }
 
 

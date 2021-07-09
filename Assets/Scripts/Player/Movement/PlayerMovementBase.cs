@@ -1,10 +1,10 @@
+using Assets.Scripts.Character;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Player.Movement
 {
-    [RequireComponent(typeof(MovementConfig))]
     public abstract class PlayerMovementBase : MonoBehaviour
     {
         public bool DebugLogging;
@@ -13,7 +13,7 @@ namespace Assets.Scripts.Player.Movement
 
         public PlayerInput PlayerInput => _playerInput;
 
-        protected MovementConfig _movementData;
+        protected CharacterStats _movementData;
         protected PlayerInput _playerInput;
         protected UnityEngine.Camera _camera;
 
@@ -24,10 +24,9 @@ namespace Assets.Scripts.Player.Movement
         protected virtual void Awake()
         {
             _playerInput = GetComponent<PlayerInput>();
-            _movementData = GetComponent<MovementConfig>();
+            _movementData = GetComponent<CharacterStats>();
             _camera = UnityEngine.Camera.main;
 
-            _movementData.Init();
             _playerInput.ReleaseControl();
         }
 
