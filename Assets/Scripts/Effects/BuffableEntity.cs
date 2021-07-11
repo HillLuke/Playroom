@@ -12,6 +12,10 @@ namespace Assets.Scripts.Effects
     {
         public List<EffectBase> Effects { get { return _effects; } }
 
+
+        public event Action<EffectBase> ActionEffectAdded;
+        public event Action<EffectBase> ActionEffectRemoved;
+
         [SerializeReference]
         private List<EffectBase> _effects;
 
@@ -26,6 +30,10 @@ namespace Assets.Scripts.Effects
             effect.Initialize(gameObject);
             effect.Activate();
 
+            if (ActionEffectAdded != null)
+            {
+                ActionEffectAdded.Invoke(effect);
+            }
             return effect;
         }
 
@@ -35,7 +43,15 @@ namespace Assets.Scripts.Effects
             {
                 effect.Tick(Time.deltaTime);
             }
-            _effects.RemoveAll(x => x.IsFinished);
+
+            foreach (var effect in _effects.Where(x => !x.IsActive).ToList())
+            {
+                if (ActionEffectRemoved != null)
+                {
+                    ActionEffectRemoved.Invoke(effect);
+                }
+                _effects.Remove(effect);
+            }
         }
 
         private void Awake()
