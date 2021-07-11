@@ -42,7 +42,6 @@ namespace Assets.Scripts.Player
         private void Update()
         {            
             _movment.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-            _camera.Set(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
             _jump = Input.GetKeyDown(PlayerInputData.Jump);
             _run = Input.GetKey(PlayerInputData.Run);
@@ -58,6 +57,11 @@ namespace Assets.Scripts.Player
             {
                 DebugLog();
             }
+        }
+
+        private void FixedUpdate()
+        {
+            _camera.Set(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         }
 
         /// <summary>
