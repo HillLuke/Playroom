@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Assets.Scripts.Resources
+{
 public class Resource : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -15,4 +17,5 @@ public class Resource : MonoBehaviour
     {
         
     }
+}
 }

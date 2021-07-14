@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+namespace Assets.Scripts.UI.Effects
+{
 public class EffectUIHolder : MonoBehaviour
 {
     //TODO: make gamemanager to hold player refrence as a singleton
@@ -34,4 +36,5 @@ public class EffectUIHolder : MonoBehaviour
             CurrentEffects.Remove(effectBase);
         }
     }
+}
 }

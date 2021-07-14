@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+namespace Assets.Scripts.UI.Effects
+{
 public class EffectUIData : MonoBehaviour
 {
     private EffectBase _effect;
@@ -27,4 +29,5 @@ public class EffectUIData : MonoBehaviour
             _duration.text = _effect.Duration.ToString("0.0");
         }
     }
+}
 }

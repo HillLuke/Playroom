@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace Assets.Scripts.Player
+{
 [CreateAssetMenu(fileName = "PlayerInputData", menuName = "PlayerInputData/New")]
 public class PlayerInputData : ScriptableObject
 {
@@ -14,4 +16,5 @@ public class PlayerInputData : ScriptableObject
     [Header("Sensitivity")]
     public float HorizontalSensitivity = 500f;
     public float VerticalSensitivity = 6f;
+}
 }
