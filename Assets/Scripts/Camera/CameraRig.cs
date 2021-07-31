@@ -33,11 +33,11 @@ namespace Assets.Scripts.Camera
 
                 if (player != null)
                 {
-                    Follow = player.gameObject.transform;
+                    Follow = player.FollowTarget.transform;
                     LookAt = player.LookAt.transform;
 
-                    FreeLookMovement.m_XAxis.m_MaxSpeed = player.PlayerInput.PlayerInputData.HorizontalSensitivity;
-                    FreeLookMovement.m_YAxis.m_MaxSpeed = player.PlayerInput.PlayerInputData.VerticalSensitivity;
+                    FreeLookMovement.m_XAxis.m_MaxSpeed = player.InputManager.PlayerInputData.HorizontalSensitivity;
+                    FreeLookMovement.m_YAxis.m_MaxSpeed = player.InputManager.PlayerInputData.VerticalSensitivity;
                 }
             }
         }

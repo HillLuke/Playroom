@@ -1,4 +1,5 @@
 using Assets.Scripts.Character;
+using Assets.Scripts.Singletons;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,11 +11,12 @@ namespace Assets.Scripts.Player.Movement
         public bool DebugLogging;
         // Where the camera will centre on
         public GameObject LookAt;
+        public GameObject FollowTarget;
 
-        public PlayerInput PlayerInput => _playerInput;
+        public InputManager InputManager => _inputManager;
 
         protected CharacterStats _movementData;
-        protected PlayerInput _playerInput;
+        protected InputManager _inputManager;
         protected UnityEngine.Camera _camera;
 
         protected virtual void Start()
@@ -23,11 +25,14 @@ namespace Assets.Scripts.Player.Movement
 
         protected virtual void Awake()
         {
-            _playerInput = GetComponent<PlayerInput>();
+            if (InputManager.instanceExists)
+            {
+                _inputManager = InputManager.instance;
+            }
             _movementData = GetComponent<CharacterStats>();
             _camera = UnityEngine.Camera.main;
 
-            _playerInput.ReleaseControl();
+            _inputManager.ReleaseControl();
         }
 
         protected virtual void FixedUpdate()
@@ -37,7 +42,7 @@ namespace Assets.Scripts.Player.Movement
 
         protected virtual void Update()
         {
-            if (_playerInput.Jump && _movementData.JumpsLeft > 0 && !_movementData.CanJump)
+            if (_inputManager.Jump && _movementData.JumpsLeft > 0 && !_movementData.CanJump)
             {
                 _movementData.CanJump = true;
             }

@@ -4,18 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Resources
 {
-public class ResourceNode : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
+    public class ResourceNode : MonoBehaviour
     {
-        
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
 }

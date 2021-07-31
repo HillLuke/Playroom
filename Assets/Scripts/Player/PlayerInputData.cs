@@ -12,8 +12,9 @@ public class PlayerInputData : ScriptableObject
     public KeyCode Jump = KeyCode.Space;
     public KeyCode Run = KeyCode.LeftShift;
     public KeyCode ShowMouse = KeyCode.Tab;
+    public KeyCode DropItem = KeyCode.Q;
 
-    [Header("Sensitivity")]
+        [Header("Sensitivity")]
     public float HorizontalSensitivity = 500f;
     public float VerticalSensitivity = 6f;
 }

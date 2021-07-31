@@ -45,10 +45,10 @@ namespace Assets.Scripts.Player.Movement
         protected override void CalculateMove()
         {
             //Get worldspace input to handle movment based off of current rotation
-            var moveinput = new Vector3(_playerInput.MovementVector.x, 0, _playerInput.MovementVector.y);
+            var moveinput = new Vector3(_inputManager.MovementVector.x, 0, _inputManager.MovementVector.y);
             moveinput = Vector3.ClampMagnitude(moveinput, 1);
             Vector3 worldspaceMoveInput = transform.TransformVector(moveinput);
-            Vector3 targetVelocity = worldspaceMoveInput * (_playerInput.Run ? _movementData.RunningSpeed : _movementData.WalkingSpeed);
+            Vector3 targetVelocity = worldspaceMoveInput * (_inputManager.Run ? _movementData.RunningSpeed : _movementData.WalkingSpeed);
 
             if (_movementData.MovementSharpness <= 0)
             {

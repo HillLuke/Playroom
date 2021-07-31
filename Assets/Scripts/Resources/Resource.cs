@@ -4,18 +4,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Resources
 {
-public class Resource : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
+    [CreateAssetMenu(fileName = "Resource", menuName = "Resource/New Resource")]
+    public class Resource : ScriptableObject
     {
-        
+        public string ResourceName;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
 }
