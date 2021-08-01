@@ -8,7 +8,7 @@ namespace Assets.Scripts.Inventory.Items
     {
         [HorizontalGroup("Split", 55, LabelWidth = 0)]
         [PreviewField(55, ObjectFieldAlignment.Left)]
-        public Texture2D Thumbnail;
+        public Sprite Icon;
 
         public GameObject WorldItem;
 
