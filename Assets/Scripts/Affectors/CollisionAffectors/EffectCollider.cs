@@ -1,8 +1,5 @@
 using Assets.Scripts.Effects;
-using Sirenix.OdinInspector;
-using Sirenix.Serialization;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -63,7 +60,7 @@ namespace Assets.Scripts.Affectors.CollisionAffectors
         }
 
         private void OnTriggerStay(Collider other)
-        {            
+        {
             if (ReApplyOnStay)
             {
                 var BuffableEntity = other.GetComponent<BuffableEntity>();

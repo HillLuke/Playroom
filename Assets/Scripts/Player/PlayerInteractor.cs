@@ -1,20 +1,17 @@
 using Assets.Scripts.Interactable;
-using Assets.Scripts.Player;
 using Assets.Scripts.Singletons;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Character
 {
-    public class CharacterInteractor : MonoBehaviour
+    public class PlayerInteractor : MonoBehaviour
     {
         public GameObject InteractPointFrom;
 
         private UnityEngine.Camera _camera;
         private GameObject _player;
         private InputManager _inputManager;
-        protected UIManager _uIManager;
+        private UIManager _uIManager;
         private InteractableBase _lookingAt;
 
         private void Awake()
@@ -88,12 +85,10 @@ namespace Assets.Scripts.Character
                     }
                 }
             }
-
         }
 
         private void Start()
         {
-            
         }
     }
 }

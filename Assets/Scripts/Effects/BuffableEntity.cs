@@ -1,5 +1,3 @@
-using Sirenix.OdinInspector;
-using Sirenix.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +10,8 @@ namespace Assets.Scripts.Effects
     {
         public List<EffectBase> Effects { get { return _effects; } }
 
-
         public event Action<EffectBase> ActionEffectAdded;
+
         public event Action<EffectBase> ActionEffectRemoved;
 
         [SerializeReference]

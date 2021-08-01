@@ -24,27 +24,35 @@ namespace Assets.Scripts.Singletons
 
         private Vector2 _movment;
         private Vector2 _camera;
+
         [ReadOnly]
         [ShowInInspector]
         private bool _hasControl;
+
         [ReadOnly]
         [ShowInInspector]
         private bool _jump;
+
         [ReadOnly]
         [ShowInInspector]
         private bool _run;
+
         [ReadOnly]
         [ShowInInspector]
         private bool _showMouse;
+
         [ReadOnly]
         [ShowInInspector]
         private bool _leftClick;
+
         [ReadOnly]
         [ShowInInspector]
         private bool _mouseLocked = true;
+
         [ReadOnly]
         [ShowInInspector]
         private bool _interact = true;
+
         [ReadOnly]
         [ShowInInspector]
         private bool _dropFirstItem = true;

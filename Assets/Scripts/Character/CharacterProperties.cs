@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Sirenix.OdinInspector;
+using System;
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 using static Assets.Scripts.Character.CharacterProperties.Modifier;
 using static Assets.Scripts.Character.CharacterProperties.Property;
 
@@ -73,6 +73,7 @@ namespace Assets.Scripts.Character
                             case ModifierType.FlatFinal:
                                 finalValue += modifier.Value;
                                 break;
+
                             case ModifierType.PercentBase:
                                 percentBaseValue += modifier.Value;
                                 if (modifier == selectedModifiersOfType.Last())
@@ -80,6 +81,7 @@ namespace Assets.Scripts.Character
                                     finalValue = finalValue += (BaseValue * percentBaseValue);
                                 }
                                 break;
+
                             case ModifierType.PercentFinal:
                                 percentFinalValue += modifier.Value;
                                 if (modifier == selectedModifiersOfType.Last())
@@ -87,6 +89,7 @@ namespace Assets.Scripts.Character
                                     finalValue = finalValue += (finalValue * percentFinalValue);
                                 }
                                 break;
+
                             default:
                                 Debug.LogError("ModifierType not found");
                                 break;
@@ -118,14 +121,17 @@ namespace Assets.Scripts.Character
                 /// Change the base value by a flat amount +/-
                 /// </summary>
                 FlatBase,
+
                 /// <summary>
                 /// Change the final value by a flat amount +/-
                 /// </summary>
                 FlatFinal,
+
                 /// <summary>
                 /// Change the base value by a percentage
                 /// </summary>
                 PercentBase,
+
                 /// <summary>
                 /// Change the final value after Flat and PercentBase has been calculated
                 /// </summary>

@@ -1,6 +1,4 @@
 using Assets.Scripts.Singletons;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Interactable
@@ -27,7 +25,7 @@ namespace Assets.Scripts.Interactable
 
         public abstract void Interact(GameObject Interactor);
 
-        public virtual void LookAt(GameObject Interactor) 
+        public virtual void LookAt(GameObject Interactor)
         {
             if (_uIManager != null)
             {

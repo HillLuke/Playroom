@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Assets.Scripts.Effects.Passive
 {
     public abstract class Passive : EffectBase

@@ -1,33 +1,31 @@
 using Assets.Scripts.Effects;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 namespace Assets.Scripts.UI.Effects
 {
-public class EffectUIData : MonoBehaviour
-{
-    private EffectBase _effect;
-    [SerializeField] TextMeshProUGUI _title;
-    [SerializeField] TextMeshProUGUI _duration;
-
-    public void Init(EffectBase effect)
+    public class EffectUIData : MonoBehaviour
     {
-        _effect = effect;
-        _title.text = _effect.EffectName;
-        if (_effect.IsPermanent)
+        private EffectBase _effect;
+        [SerializeField] private TextMeshProUGUI _title;
+        [SerializeField] private TextMeshProUGUI _duration;
+
+        public void Init(EffectBase effect)
         {
-            _duration.enabled = false;
+            _effect = effect;
+            _title.text = _effect.EffectName;
+            if (_effect.IsPermanent)
+            {
+                _duration.enabled = false;
+            }
+        }
+
+        private void Update()
+        {
+            if (_effect != null && !_effect.IsPermanent)
+            {
+                _duration.text = _effect.Duration.ToString("0.0");
+            }
         }
     }
-
-    private void Update()
-    {
-        if (_effect != null && !_effect.IsPermanent)
-        {
-            _duration.text = _effect.Duration.ToString("0.0");
-        }
-    }
-}
 }

@@ -12,7 +12,14 @@ public class UIInventoryEvents : MonoBehaviour
         if (CharacterInventory != null)
         {
             CharacterInventory.ActionItemAdded += CharacterInventory_ActionItemAdded;
+            CharacterInventory.ActionItemDropped += CharacterInventory_ActionItemDropped;
         }
+    }
+
+    private void CharacterInventory_ActionItemDropped(Item item)
+    {
+        var notification = Instantiate(UIInventoryEventText, gameObject.transform);
+        notification.SetText($"Dropped {item.ItemName}");
     }
 
     private void CharacterInventory_ActionItemAdded(Item item)

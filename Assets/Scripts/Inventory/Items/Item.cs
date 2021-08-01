@@ -1,8 +1,5 @@
 using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.Scripts.Inventory.Items
 {
@@ -18,13 +15,17 @@ namespace Assets.Scripts.Inventory.Items
         public string ItemName;
         public string Description;
         public bool IsStackable;
+
         [ShowIf("IsStackable")]
         public int MaxStack;
 
         [ShowInInspector]
         public virtual ItemType ItemType { get; set; }
 
-        public virtual bool Use() { return true; }
+        public virtual bool Use()
+        {
+            return true;
+        }
     }
 
     public enum ItemType

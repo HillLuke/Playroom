@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Player.Movement
@@ -57,7 +55,7 @@ namespace Assets.Scripts.Player.Movement
             }
             else
             {
-                //Moving on slidy surface 
+                //Moving on slidy surface
                 var moveVector = Vector3.Lerp(_playerVelocity, targetVelocity, _movementData.MovementSharpness * Time.deltaTime);
                 _playerVelocity.x = moveVector.x;
                 _playerVelocity.z = moveVector.z;
@@ -87,7 +85,7 @@ namespace Assets.Scripts.Player.Movement
             }
         }
 
-        void UpdateOrientation()
+        private void UpdateOrientation()
         {
             //Make the player always face forward
             float yaw = _camera.transform.rotation.eulerAngles.y;

@@ -1,7 +1,6 @@
 using Assets.Scripts.Inventory.Items;
 using Assets.Scripts.Singletons;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,6 +10,8 @@ namespace Assets.Scripts.Character
     public class CharacterInventory : MonoBehaviour
     {
         public event Action<Item> ActionItemAdded;
+
+        public event Action<Item> ActionItemDropped;
 
         public List<Item> Items = new List<Item>();
 
@@ -39,8 +40,13 @@ namespace Assets.Scripts.Character
             if (_worldItemManager != null && Items.Count > 0)
             {
                 _worldItemManager.SpawnItem(Items.First(), gameObject);
-                Items.Remove(Items.First());
 
+                if (ActionItemAdded != null)
+                {
+                    ActionItemDropped.Invoke(Items.First());
+                }
+
+                Items.Remove(Items.First());
             }
         }
     }

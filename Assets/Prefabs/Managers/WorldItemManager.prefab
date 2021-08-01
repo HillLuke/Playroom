@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WorldItemPrefab: {fileID: 8911580136341460679, guid: af98d70fad99bb34096087b7537ce320, type: 3}
-  DropForce: 200
+  DropForce: 250
+  ForceMode: 0

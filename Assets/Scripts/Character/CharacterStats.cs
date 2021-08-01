@@ -11,9 +11,11 @@ namespace Assets.Scripts.Character
         [ReadOnly]
         [ShowInInspector]
         public bool IsGrounded { get; set; }
+
         [ReadOnly]
         [ShowInInspector]
         public bool IsJumping { get; set; }
+
         [ReadOnly]
         [ShowInInspector]
         public bool CanJump { get; set; }
@@ -22,6 +24,7 @@ namespace Assets.Scripts.Character
         /// e.g. walking on ice, closer to 0 the more movment slides
         /// </summary>
         public float MovementSharpness => Property(PropertyType.MovementSharpness);
+
         public float WalkingSpeed => Property(PropertyType.Speed) * Property(PropertyType.WalkingSpeedMultiplier);
         public float RunningSpeed => Property(PropertyType.Speed) * Property(PropertyType.RunningSpeedMultiplier);
         public float JumpForce => Property(PropertyType.JumpForce);
@@ -42,14 +45,14 @@ namespace Assets.Scripts.Character
             catch (System.Exception ex)
             {
                 Debug.LogError(ex.Message);
-            }            
+            }
         }
-        
+
         private float Property(PropertyType Type)
         {
             return CharacterProperties.GetPropertyFinalValue(Type);
         }
-                
+
         public void Jump()
         {
             _jumpsLeft++;
@@ -62,6 +65,5 @@ namespace Assets.Scripts.Character
             _jumpsLeft = 0;
             IsJumping = false;
         }
-
     }
 }

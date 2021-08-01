@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Assets.Scripts.Inventory.Items;
-using TMPro;
 using Assets.Scripts.Character;
+using Assets.Scripts.Inventory.Items;
+using UnityEngine;
 
 namespace Assets.Scripts.Interactable
 {
@@ -13,6 +10,7 @@ namespace Assets.Scripts.Interactable
 
         [SerializeField]
         private GameObject _spawnLocation;
+
         private GameObject _itemModel;
 
         public override string InteractUIMessage => $"Pickup {ItemData.ItemName} ({_inputManager.PlayerInputData.Use})";
@@ -34,7 +32,6 @@ namespace Assets.Scripts.Interactable
                 inventory.AddItem(ItemData);
                 Destroy(gameObject);
             }
-
         }
     }
 }

@@ -1,7 +1,5 @@
 using Assets.Scripts.Character;
 using Assets.Scripts.Singletons;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Player.Movement
@@ -9,8 +7,10 @@ namespace Assets.Scripts.Player.Movement
     public abstract class PlayerMovementBase : MonoBehaviour
     {
         public bool DebugLogging;
+
         // Where the camera will centre on
         public GameObject LookAt;
+
         public GameObject FollowTarget;
 
         public InputManager InputManager => _inputManager;

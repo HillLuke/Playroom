@@ -10,7 +10,7 @@ namespace Assets.Scripts.Camera
         public Transform LookAt;
         public CinemachineFreeLook FreeLookMovement;
 
-        void Start()
+        private void Start()
         {
             FollowAndLookCheck();
             UpdateSettings();

@@ -1,6 +1,4 @@
 using Assets.Scripts.Scenes;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,6 +24,5 @@ namespace Assets.Scripts.Interactable
         {
             base.LookAway(Interactor);
         }
-
     }
 }

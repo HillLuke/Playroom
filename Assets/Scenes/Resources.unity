@@ -447,6 +447,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5240297124246541574, guid: 8d8de9a78460ef5419e80c7ab034309e, type: 3}
   m_PrefabInstance: {fileID: 920545069}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &666623501 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8353470846170905463, guid: decbd84fb72fd1a49b30e5375f31f17f, type: 3}
+  m_PrefabInstance: {fileID: 2000883571}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b248527b5ae85ad43a9233a974b85964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &810766590
 Mesh:
   m_ObjectHideFlags: 0
@@ -980,11 +991,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 168736826588957441, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 0.498288
+      value: 2.655198
       objectReference: {fileID: 0}
     - target: {fileID: 168736826588957441, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -6.76055
+      value: -4.103773
       objectReference: {fileID: 0}
     - target: {fileID: 381852643235583844, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_XAxis.m_MaxSpeed
@@ -1040,19 +1051,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3312392532201094459, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 0.498288
+      value: 2.655198
       objectReference: {fileID: 0}
     - target: {fileID: 3312392532201094459, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -6.76055
+      value: -4.103773
       objectReference: {fileID: 0}
     - target: {fileID: 3468116300135072596, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 0.498288
+      value: 2.655198
       objectReference: {fileID: 0}
     - target: {fileID: 3468116300135072596, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -6.76055
+      value: -4.103773
       objectReference: {fileID: 0}
     - target: {fileID: 5225869761377882893, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_VerticalDamping
@@ -1635,7 +1646,7 @@ PrefabInstance:
     - target: {fileID: 2824469333812653754, guid: f938a7115b712284c8c90dbad1df09d0, type: 3}
       propertyPath: CharacterInventory
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 666623501}
     - target: {fileID: 8143688738040101737, guid: f938a7115b712284c8c90dbad1df09d0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

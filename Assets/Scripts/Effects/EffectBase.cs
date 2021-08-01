@@ -1,9 +1,6 @@
 using Assets.Scripts.Character;
 using Sirenix.OdinInspector;
-using Sirenix.Serialization;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using static Assets.Scripts.Character.CharacterProperties;
 using static Assets.Scripts.Character.CharacterProperties.Property;
@@ -20,6 +17,7 @@ namespace Assets.Scripts.Effects
     {
         [Title("Base data")]
         public string EffectName;
+
         public string Description;
         public float Duration;
         public bool IsPermanent;
@@ -31,14 +29,18 @@ namespace Assets.Scripts.Effects
         [Title("Show in inspector fields")]
         [ShowInInspector]
         public abstract Effect Effect { get; }
+
         [ShowInInspector]
         public abstract EffectType EffectType { get; set; }
+
         [ShowInInspector]
         public abstract EffectBehaviour EffectBehaviour { get; set; }
 
         public int Stacks { get { return _stacks; } }
+
         [ShowInInspector]
-        public bool IsActive { get {return _isActive; } }
+        public bool IsActive { get { return _isActive; } }
+
         [ShowInInspector]
         public bool IsFinished { get { return _isFinished; } }
 
@@ -81,15 +83,18 @@ namespace Assets.Scripts.Effects
             }
         }
 
-        public virtual void Initialize(GameObject Target) { _target = Target; }
+        public virtual void Initialize(GameObject Target)
+        {
+            _target = Target;
+        }
 
-        protected virtual void ApplyEffect() 
+        protected virtual void ApplyEffect()
         {
             var characterProperties = _target.GetComponent<CharacterStats>().CharacterProperties;
             characterProperties.ApplyModifierToProperty(ApplyTo, Modifier);
         }
 
-        public virtual void End() 
+        public virtual void End()
         {
             _isActive = false;
             _isFinished = true;
@@ -98,7 +103,6 @@ namespace Assets.Scripts.Effects
             characterProperties.RemoveModifierFromProperty(ApplyTo, Modifier);
         }
     }
-
 
     public enum Effect
     {

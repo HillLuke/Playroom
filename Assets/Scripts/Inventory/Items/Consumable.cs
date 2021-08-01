@@ -1,8 +1,4 @@
-﻿using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Inventory.Items
 {
@@ -16,7 +12,6 @@ namespace Assets.Scripts.Inventory.Items
 
         public override bool Use()
         {
-            
             if (ConsumableBehaviour != null)
             {
                 ConsumableBehaviour.Consume();
@@ -27,14 +22,13 @@ namespace Assets.Scripts.Inventory.Items
     }
 
     /// <summary>
-    /// Base behaviour for different consumable types 
+    /// Base behaviour for different consumable types
     /// e.g. Food, potions, usables
     /// </summary>
-    public class ConsumableBehaviour 
-    { 
+    public class ConsumableBehaviour
+    {
         public virtual void Consume()
         {
-
         }
     }
 

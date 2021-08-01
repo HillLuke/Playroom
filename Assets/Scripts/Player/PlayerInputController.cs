@@ -1,8 +1,6 @@
 using Assets.Scripts.Character;
 using Assets.Scripts.Singletons;
 using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Player
@@ -13,12 +11,15 @@ namespace Assets.Scripts.Player
     public class PlayerInputController : MonoBehaviour
     {
         public Animator Animator;
+
         [ReadOnly]
         public CharacterEquipment CharacterEquipment;
+
         [ReadOnly]
         public CharacterInventory CharacterInventory;
+
         [ReadOnly]
-        public CharacterInteractor CharacterInteractor;
+        public PlayerInteractor CharacterInteractor;
 
         private InputManager _inputManager;
 
@@ -26,7 +27,7 @@ namespace Assets.Scripts.Player
         {
             CharacterEquipment = GetComponent<CharacterEquipment>();
             CharacterInventory = GetComponent<CharacterInventory>();
-            CharacterInteractor = GetComponent<CharacterInteractor>();
+            CharacterInteractor = GetComponent<PlayerInteractor>();
 
             if (InputManager.instanceExists)
             {
@@ -38,7 +39,6 @@ namespace Assets.Scripts.Player
         {
             if (_inputManager != null)
             {
-
                 if (_inputManager.LeftClick)
                 {
                     Animator.SetTrigger("RightHandLeftClick");
