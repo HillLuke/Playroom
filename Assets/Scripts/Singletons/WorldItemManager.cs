@@ -1,11 +1,6 @@
 ﻿using Assets.Scripts.Interactable;
 using Assets.Scripts.Inventory.Items;
 using Assets.Scripts.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Scripts.Singletons
@@ -26,8 +21,7 @@ namespace Assets.Scripts.Singletons
         {
             var temp = Instantiate(WorldItemPrefab, parent.transform.position, parent.transform.rotation);
             temp.ItemData = item;
-            temp.GetComponent<Rigidbody>().AddForce(parent.transform.forward  * DropForce);
-
+            temp.GetComponent<Rigidbody>().AddForce(parent.transform.forward * DropForce);
 
             // drop in direction of camera
             //temp.GetComponent<Rigidbody>().AddForce(parent.transform.forward * DropForce);

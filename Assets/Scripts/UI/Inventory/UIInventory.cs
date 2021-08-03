@@ -13,20 +13,28 @@ namespace Assets.Scripts.UI.Inventory
 
         [ReadOnly]
         [ShowInInspector]
-        private UIInventoryItem[] _inventorySlots;
+        private List<UIInventoryItem> _inventorySlots = new List<UIInventoryItem>();
+
+        [SerializeField]
+        private UIInventoryItem _uIInventoryItemPrefab;
 
         private void Start()
         {
             if (CharacterInventory != null)
             {
-                _inventorySlots = GetComponentsInChildren<UIInventoryItem>();
+                for (int i = 0; i < CharacterInventory.InventorySize; i++)
+                {
+                    _inventorySlots.Add(Instantiate(_uIInventoryItemPrefab, gameObject.transform));
+                }
+
                 CharacterInventory.ActionItemAdded += CharacterInventory_ActionItemAdded;
             }
         }
 
         private void CharacterInventory_ActionItemAdded(Item item)
         {
-            _inventorySlots.First().SlotIcon.overrideSprite = item.Icon;
+            var z = _inventorySlots.Where(x => !x.HasItem);
+            _inventorySlots.Where(x => !x.HasItem).First().SetItem(item);
         }
     }
 }

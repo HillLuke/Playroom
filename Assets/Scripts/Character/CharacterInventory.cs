@@ -13,6 +13,8 @@ namespace Assets.Scripts.Character
 
         public event Action<Item> ActionItemDropped;
 
+        public int InventorySize = 20;
+
         public List<Item> Items = new List<Item>();
 
         private WorldItemManager _worldItemManager;
@@ -25,14 +27,21 @@ namespace Assets.Scripts.Character
             }
         }
 
-        public void AddItem(Item item)
+        public bool AddItem(Item item)
         {
+            if (Items.Count >= InventorySize)
+            {
+                return false;
+            }
+
             Items.Add(item);
 
             if (ActionItemAdded != null)
             {
                 ActionItemAdded.Invoke(item);
             }
+
+            return true;
         }
 
         public void DropFirstItem()

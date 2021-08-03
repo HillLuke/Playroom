@@ -18,5 +18,6 @@ MonoBehaviour:
   Jump: 32
   Run: 304
   ShowMouse: 9
-  HorizontalSensitivity: 300
+  DropItem: 113
+  HorizontalSensitivity: 350
   VerticalSensitivity: 3
