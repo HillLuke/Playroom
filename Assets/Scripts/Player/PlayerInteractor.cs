@@ -30,7 +30,7 @@ namespace Assets.Scripts.Character
             }
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             InteractPointFrom.transform.rotation = _camera.transform.rotation;
 

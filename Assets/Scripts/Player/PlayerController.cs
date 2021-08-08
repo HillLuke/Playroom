@@ -8,7 +8,7 @@ namespace Assets.Scripts.Player
     /// <summary>
     /// Feeds player input in to player components
     /// </summary>
-    public class PlayerInputController : MonoBehaviour
+    public class PlayerController : MonoBehaviour
     {
         public Animator Animator;
 
