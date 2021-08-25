@@ -20,6 +20,8 @@ namespace Assets.Scripts.Interactable
             if (ItemData != null && _itemModel == null)
             {
                 _itemModel = Instantiate(ItemData.WorldItem, _spawnLocation.transform);
+                _itemModel.AddComponent<BoxCollider>().isTrigger = true;
+                _itemModel.AddComponent<BoxCollider>();
             }
         }
 

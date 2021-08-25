@@ -1,12 +1,17 @@
 using Assets.Scripts.Interactable;
 using Assets.Scripts.Singletons;
+using System;
 using UnityEngine;
+using static Assets.Scripts.Interactable.InteractableBase;
 
 namespace Assets.Scripts.Character
 {
     public class PlayerInteractor : MonoBehaviour
     {
         public GameObject InteractPointFrom;
+        public float Range;
+
+        public event Action<EInteractType> Interact;
 
         private UnityEngine.Camera _camera;
         private GameObject _player;
@@ -34,13 +39,23 @@ namespace Assets.Scripts.Character
         {
             InteractPointFrom.transform.rotation = _camera.transform.rotation;
 
+            Ray rayFromCamera = new Ray(_camera.transform.position, _camera.transform.forward);
+            RaycastHit raycastHitCamera;
+            Physics.Raycast(rayFromCamera, out raycastHitCamera, 20f);
+
             Ray ray = new Ray(InteractPointFrom.transform.position, InteractPointFrom.transform.forward);
             RaycastHit raycastHit;
-            if (Physics.Raycast(ray, out raycastHit, 3f))
-            {
-                Debug.DrawRay(InteractPointFrom.transform.position, InteractPointFrom.transform.TransformDirection(Vector3.forward) * raycastHit.distance, Color.yellow);
 
-                var templookingAt = raycastHit.collider.gameObject.GetComponent<InteractableBase>();
+            if (Physics.Raycast(rayFromCamera, out raycastHit, Range))
+            {
+                Debug.DrawRay(_camera.transform.position, _camera.transform.TransformDirection(Vector3.forward) * 20f, Color.red);
+
+                Vector3 fromPosition = InteractPointFrom.transform.position;
+                Vector3 toPosition = raycastHitCamera.point;
+                Vector3 direction = toPosition - fromPosition;
+                Debug.DrawRay(InteractPointFrom.transform.position, direction * raycastHit.distance, Color.blue);
+
+                var templookingAt = raycastHit.collider.gameObject.GetComponentInParent<InteractableBase>();
 
                 if (templookingAt != _lookingAt)
                 {
@@ -67,6 +82,11 @@ namespace Assets.Scripts.Character
 
                 if (_lookingAt != null && _inputManager.Interact)
                 {
+                    if (Interact != null)
+                    {
+                        Interact.Invoke(_lookingAt.InteractType);
+                    }
+
                     _lookingAt.Interact(_player);
                 }
             }

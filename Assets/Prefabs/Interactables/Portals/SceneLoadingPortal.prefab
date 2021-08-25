@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4627f40ea0cc29641bdaa768aeb7db77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InteractType: 1
   SceneData: {fileID: 0}
 --- !u!65 &2650483137166072326
 BoxCollider:

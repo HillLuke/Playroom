@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +7,12 @@ namespace Assets.Scripts.Character
 {
     public class CharacterEquipment : MonoBehaviour
     {
-        public EquipmentSlot SlotHead;
-        public EquipmentSlot SlotChest;
-        public EquipmentSlot SlotLegs;
-        public EquipmentSlot SlotFeet;
-        public EquipmentSlot SlotLeftHand;
-        public EquipmentSlot SlotRightHand;
+        public EquipmentSlot SlotHead = new EquipmentSlot { SlotType = Slot.Head };
+        public EquipmentSlot SlotChest = new EquipmentSlot { SlotType = Slot.Chest };
+        public EquipmentSlot SlotLegs = new EquipmentSlot { SlotType = Slot.Legs };
+        public EquipmentSlot SlotFeet = new EquipmentSlot { SlotType = Slot.Feet };
+        public EquipmentSlot SlotLeftHand = new EquipmentSlot { SlotType = Slot.LeftHand };
+        public EquipmentSlot SlotRightHand = new EquipmentSlot { SlotType = Slot.RightHand };
 
         private Dictionary<Slot, EquipmentSlot> SlotsMap = new Dictionary<Slot, EquipmentSlot>();
 
@@ -41,6 +42,8 @@ namespace Assets.Scripts.Character
     public class EquipmentSlot
     {
         public GameObject Slot;
+        [ReadOnly]
+        [ShowInInspector]
         public Slot SlotType;
         public GameObject SpawnedEquipment;
     }

@@ -22,6 +22,8 @@ namespace Assets.Scripts.Singletons
 
         public bool DebugLogging;
 
+        [ReadOnly]
+        [ShowInInspector]
         private Vector2 _movment;
         private Vector2 _camera;
 
