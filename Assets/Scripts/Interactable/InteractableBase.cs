@@ -6,12 +6,12 @@ namespace Assets.Scripts.Interactable
     public abstract class InteractableBase : MonoBehaviour
     {
         public abstract string InteractUIMessage { get; }
+
         //Todo Think of a naming structure for enums.
         public EInteractType InteractType;
 
         protected UIManager _uIManager;
         protected InputManager _inputManager;
-        
 
         protected virtual void Awake()
         {

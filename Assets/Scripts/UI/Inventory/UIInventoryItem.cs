@@ -12,6 +12,7 @@ namespace Assets.Scripts.UI.Inventory
 
         [SerializeField]
         private Image _slotIcon;
+
         private Item _item;
 
         public void SetItem(Item item)

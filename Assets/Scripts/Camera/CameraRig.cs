@@ -1,4 +1,5 @@
 using Assets.Scripts.Player.Movement;
+using Assets.Scripts.Singletons;
 using Cinemachine;
 using UnityEngine;
 
@@ -10,16 +11,50 @@ namespace Assets.Scripts.Camera
         public Transform LookAt;
         public CinemachineFreeLook FreeLookMovement;
 
+        private InputManager _inputManager;
+        private bool _isPaused = false;
+
         private void Start()
         {
+            if (InputManager.instanceExists)
+            {
+                _inputManager = InputManager.instance;
+
+                _inputManager.ActionKeyPressed += PauseCameraInput;
+            }
+
             FollowAndLookCheck();
             UpdateSettings();
+            UpdateCameraInputs();
+        }
+
+        private void PauseCameraInput(KeyCode keyCode)
+        {
+            if (keyCode == _inputManager.PlayerInputData.ShowMouse)
+            {
+                _isPaused = !_isPaused;
+                UpdateCameraInputs();
+            }
         }
 
         public void UpdateSettings()
         {
             FreeLookMovement.Follow = Follow;
             FreeLookMovement.LookAt = LookAt;
+        }
+
+        public void UpdateCameraInputs()
+        {
+            if (_isPaused)
+            {
+                FreeLookMovement.m_YAxis.m_InputAxisName = string.Empty;
+                FreeLookMovement.m_XAxis.m_InputAxisName = string.Empty;
+            }
+            else
+            {
+                FreeLookMovement.m_YAxis.m_InputAxisName = _inputManager.PlayerInputData.YAxis;
+                FreeLookMovement.m_XAxis.m_InputAxisName = _inputManager.PlayerInputData.XAxis;
+            }
         }
 
         /// <summary>

@@ -18,6 +18,10 @@ namespace Assets.Scripts.Character
 
         [ReadOnly]
         [ShowInInspector]
+        public bool WasJumping { get; set; }
+
+        [ReadOnly]
+        [ShowInInspector]
         public bool CanJump { get; set; }
 
         /// <summary>

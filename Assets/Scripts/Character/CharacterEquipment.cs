@@ -42,9 +42,11 @@ namespace Assets.Scripts.Character
     public class EquipmentSlot
     {
         public GameObject Slot;
+
         [ReadOnly]
         [ShowInInspector]
         public Slot SlotType;
+
         public GameObject SpawnedEquipment;
     }
 

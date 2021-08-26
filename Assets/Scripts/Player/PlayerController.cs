@@ -22,7 +22,13 @@ namespace Assets.Scripts.Player
         [ReadOnly]
         public PlayerInteractor CharacterInteractor;
 
+        [ReadOnly]
+        public CharacterStats CharacterStats;
+
         private InputManager _inputManager;
+
+        private bool _wasJumping;
+        private bool _isFalling;
 
         private void Start()
         {
@@ -35,12 +41,12 @@ namespace Assets.Scripts.Player
 
             CharacterInventory = GetComponent<CharacterInventory>();
             CharacterInteractor = GetComponent<PlayerInteractor>();
+            CharacterStats = GetComponent<CharacterStats>();
 
             if (InputManager.instanceExists)
             {
                 _inputManager = InputManager.instance;
             }
-
 
             if (CharacterInteractor != null)
             {
@@ -55,6 +61,7 @@ namespace Assets.Scripts.Player
                 case Interactable.InteractableBase.EInteractType.Pickup:
                     Animator.SetTrigger(AnimationParameters.ACTION_PICKUP);
                     break;
+
                 case Interactable.InteractableBase.EInteractType.Activate:
                     Animator.SetTrigger(AnimationParameters.ACTION_ACTIVATE);
                     break;
@@ -63,6 +70,7 @@ namespace Assets.Scripts.Player
 
         private void Update()
         {
+            //Todo - move this in to some other controller/function to handle animation logic
             if (_inputManager != null)
             {
                 if (_inputManager.LeftClick)
@@ -88,6 +96,40 @@ namespace Assets.Scripts.Player
                     Animator.SetFloat(AnimationParameters.MOVEMENT_VELOCITY_Z, 0f);
                 }
 
+                if (_inputManager.Run)
+                {
+                    Animator.SetBool(AnimationParameters.SPRINT, true);
+                }
+                else
+                {
+                    Animator.SetBool(AnimationParameters.SPRINT, false);
+                }
+
+                if (CharacterStats != null)
+                {
+                    if (_inputManager.Jump)
+                    {
+                        Animator.SetTrigger(AnimationParameters.JUMP);
+                    }
+
+                    if (_wasJumping && !CharacterStats.IsJumping)
+                    {
+                        Animator.SetTrigger(AnimationParameters.LAND);
+                    }
+
+                    if (!CharacterStats.IsGrounded && !_wasJumping && !CharacterStats.IsJumping)
+                    {
+                        _isFalling = true;
+                        Animator.SetBool(AnimationParameters.FALLING, _isFalling);
+                    }
+                    else
+                    {
+                        _isFalling = false;
+                        Animator.SetBool(AnimationParameters.FALLING, _isFalling);
+                    }
+                }
+
+                _wasJumping = CharacterStats.IsJumping;
             }
         }
     }

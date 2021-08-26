@@ -1,12 +1,15 @@
 using TMPro;
 using UnityEngine;
 
-public class UIText : MonoBehaviour
+namespace Assets.Scripts.UI
 {
-    public TextMeshPro Text;
-
-    public void SetText(string newText)
+    public class UIText : MonoBehaviour
     {
-        Text.text = newText;
+        public TextMeshPro Text;
+
+        public void SetText(string newText)
+        {
+            Text.text = newText;
+        }
     }
 }

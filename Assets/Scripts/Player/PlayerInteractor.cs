@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 using static Assets.Scripts.Interactable.InteractableBase;
 
-namespace Assets.Scripts.Character
+namespace Assets.Scripts.Player
 {
     public class PlayerInteractor : MonoBehaviour
     {

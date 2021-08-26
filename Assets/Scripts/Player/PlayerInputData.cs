@@ -19,5 +19,12 @@ namespace Assets.Scripts.Player
         public float HorizontalSensitivity = 500f;
 
         public float VerticalSensitivity = 6f;
+
+
+        [Header("Camera")]
+        public string YAxis = "Mouse Y";
+        public string XAxis = "Mouse X";
+
+
     }
 }

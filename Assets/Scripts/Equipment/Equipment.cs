@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts.Usable
+namespace Assets.Scripts.Equipment
 {
     public class Equipment : MonoBehaviour
     {

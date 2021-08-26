@@ -1,6 +1,7 @@
 using Assets.Scripts.Player;
 using Assets.Scripts.Utilities;
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Singletons
@@ -10,6 +11,8 @@ namespace Assets.Scripts.Singletons
     /// </summary>
     public class InputManager : Singleton<InputManager>
     {
+        public Action<KeyCode> ActionKeyPressed;
+
         public PlayerInputData PlayerInputData;
         public Vector2 MovementVector => _hasControl ? _movment : Vector2.zero;
         public Vector2 Camera => _hasControl ? _camera : Vector2.zero;
@@ -19,12 +22,16 @@ namespace Assets.Scripts.Singletons
         public bool LeftClick => _hasControl ? _leftClick : false;
         public bool Interact => _hasControl ? _interact : false;
         public bool DropFirstItem => _hasControl ? _dropFirstItem : false;
+        public bool Inventory => _inventory;
 
         public bool DebugLogging;
 
         [ReadOnly]
         [ShowInInspector]
         private Vector2 _movment;
+
+        [ReadOnly]
+        [ShowInInspector]
         private Vector2 _camera;
 
         [ReadOnly]
@@ -59,6 +66,11 @@ namespace Assets.Scripts.Singletons
         [ShowInInspector]
         private bool _dropFirstItem = true;
 
+        [Title("UI Controls")]
+        [ReadOnly]
+        [ShowInInspector]
+        private bool _inventory = false;
+
         private void Update()
         {
             _movment.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -70,9 +82,34 @@ namespace Assets.Scripts.Singletons
             _dropFirstItem = Input.GetKeyDown(PlayerInputData.DropItem);
             _leftClick = Input.GetMouseButton(0);
 
+            _inventory = Input.GetKeyDown(PlayerInputData.Inventory);
+
+            if (ActionKeyPressed != null)
+            {
+                if (_inventory)
+                {
+                    ActionKeyPressed.Invoke(PlayerInputData.Inventory);
+                }
+
+                if (_showMouse)
+                {
+                    ActionKeyPressed.Invoke(PlayerInputData.ShowMouse);
+                }
+            }
+
             if (_showMouse)
             {
                 _mouseLocked = !_mouseLocked;
+
+                if (_mouseLocked)
+                {
+                    LockControl();
+                }
+                else
+                {
+                    ReleaseControl();
+                }
+
                 LockMouse();
             }
 
@@ -84,7 +121,10 @@ namespace Assets.Scripts.Singletons
 
         private void FixedUpdate()
         {
-            _camera.Set(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+            if (_hasControl)
+            {
+                _camera.Set(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+            }
         }
 
         /// <summary>
@@ -108,7 +148,8 @@ namespace Assets.Scripts.Singletons
         /// </summary>
         private void DebugLog()
         {
-            Debug.Log($"Movement - {_movment}");
+            //Debug.Log($"Movement - {_movment}");
+            Debug.Log($"_mouseLocked - {_mouseLocked}  _hasControl - {_hasControl}");
         }
 
         protected override void Awake()
@@ -126,13 +167,15 @@ namespace Assets.Scripts.Singletons
         {
             if (_mouseLocked)
             {
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                ReleaseControl();
             }
             else
             {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
+                LockControl();
             }
         }
     }

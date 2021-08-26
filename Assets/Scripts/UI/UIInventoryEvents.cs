@@ -2,29 +2,32 @@ using Assets.Scripts.Character;
 using Assets.Scripts.Inventory.Items;
 using UnityEngine;
 
-public class UIInventoryEvents : MonoBehaviour
+namespace Assets.Scripts.UI
 {
-    public CharacterInventory CharacterInventory;
-    public UIInventoryEventText UIInventoryEventText;
-
-    private void Start()
+    public class UIInventoryEvents : MonoBehaviour
     {
-        if (CharacterInventory != null)
+        public CharacterInventory CharacterInventory;
+        public UIInventoryEventText UIInventoryEventText;
+
+        private void Start()
         {
-            CharacterInventory.ActionItemAdded += CharacterInventory_ActionItemAdded;
-            CharacterInventory.ActionItemDropped += CharacterInventory_ActionItemDropped;
+            if (CharacterInventory != null)
+            {
+                CharacterInventory.ActionItemAdded += CharacterInventory_ActionItemAdded;
+                CharacterInventory.ActionItemDropped += CharacterInventory_ActionItemDropped;
+            }
         }
-    }
 
-    private void CharacterInventory_ActionItemDropped(Item item)
-    {
-        var notification = Instantiate(UIInventoryEventText, gameObject.transform);
-        notification.SetText($"Dropped {item.ItemName}");
-    }
+        private void CharacterInventory_ActionItemDropped(Item item)
+        {
+            var notification = Instantiate(UIInventoryEventText, gameObject.transform);
+            notification.SetText($"Dropped {item.ItemName}");
+        }
 
-    private void CharacterInventory_ActionItemAdded(Item item)
-    {
-        var notification = Instantiate(UIInventoryEventText, gameObject.transform);
-        notification.SetText($"Picked up {item.ItemName}");
+        private void CharacterInventory_ActionItemAdded(Item item)
+        {
+            var notification = Instantiate(UIInventoryEventText, gameObject.transform);
+            notification.SetText($"Picked up {item.ItemName}");
+        }
     }
 }

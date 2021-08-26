@@ -32,7 +32,7 @@ MonoBehaviour:
     BaseValue: 0
     Modifiers: []
   - Type: 4
-    BaseValue: 1.5
+    BaseValue: 2
     Modifiers: []
   - Type: 5
     BaseValue: 1

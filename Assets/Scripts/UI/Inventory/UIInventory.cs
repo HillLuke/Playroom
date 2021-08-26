@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.UI.Inventory
 {
-    public class UIInventory : MonoBehaviour
+    public class UIInventory : UIBase
     {
         public CharacterInventory CharacterInventory;
 
@@ -18,8 +18,10 @@ namespace Assets.Scripts.UI.Inventory
         [SerializeField]
         private UIInventoryItem _uIInventoryItemPrefab;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+
             if (CharacterInventory != null)
             {
                 for (int i = 0; i < CharacterInventory.InventorySize; i++)
@@ -28,6 +30,11 @@ namespace Assets.Scripts.UI.Inventory
                 }
 
                 CharacterInventory.ActionItemAdded += CharacterInventory_ActionItemAdded;
+            }
+
+            if (_UIManager != null)
+            {
+                _UIManager.ActionInventory += SetActive;
             }
         }
 
