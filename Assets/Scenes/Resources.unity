@@ -1745,11 +1745,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 168736826588957441, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 3.758568
+      value: 1.24054
       objectReference: {fileID: 0}
     - target: {fileID: 168736826588957441, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -1.938547
+      value: -5.301506
+      objectReference: {fileID: 0}
+    - target: {fileID: 381852643235583844, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
+      propertyPath: m_XAxis.m_InputAxisName
+      value: Mouse X
+      objectReference: {fileID: 0}
+    - target: {fileID: 381852643235583844, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
+      propertyPath: m_YAxis.m_InputAxisName
+      value: Mouse Y
       objectReference: {fileID: 0}
     - target: {fileID: 1244352100523682328, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_RootOrder
@@ -1801,19 +1809,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3312392532201094459, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 3.758568
+      value: 1.24054
       objectReference: {fileID: 0}
     - target: {fileID: 3312392532201094459, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -1.938547
+      value: -5.301506
       objectReference: {fileID: 0}
     - target: {fileID: 3468116300135072596, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 3.758568
+      value: 1.24054
       objectReference: {fileID: 0}
     - target: {fileID: 3468116300135072596, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -1.938547
+      value: -5.301506
       objectReference: {fileID: 0}
     - target: {fileID: 5225869761377882893, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_VerticalDamping

@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.UI.Inventory
 {
@@ -42,6 +43,10 @@ namespace Assets.Scripts.UI.Inventory
         {
             var z = _inventorySlots.Where(x => !x.HasItem);
             _inventorySlots.Where(x => !x.HasItem).First().SetItem(item);
+        }
+
+        public override void OnPointerClick(PointerEventData eventData) 
+        {
         }
     }
 }

@@ -1,9 +1,10 @@
 using Assets.Scripts.Singletons;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.UI
 {
-    public class UIBase : MonoBehaviour
+    public class UIBase : MonoBehaviour, IPointerClickHandler
     {
         protected UIManager _UIManager;
         public bool ShowByDefault = true;
@@ -28,5 +29,7 @@ namespace Assets.Scripts.UI
 
             _isActive = !_isActive;
         }
+
+        public virtual void OnPointerClick(PointerEventData eventData){}
     }
 }
