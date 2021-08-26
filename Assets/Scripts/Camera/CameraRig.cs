@@ -48,7 +48,9 @@ namespace Assets.Scripts.Camera
             if (_isPaused)
             {
                 FreeLookMovement.m_YAxis.m_InputAxisName = string.Empty;
+                FreeLookMovement.m_YAxis.m_InputAxisValue = 0f;
                 FreeLookMovement.m_XAxis.m_InputAxisName = string.Empty;
+                FreeLookMovement.m_XAxis.m_InputAxisValue = 0f;
             }
             else
             {
