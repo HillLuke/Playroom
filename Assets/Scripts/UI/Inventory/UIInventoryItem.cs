@@ -1,11 +1,8 @@
 using Assets.Scripts.Inventory.Items;
-using Assets.Scripts.Player;
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
 
 namespace Assets.Scripts.UI.Inventory

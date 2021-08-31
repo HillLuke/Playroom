@@ -1,3 +1,4 @@
+using Assets.Scripts.Player;
 using Assets.Scripts.Player.Movement;
 using Assets.Scripts.Singletons;
 using Cinemachine;
@@ -7,12 +8,13 @@ namespace Assets.Scripts.Camera
 {
     public class CameraRig : MonoBehaviour
     {
-        public Transform Follow;
-        public Transform LookAt;
         public CinemachineFreeLook FreeLookMovement;
 
         private InputManager _inputManager;
+        private PlayerManager _playerManager;
         private bool _isPaused = false;
+        private Transform _follow;
+        private Transform _lookAt;
 
         private void Start()
         {
@@ -23,8 +25,32 @@ namespace Assets.Scripts.Camera
                 _inputManager.ActionKeyPressed += PauseCameraInput;
             }
 
-            FollowAndLookCheck();
-            UpdateSettings();
+            if (PlayerManager.instanceExists)
+            {
+                _playerManager = PlayerManager.instance;
+
+                if (_playerManager.isInitialized)
+                {
+                    Initialize();
+                }
+                else
+                {
+                    _playerManager.ActionInitialized += Initialize;
+                }
+            }
+        }
+
+        private void Initialize()
+        {
+            _follow = _playerManager.Player.GetComponent<PlayerCameraConfig>().Follow.transform;
+            _lookAt = _playerManager.Player.GetComponent<PlayerCameraConfig>().LookAt.transform;
+
+            FreeLookMovement.Follow = _follow;
+            FreeLookMovement.LookAt = _lookAt;
+
+            FreeLookMovement.m_XAxis.m_MaxSpeed = _inputManager.PlayerInputData.HorizontalSensitivity;
+            FreeLookMovement.m_YAxis.m_MaxSpeed = _inputManager.PlayerInputData.VerticalSensitivity;
+
             UpdateCameraInputs();
         }
 
@@ -35,12 +61,6 @@ namespace Assets.Scripts.Camera
                 _isPaused = !_isPaused;
                 UpdateCameraInputs();
             }
-        }
-
-        public void UpdateSettings()
-        {
-            FreeLookMovement.Follow = Follow;
-            FreeLookMovement.LookAt = LookAt;
         }
 
         public void UpdateCameraInputs()
@@ -56,26 +76,6 @@ namespace Assets.Scripts.Camera
             {
                 FreeLookMovement.m_YAxis.m_InputAxisName = _inputManager.PlayerInputData.YAxis;
                 FreeLookMovement.m_XAxis.m_InputAxisName = _inputManager.PlayerInputData.XAxis;
-            }
-        }
-
-        /// <summary>
-        /// Auto follow and look at the player if not set
-        /// </summary>
-        private void FollowAndLookCheck()
-        {
-            if (Follow == null && LookAt == null)
-            {
-                var player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovementBase>();
-
-                if (player != null)
-                {
-                    Follow = player.FollowTarget.transform;
-                    LookAt = player.LookAt.transform;
-
-                    FreeLookMovement.m_XAxis.m_MaxSpeed = player.InputManager.PlayerInputData.HorizontalSensitivity;
-                    FreeLookMovement.m_YAxis.m_MaxSpeed = player.InputManager.PlayerInputData.VerticalSensitivity;
-                }
             }
         }
     }

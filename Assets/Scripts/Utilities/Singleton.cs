@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
 
@@ -9,8 +10,10 @@ namespace Assets.Scripts.Utilities
     /// <typeparam name="T">Type of the singleton</typeparam>
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
-        public bool hasInitialized = false;
-        public Action Initialized;
+        [ReadOnly]
+        public bool isInitialized = false;
+
+        public Action ActionInitialized;
 
         /// <summary>
         /// The static reference to the instance
@@ -27,11 +30,11 @@ namespace Assets.Scripts.Utilities
 
         protected virtual void Start()
         {
-            hasInitialized = true;
+            isInitialized = true;
 
-            if (Initialized != null)
+            if (ActionInitialized != null)
             {
-                Initialized.Invoke();
+                ActionInitialized.Invoke();
             }
         }
 

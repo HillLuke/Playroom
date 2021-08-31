@@ -45,7 +45,7 @@ namespace Assets.Scripts.UI.Inventory
             _inventorySlots.Where(x => !x.HasItem).First().SetItem(item);
         }
 
-        public override void OnPointerClick(PointerEventData eventData) 
+        public override void OnPointerClick(PointerEventData eventData)
         {
             Debug.Log("click");
         }

@@ -3207,12 +3207,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8160837880716829216}
   m_LocalRotation: {x: -0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0.138, y: 0.089, z: 0.079}
+  m_LocalPosition: {x: 0.131, y: 0.089, z: 0.079}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2499139864222014426}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: -90}
+  m_LocalEulerAnglesHint: {x: -180, y: -90, z: 90}
 --- !u!1 &9183795812267739117
 GameObject:
   m_ObjectHideFlags: 0
@@ -3253,12 +3253,13 @@ GameObject:
   m_Component:
   - component: {fileID: 9183795812435189034}
   - component: {fileID: 9183795812435189033}
+  - component: {fileID: 8010712557748792618}
   - component: {fileID: 9183795812435189032}
   - component: {fileID: 4575902477315743061}
   - component: {fileID: 2134928051671863414}
-  - component: {fileID: 265346387040718436}
   - component: {fileID: 852190522672545487}
   - component: {fileID: 8353470846170905463}
+  - component: {fileID: 265346387040718436}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3302,6 +3303,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &8010712557748792618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9183795812435189013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cdf942669f57b543b368cccadeca159, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Follow: {fileID: 1270526335983895627}
+  LookAt: {fileID: 9183795812267739117}
 --- !u!114 &9183795812435189032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3348,21 +3363,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _effects: []
---- !u!114 &265346387040718436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9183795812435189013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24bd2d2cdda991e43ad3681ca2eb77ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CharacterProperties: {fileID: 0}
-  _jumpsLeft: 0
-  _characterProperties: {fileID: 11400000, guid: ff9f8740c51ffd24dbcf480da973b655, type: 2}
 --- !u!114 &852190522672545487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3391,3 +3391,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventorySize: 20
   Items: []
+--- !u!114 &265346387040718436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9183795812435189013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24bd2d2cdda991e43ad3681ca2eb77ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterProperties: {fileID: 0}
+  _jumpsLeft: 0
+  _characterProperties: {fileID: 11400000, guid: ff9f8740c51ffd24dbcf480da973b655, type: 2}

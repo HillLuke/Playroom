@@ -30,6 +30,6 @@ namespace Assets.Scripts.UI
             _isActive = !_isActive;
         }
 
-        public virtual void OnPointerClick(PointerEventData eventData){}
+        public virtual void OnPointerClick(PointerEventData eventData) { }
     }
 }
