@@ -19,4 +19,4 @@ MonoBehaviour:
   IsStackable: 0
   MaxStack: 0
   Damage: 5
-  WeaponEquipPrefab: {fileID: 0}
+  WeaponEquipPrefab: {fileID: 8366760460961493035, guid: 2dcef887d6dbd8746bab7506f94eb80c, type: 3}

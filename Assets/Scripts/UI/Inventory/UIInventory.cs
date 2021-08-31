@@ -47,6 +47,12 @@ namespace Assets.Scripts.UI.Inventory
 
         public override void OnPointerClick(PointerEventData eventData) 
         {
+            Debug.Log("click");
+        }
+
+        public void ItemClicked(PointerEventData eventData)
+        {
+
         }
     }
 }

@@ -1,5 +1,7 @@
 using Assets.Scripts.Inventory.Items;
+using Assets.Scripts.Player;
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,6 +12,8 @@ namespace Assets.Scripts.UI.Inventory
 {
     public class UIInventoryItem : MonoBehaviour, IPointerClickHandler
     {
+        public Action<PointerEventData> Clicked;
+
         [ShowInInspector]
         public bool HasItem { get { return _item != null; } }
 
@@ -26,8 +30,25 @@ namespace Assets.Scripts.UI.Inventory
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            Debug.Log($"Clicked {_item.ItemName}");
-            
+            if (Clicked != null)
+            {
+                Clicked.Invoke(eventData);
+            }
+            // propagate event further up
+            ExecuteEvents.ExecuteHierarchy(transform.parent.gameObject, eventData, ExecuteEvents.pointerClickHandler);
+
+            //if (eventData.button == PointerEventData.InputButton.Right)
+            //{
+            //    switch (_item.ItemType)
+            //    {
+            //        case ItemType.Consumable:
+            //            break;
+            //        case ItemType.Weapon:
+            //            var player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            //            player.CharacterEquipment.EquipAtSlot(Character.Slot.RightHand, ((Weapon)_item).WeaponEquipPrefab);
+            //            break;
+            //    }
+            //}
         }
 
     }
