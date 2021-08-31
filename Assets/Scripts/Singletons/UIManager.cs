@@ -13,7 +13,7 @@ namespace Assets.Scripts.Singletons
 
         private InputManager _inputManager;
 
-        private void Start()
+        protected override void Start()
         {
             if (InputManager.instanceExists)
             {
@@ -21,6 +21,8 @@ namespace Assets.Scripts.Singletons
 
                 _inputManager.ActionKeyPressed += KeyPressed;
             }
+
+            base.Start();
         }
 
         private void KeyPressed(KeyCode key)

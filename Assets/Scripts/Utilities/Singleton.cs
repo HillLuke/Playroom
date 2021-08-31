@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Utilities
@@ -8,6 +9,9 @@ namespace Assets.Scripts.Utilities
     /// <typeparam name="T">Type of the singleton</typeparam>
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
+        public bool hasInitialized = false;
+        public Action Initialized;
+
         /// <summary>
         /// The static reference to the instance
         /// </summary>
@@ -19,6 +23,16 @@ namespace Assets.Scripts.Utilities
         public static bool instanceExists
         {
             get { return instance != null; }
+        }
+
+        protected virtual void Start()
+        {
+            hasInitialized = true;
+
+            if (Initialized != null)
+            {
+                Initialized.Invoke();
+            }
         }
 
         /// <summary>

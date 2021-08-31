@@ -12,9 +12,11 @@ namespace Assets.Scripts.Singletons
 
         private UnityEngine.Camera _camera;
 
-        private void Start()
+        protected override void Start()
         {
             _camera = UnityEngine.Camera.main;
+
+            base.Start();
         }
 
         public void SpawnItem(Item item, GameObject parent)
