@@ -30,12 +30,6 @@ namespace Assets.Scripts.Utilities
 
         protected virtual void Start()
         {
-            isInitialized = true;
-
-            if (ActionInitialized != null)
-            {
-                ActionInitialized.Invoke();
-            }
         }
 
         /// <summary>
@@ -50,6 +44,13 @@ namespace Assets.Scripts.Utilities
             else
             {
                 instance = (T)this;
+            }
+
+            isInitialized = true;
+
+            if (ActionInitialized != null)
+            {
+                ActionInitialized.Invoke();
             }
         }
 
