@@ -48,8 +48,12 @@ namespace Assets.Scripts.Camera
             FreeLookMovement.Follow = _follow;
             FreeLookMovement.LookAt = _lookAt;
 
+            FreeLookMovement.m_YAxis.m_MaxValue = 90f;
+
             FreeLookMovement.m_XAxis.m_MaxSpeed = _inputManager.PlayerInputData.HorizontalSensitivity;
             FreeLookMovement.m_YAxis.m_MaxSpeed = _inputManager.PlayerInputData.VerticalSensitivity;
+
+            FreeLookMovement.m_YAxis.Value = 45f;
 
             UpdateCameraInputs();
         }

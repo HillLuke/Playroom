@@ -2,6 +2,7 @@ using Assets.Scripts.Character;
 using Assets.Scripts.Singletons;
 using Assets.Scripts.Utilities;
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Player
@@ -11,7 +12,11 @@ namespace Assets.Scripts.Player
     /// </summary>
     public class PlayerController : MonoBehaviour
     {
+        public Action<PlayerController> ActionReady;
+
         public Animator Animator;
+
+        public bool IsReady { get { return _isReady; } }
 
         [ReadOnly]
         public CharacterEquipment CharacterEquipment;
@@ -29,6 +34,7 @@ namespace Assets.Scripts.Player
 
         private bool _wasJumping;
         private bool _isFalling;
+        private bool _isReady;
 
         private void Start()
         {
@@ -51,6 +57,12 @@ namespace Assets.Scripts.Player
             if (CharacterInteractor != null)
             {
                 CharacterInteractor.Interact += CharacterInteractor_Interact;
+            }
+
+            _isReady = true;
+            if (ActionReady != null)
+            {
+                ActionReady.Invoke(this);
             }
         }
 

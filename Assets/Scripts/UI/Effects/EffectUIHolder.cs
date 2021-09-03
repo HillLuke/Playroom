@@ -1,25 +1,21 @@
 using Assets.Scripts.Effects;
+using Assets.Scripts.Player;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
+using Assets.Scripts.InputButtonT;
 
 namespace Assets.Scripts.UI.Effects
 {
-    public class EffectUIHolder : MonoBehaviour
+    public class EffectUIHolder : UIBase
     {
-        //TODO: make gamemanager to hold player refrence as a singleton
-        public BuffableEntity Player;
-
         public VerticalLayoutGroup VerticalLayoutGroup;
         public EffectUIData EffectUIDataToInit;
 
         public Dictionary<EffectBase, EffectUIData> CurrentEffects = new Dictionary<EffectBase, EffectUIData>();
 
-        private void Start()
-        {
-            Player.ActionEffectAdded += NewEffectAdded;
-            Player.ActionEffectRemoved += RemoveEffect;
-        }
+        private BuffableEntity _buffableEntity;
 
         private void NewEffectAdded(EffectBase effectBase)
         {
@@ -34,6 +30,23 @@ namespace Assets.Scripts.UI.Effects
             {
                 Destroy(CurrentEffects[effectBase].gameObject);
                 CurrentEffects.Remove(effectBase);
+            }
+        }
+
+        protected override void Setup(PlayerController player)
+        {
+            foreach (var effect in CurrentEffects)
+            {
+                effect.Value.Remove();
+            }
+
+            CurrentEffects = new Dictionary<EffectBase, EffectUIData>();
+            _buffableEntity = player.GetComponent<BuffableEntity>();
+
+            if (_buffableEntity != null)
+            {
+                _buffableEntity.ActionEffectAdded += NewEffectAdded;
+                _buffableEntity.ActionEffectRemoved += RemoveEffect;
             }
         }
     }

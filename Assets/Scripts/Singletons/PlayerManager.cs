@@ -1,4 +1,5 @@
 using Assets.Scripts.Player;
+using Assets.Scripts.UI;
 using Assets.Scripts.Utilities;
 using System;
 using UnityEngine;
@@ -7,7 +8,7 @@ namespace Assets.Scripts.Singletons
 {
     public class PlayerManager : Singleton<PlayerManager>
     {
-        public Action PlayerSpawned;
+        public Action<PlayerController> ActionPlayerChanged;
 
         public PlayerController Player { get { return _player; } }
 
@@ -36,9 +37,9 @@ namespace Assets.Scripts.Singletons
             {
                 _player = Instantiate(_playerPrefab, _spawnLocaion.transform.position, _spawnLocaion.transform.rotation);
 
-                if (PlayerSpawned != null)
+                if (ActionPlayerChanged != null)
                 {
-                    PlayerSpawned.Invoke();
+                    ActionPlayerChanged.Invoke(Player);
                 }
             }
         }

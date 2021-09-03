@@ -1,3 +1,4 @@
+using Assets.Scripts.Player;
 using Assets.Scripts.Singletons;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,10 +7,12 @@ namespace Assets.Scripts.UI
 {
     public class UIBase : MonoBehaviour, IPointerClickHandler
     {
-        protected UIManager _UIManager;
         public bool ShowByDefault = true;
+        public bool ListenForKey;         
 
+        protected UIManager _UIManager;
         protected bool _isActive = false;
+        protected PlayerController _activePlayer;
 
         protected virtual void Start()
         {
@@ -18,9 +21,9 @@ namespace Assets.Scripts.UI
             if (UIManager.instanceExists)
             {
                 _UIManager = UIManager.instance;
+                _UIManager.ActionPlayerChanged += Setup;
+                Setup(_UIManager.GetActivePlayer());
             }
-
-            SetActive();
         }
 
         protected void SetActive()
@@ -31,5 +34,22 @@ namespace Assets.Scripts.UI
         }
 
         public virtual void OnPointerClick(PointerEventData eventData) { }
+
+        protected virtual void Setup(PlayerController player)
+        {
+            if (player == null)
+            {
+                return;
+            }
+
+            if (!player.IsReady)
+            {
+                player.ActionReady += Setup;
+                return;
+            }
+
+            _activePlayer = player;
+            SetActive();
+        }
     }
 }

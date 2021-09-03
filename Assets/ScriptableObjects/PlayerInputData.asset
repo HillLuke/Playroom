@@ -13,11 +13,14 @@ MonoBehaviour:
   m_Name: PlayerInputData
   m_EditorClassIdentifier: 
   Use: 101
-  Inventory: 105
-  Character: 99
   Jump: 32
   Run: 304
-  ShowMouse: 9
   DropItem: 113
-  HorizontalSensitivity: 350
-  VerticalSensitivity: 3
+  HorizontalSensitivity: 500
+  VerticalSensitivity: 100
+  Inventory: 105
+  CloseAllUI: 27
+  Character: 99
+  ShowMouse: 9
+  YAxis: Mouse Y
+  XAxis: Mouse X

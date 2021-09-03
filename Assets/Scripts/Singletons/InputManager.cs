@@ -12,6 +12,7 @@ namespace Assets.Scripts.Singletons
     public class InputManager : Singleton<InputManager>
     {
         public Action<KeyCode> ActionKeyPressed;
+        public Action<KeyCode> ActionReMapped;
 
         public PlayerInputData PlayerInputData;
         public Vector2 MovementVector => _hasControl ? _movment : Vector2.zero;

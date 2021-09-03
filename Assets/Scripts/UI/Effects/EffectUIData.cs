@@ -20,6 +20,14 @@ namespace Assets.Scripts.UI.Effects
             }
         }
 
+        public void Remove()
+        {
+            if (_effect != null)
+            {
+                _effect.End();
+            }
+        }
+
         private void Update()
         {
             if (_effect != null && !_effect.IsPermanent)
