@@ -21,9 +21,14 @@ namespace Assets.Scripts.UI
             if (UIManager.instanceExists)
             {
                 _UIManager = UIManager.instance;
-                _UIManager.ActionPlayerChanged += Setup;
-                Setup(_UIManager.GetActivePlayer());
+                _UIManager.ActionPlayerChanged += SetPlayer;
+                SetPlayer(_UIManager.GetActivePlayer());
             }
+        }
+
+        protected virtual void Awake()
+        {
+
         }
 
         protected void SetActive()
@@ -35,7 +40,7 @@ namespace Assets.Scripts.UI
 
         public virtual void OnPointerClick(PointerEventData eventData) { }
 
-        protected virtual void Setup(PlayerController player)
+        private void SetPlayer(PlayerController player)
         {
             if (player == null)
             {
@@ -44,11 +49,16 @@ namespace Assets.Scripts.UI
 
             if (!player.IsReady)
             {
-                player.ActionReady += Setup;
+                player.ActionReady += SetPlayer;
                 return;
             }
 
             _activePlayer = player;
+            Setup();
+        }
+
+        protected virtual void Setup()
+        {
             SetActive();
         }
     }
