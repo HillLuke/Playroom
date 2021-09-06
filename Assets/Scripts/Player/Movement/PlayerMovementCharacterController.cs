@@ -14,12 +14,6 @@ namespace Assets.Scripts.Player.Movement
             _characterController = GetComponent<CharacterController>();
         }
 
-        protected override void Update()
-        {
-            base.Update();
-            UpdateOrientation();
-        }
-
         protected override void FixedUpdate()
         {
             base.FixedUpdate();
@@ -31,6 +25,8 @@ namespace Assets.Scripts.Player.Movement
             {
                 _movementData.ResetJumps();
             }
+
+            UpdateOrientation();
         }
 
         protected override void CalculateJump()
@@ -90,9 +86,9 @@ namespace Assets.Scripts.Player.Movement
             //Make the player always face forward
             float yaw = _camera.transform.rotation.eulerAngles.y;
             //Use 1 in Slerp to make rotation instant
-            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, yaw, 0), 1);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, yaw, 0), 1f);
 
-            transform.rotation = Quaternion.Euler(transform.rotation.z, yaw, transform.rotation.z);
+            transform.rotation = Quaternion.Euler(transform.rotation.x, yaw, transform.rotation.z);
         }
     }
 }
