@@ -21,10 +21,6 @@ namespace Assets.Scripts.Player.Movement
 
         protected virtual void Start()
         {
-        }
-
-        protected virtual void Awake()
-        {
             if (InputManager.instanceExists)
             {
                 _inputManager = InputManager.instance;
@@ -33,6 +29,10 @@ namespace Assets.Scripts.Player.Movement
             _camera = UnityEngine.Camera.main;
 
             _inputManager.ReleaseControl();
+        }
+
+        protected virtual void Awake()
+        {
         }
 
         protected virtual void FixedUpdate()
