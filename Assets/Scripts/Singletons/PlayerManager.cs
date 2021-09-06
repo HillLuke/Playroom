@@ -19,7 +19,7 @@ namespace Assets.Scripts.Singletons
 
         private PlayerController _player;
 
-        protected override void Start()
+        protected override void Awake()
         {
             if (_playerPrefab == null)
             {
@@ -28,7 +28,7 @@ namespace Assets.Scripts.Singletons
 
             SpawnPlayer();
 
-            base.Start();
+            base.Awake();
         }
 
         private void SpawnPlayer()
