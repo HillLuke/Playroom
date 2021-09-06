@@ -9,6 +9,7 @@ namespace Assets.Scripts.Camera
     public class CameraRig : MonoBehaviour
     {
         public CinemachineFreeLook FreeLookMovement;
+        public Cinemachine.CinemachineBrain Brain;
 
         private InputManager _inputManager;
         private PlayerManager _playerManager;
@@ -38,6 +39,11 @@ namespace Assets.Scripts.Camera
                     _playerManager.ActionInitialized += Initialize;
                 }
             }
+        }
+
+        private void LateUpdate()
+        {
+            Brain.ManualUpdate();
         }
 
         private void Initialize()
