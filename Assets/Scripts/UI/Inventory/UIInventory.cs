@@ -23,6 +23,14 @@ namespace Assets.Scripts.UI.Inventory
         {
             base.Start();
 
+            if (_UIManager != null)
+            {
+                _UIManager.ActionInventory += SetActive;
+            }
+        }
+
+        protected override void Setup()
+        {
             if (CharacterInventory != null)
             {
                 for (int i = 0; i < CharacterInventory.InventorySize; i++)
@@ -33,15 +41,11 @@ namespace Assets.Scripts.UI.Inventory
                 CharacterInventory.ActionItemAdded += CharacterInventory_ActionItemAdded;
             }
 
-            if (_UIManager != null)
-            {
-                _UIManager.ActionInventory += SetActive;
-            }
+            base.Setup();
         }
 
         private void CharacterInventory_ActionItemAdded(Item item)
         {
-            var z = _inventorySlots.Where(x => !x.HasItem);
             _inventorySlots.Where(x => !x.HasItem).First().SetItem(item);
         }
 
