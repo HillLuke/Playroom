@@ -33,7 +33,7 @@ namespace Assets.Scripts.UI.Effects
             }
         }
 
-        protected override void Setup(PlayerController player)
+        protected override void Setup()
         {
             foreach (var effect in CurrentEffects)
             {
@@ -41,13 +41,19 @@ namespace Assets.Scripts.UI.Effects
             }
 
             CurrentEffects = new Dictionary<EffectBase, EffectUIData>();
-            _buffableEntity = player.GetComponent<BuffableEntity>();
+            _buffableEntity = _activePlayer.GetComponent<BuffableEntity>();
 
             if (_buffableEntity != null)
             {
                 _buffableEntity.ActionEffectAdded += NewEffectAdded;
                 _buffableEntity.ActionEffectRemoved += RemoveEffect;
             }
+            else
+            {
+                Debug.LogError("_buffableEntity is null");
+            }
+
+            base.Setup();
         }
     }
 }
