@@ -8,6 +8,8 @@ namespace Assets.Scripts.Player
 {
     public class PlayerInteractor : MonoBehaviour
     {
+        public bool DebugDraw;
+
         public GameObject InteractPointFrom;
         public float Range;
 
@@ -64,12 +66,16 @@ namespace Assets.Scripts.Player
 
             if (Physics.Raycast(rayFromCamera, out raycastHit, Range))
             {
-                Debug.DrawRay(_camera.transform.position, _camera.transform.TransformDirection(Vector3.forward) * 20f, Color.red);
 
                 Vector3 fromPosition = InteractPointFrom.transform.position;
                 Vector3 toPosition = raycastHitCamera.point;
                 Vector3 direction = toPosition - fromPosition;
-                Debug.DrawRay(InteractPointFrom.transform.position, direction * raycastHit.distance, Color.blue);
+
+                if (DebugDraw)
+                {
+                    Debug.DrawRay(_camera.transform.position, _camera.transform.TransformDirection(Vector3.forward) * 20f, Color.red);
+                    Debug.DrawRay(InteractPointFrom.transform.position, direction * raycastHit.distance, Color.blue);
+                }
 
                 var templookingAt = raycastHit.collider.gameObject.GetComponentInParent<InteractableBase>();
 
