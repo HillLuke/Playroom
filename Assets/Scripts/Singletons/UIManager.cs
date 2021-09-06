@@ -22,7 +22,7 @@ namespace Assets.Scripts.Singletons
 
         public PlayerController GetActivePlayer()
         {
-            return _playerManger.Player;
+            return _playerManger?.Player;
         }
 
         protected override void Start()
