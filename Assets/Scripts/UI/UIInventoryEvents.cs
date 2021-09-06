@@ -4,18 +4,26 @@ using UnityEngine;
 
 namespace Assets.Scripts.UI
 {
-    public class UIInventoryEvents : MonoBehaviour
+    public class UIInventoryEvents : UIBase
     {
         public CharacterInventory CharacterInventory;
         public UIInventoryEventText UIInventoryEventText;
 
-        private void Start()
+        protected override void Setup()
         {
+            CharacterInventory = _activePlayer.GetComponent<CharacterInventory>();
+
             if (CharacterInventory != null)
             {
                 CharacterInventory.ActionItemAdded += CharacterInventory_ActionItemAdded;
                 CharacterInventory.ActionItemDropped += CharacterInventory_ActionItemDropped;
             }
+            else
+            {
+                Debug.LogError("CharacterInventory is null");
+            }
+
+            base.Setup();
         }
 
         private void CharacterInventory_ActionItemDropped(Item item)
