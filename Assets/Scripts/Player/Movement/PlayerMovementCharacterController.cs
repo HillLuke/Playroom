@@ -26,6 +26,11 @@ namespace Assets.Scripts.Player.Movement
                 _movementData.ResetJumps();
             }
 
+            //UpdateOrientation();
+        }
+
+        private void LateUpdate()
+        {
             UpdateOrientation();
         }
 

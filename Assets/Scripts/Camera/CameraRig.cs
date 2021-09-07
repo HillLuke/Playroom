@@ -41,11 +41,6 @@ namespace Assets.Scripts.Camera
             }
         }
 
-        private void LateUpdate()
-        {
-            Brain.ManualUpdate();
-        }
-
         private void Initialize()
         {
             _follow = _playerManager.Player.GetComponent<PlayerCameraConfig>().Follow.transform;
