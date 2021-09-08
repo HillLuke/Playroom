@@ -60,7 +60,7 @@ namespace Assets.Scripts.Camera
 
         private void PauseCameraInput(InputAction inputAction)
         {
-            if (inputAction.InputType != EInputType.ShowMouse)
+            if (inputAction.InputType != EInputType.UI_ShowMouse)
             {
                 return;
             }

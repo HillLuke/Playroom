@@ -83,7 +83,7 @@ namespace Assets.Scripts.Singletons
 
         private void ShowMouse(InputAction inputAction)
         {
-            if (inputAction.InputType != EInputType.ShowMouse)
+            if (inputAction.InputType != EInputType.UI_ShowMouse)
             {
                 return;
             }

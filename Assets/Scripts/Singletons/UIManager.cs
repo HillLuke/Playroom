@@ -7,10 +7,10 @@ namespace Assets.Scripts.Singletons
 {
     public class UIManager : Singleton<UIManager>
     {
-        public Action ActionInventory;
         public Action ActionCloseAllUI;
 
         public Action<PlayerController> ActionPlayerChanged;
+        public Action<InputAction> ActionKeyPressed;
 
         public TextMeshProUGUI InteractText;
 
@@ -43,23 +43,20 @@ namespace Assets.Scripts.Singletons
 
         private void KeyPressed(InputAction inputAction)
         {
-            if (inputAction.InputType == EInputType.Inventory)
+            if (inputAction.InputType == EInputType.UI_CloseAllUI)
             {
-                InvokeAction(ActionInventory);
+                if (ActionCloseAllUI != null)
+                {
+                    ActionCloseAllUI.Invoke();
+                }
             }
-
-            if (inputAction.InputType == EInputType.CloseAllUI)
+            else
             {
-                InvokeAction(ActionCloseAllUI);
-            }
-        }
-
-        private void InvokeAction(Action action)
-        {
-            if (action != null)
-            {
-                action.Invoke();
-            }
+                if (ActionKeyPressed != null)
+                {
+                    ActionKeyPressed.Invoke(inputAction);
+                }
+            }            
         }
     }
 }

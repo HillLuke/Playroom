@@ -19,16 +19,6 @@ namespace Assets.Scripts.UI.Inventory
         [SerializeField]
         private UIInventoryItem _uIInventoryItemPrefab;
 
-        protected override void Start()
-        {
-            base.Start();
-
-            if (_UIManager != null)
-            {
-                _UIManager.ActionInventory += SetActive;
-            }
-        }
-
         protected override void Setup()
         {
             CharacterInventory = _activePlayer?.CharacterInventory;

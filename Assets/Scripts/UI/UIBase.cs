@@ -7,12 +7,12 @@ namespace Assets.Scripts.UI
 {
     public class UIBase : MonoBehaviour, IPointerClickHandler
     {
-        public bool ShowByDefault = true;
-        public EInputType ToggleAction;
+        public bool ShowByDefault = false;
+        public EInputType ToggleInputType;
 
         protected UIManager _UIManager;
-        protected bool _isActive = false;
         protected PlayerController _activePlayer;
+        protected bool _isActive = false;
 
         protected virtual void Start()
         {
@@ -22,13 +22,12 @@ namespace Assets.Scripts.UI
             {
                 _UIManager = UIManager.instance;
                 _UIManager.ActionPlayerChanged += SetPlayer;
+                _UIManager.ActionCloseAllUI += () => { _isActive = false; SetActive(); };
                 SetPlayer(_UIManager.GetActivePlayer());
             }
         }
 
-        protected virtual void Awake()
-        {
-        }
+        protected virtual void Awake() {}
 
         protected void SetActive()
         {
@@ -37,9 +36,7 @@ namespace Assets.Scripts.UI
             _isActive = !_isActive;
         }
 
-        public virtual void OnPointerClick(PointerEventData eventData)
-        {
-        }
+        public virtual void OnPointerClick(PointerEventData eventData) {}
 
         private void SetPlayer(PlayerController player)
         {
@@ -60,7 +57,18 @@ namespace Assets.Scripts.UI
 
         protected virtual void Setup()
         {
+            _UIManager.ActionKeyPressed += KeyPressed;
+
+            _isActive = ShowByDefault;
             SetActive();
+        }
+
+        protected virtual void KeyPressed(InputAction input)
+        {
+            if (input.InputType == ToggleInputType)
+            {
+                SetActive();
+            }
         }
     }
 }

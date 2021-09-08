@@ -12,15 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 433a924cc19079e4286f1edfa58682a3, type: 3}
   m_Name: PlayerInputData
   m_EditorClassIdentifier: 
-  Use: 101
-  Jump: 32
-  Run: 304
-  DropItem: 113
-  HorizontalSensitivity: 500
-  VerticalSensitivity: 100
-  Inventory: 105
-  CloseAllUI: 27
-  Character: 99
-  ShowMouse: 9
+  Movement_Jump:
+    InputType: 1
+    KeyCode: 32
+  Movement_Run:
+    InputType: 2
+    KeyCode: 304
+  Action_Use:
+    InputType: 3
+    KeyCode: 101
+  Action_DropItem:
+    InputType: 4
+    KeyCode: 113
+  UI_CloseAll:
+    InputType: 7
+    KeyCode: 27
+  UI_Inventory:
+    InputType: 5
+    KeyCode: 105
+  UI_Character:
+    InputType: 6
+    KeyCode: 99
+  UI_ShowMouse:
+    InputType: 8
+    KeyCode: 9
   YAxis: Mouse Y
   XAxis: Mouse X
+  HorizontalSensitivity: 500
+  VerticalSensitivity: 100
