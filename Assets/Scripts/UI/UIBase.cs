@@ -28,7 +28,6 @@ namespace Assets.Scripts.UI
 
         protected virtual void Awake()
         {
-
         }
 
         protected void SetActive()
@@ -38,7 +37,9 @@ namespace Assets.Scripts.UI
             _isActive = !_isActive;
         }
 
-        public virtual void OnPointerClick(PointerEventData eventData) { }
+        public virtual void OnPointerClick(PointerEventData eventData)
+        {
+        }
 
         private void SetPlayer(PlayerController player)
         {

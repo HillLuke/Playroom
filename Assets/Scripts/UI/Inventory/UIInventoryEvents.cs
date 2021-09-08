@@ -2,7 +2,7 @@ using Assets.Scripts.Character;
 using Assets.Scripts.Inventory.Items;
 using UnityEngine;
 
-namespace Assets.Scripts.UI
+namespace Assets.Scripts.UI.Inventory
 {
     public class UIInventoryEvents : UIBase
     {
@@ -11,7 +11,7 @@ namespace Assets.Scripts.UI
 
         protected override void Setup()
         {
-            CharacterInventory = _activePlayer.GetComponent<CharacterInventory>();
+            CharacterInventory = _activePlayer?.CharacterInventory;
 
             if (CharacterInventory != null)
             {

@@ -1,9 +1,7 @@
 using Assets.Scripts.Player;
 using Assets.Scripts.Utilities;
 using System;
-using System.Collections.Generic;
 using TMPro;
-using UnityEngine;
 
 namespace Assets.Scripts.Singletons
 {
@@ -18,7 +16,6 @@ namespace Assets.Scripts.Singletons
 
         private InputManager _inputManager;
         private PlayerManager _playerManger;
-
 
         public PlayerController GetActivePlayer()
         {

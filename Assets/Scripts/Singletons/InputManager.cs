@@ -61,6 +61,7 @@ namespace Assets.Scripts.Singletons
                 _camera.Set(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
             }
         }
+
         protected override void Awake()
         {
             if (PlayerInputData == null)

@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Scripts.InputButtonT
+namespace Assets.Scripts.Singletons
 {
     [Serializable]
     public struct InputButtonTest
     {
-        InputButtonType ButtonType;
-        KeyCode KeyCode;
+        private InputButtonType ButtonType;
+        private KeyCode KeyCode;
 
         public InputButtonTest(InputButtonType buttonType, KeyCode keyCode)
         {

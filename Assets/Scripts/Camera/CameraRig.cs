@@ -1,5 +1,4 @@
 using Assets.Scripts.Player;
-using Assets.Scripts.Player.Movement;
 using Assets.Scripts.Singletons;
 using Cinemachine;
 using UnityEngine;

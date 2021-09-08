@@ -1,5 +1,3 @@
-using UnityEditor;
-
 namespace Assets.Scripts.Inspector
 {
     //[CustomEditor(typeof(SpawnPoint), true)]

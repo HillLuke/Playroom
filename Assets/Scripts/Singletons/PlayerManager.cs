@@ -1,5 +1,4 @@
 using Assets.Scripts.Player;
-using Assets.Scripts.UI;
 using Assets.Scripts.Utilities;
 using System;
 using UnityEngine;
@@ -14,6 +13,7 @@ namespace Assets.Scripts.Singletons
 
         [SerializeField]
         private PlayerController _playerPrefab;
+
         [SerializeField]
         private GameObject _spawnLocaion;
 

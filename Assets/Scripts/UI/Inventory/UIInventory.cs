@@ -31,6 +31,8 @@ namespace Assets.Scripts.UI.Inventory
 
         protected override void Setup()
         {
+            CharacterInventory = _activePlayer?.CharacterInventory;
+
             if (CharacterInventory != null)
             {
                 for (int i = 0; i < CharacterInventory.InventorySize; i++)
@@ -39,6 +41,10 @@ namespace Assets.Scripts.UI.Inventory
                 }
 
                 CharacterInventory.ActionItemAdded += CharacterInventory_ActionItemAdded;
+            }
+            else
+            {
+                Debug.LogError("CharacterInventory is null");
             }
 
             base.Setup();
@@ -56,7 +62,6 @@ namespace Assets.Scripts.UI.Inventory
 
         public void ItemClicked(PointerEventData eventData)
         {
-
         }
     }
 }

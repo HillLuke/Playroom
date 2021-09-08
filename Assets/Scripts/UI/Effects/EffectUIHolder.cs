@@ -1,10 +1,7 @@
 using Assets.Scripts.Effects;
-using Assets.Scripts.Player;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Sirenix.OdinInspector;
-using Assets.Scripts.InputButtonT;
 
 namespace Assets.Scripts.UI.Effects
 {
@@ -35,13 +32,14 @@ namespace Assets.Scripts.UI.Effects
 
         protected override void Setup()
         {
+            _buffableEntity = _activePlayer.GetComponent<BuffableEntity>();
+
             foreach (var effect in CurrentEffects)
             {
                 effect.Value.Remove();
             }
 
             CurrentEffects = new Dictionary<EffectBase, EffectUIData>();
-            _buffableEntity = _activePlayer.GetComponent<BuffableEntity>();
 
             if (_buffableEntity != null)
             {

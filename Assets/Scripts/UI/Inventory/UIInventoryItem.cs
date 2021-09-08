@@ -47,6 +47,5 @@ namespace Assets.Scripts.UI.Inventory
             //    }
             //}
         }
-
     }
 }

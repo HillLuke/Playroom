@@ -4,8 +4,7 @@ namespace Assets.Scripts.UI
 {
     public class SpawnPoint : MonoBehaviour
     {
-
-        void OnDrawGizmos()
+        private void OnDrawGizmos()
         {
             // Draw a yellow cube at the transform position
             Gizmos.color = Color.yellow;
