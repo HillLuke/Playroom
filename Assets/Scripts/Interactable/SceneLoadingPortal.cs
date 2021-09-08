@@ -8,7 +8,7 @@ namespace Assets.Scripts.Interactable
     {
         public SceneData SceneData;
 
-        public override string InteractUIMessage => $"Portal to {SceneData.SceneName} ({_inputManager.PlayerInputData.Use})";
+        public override string InteractUIMessage => $"Portal to {SceneData.SceneName} ({_inputManager.PlayerInputData.Action_Use.KeyCode})";
 
         public override void Interact(GameObject Interactor)
         {

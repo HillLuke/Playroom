@@ -59,13 +59,15 @@ namespace Assets.Scripts.Camera
             UpdateCameraInputs();
         }
 
-        private void PauseCameraInput(KeyCode keyCode)
+        private void PauseCameraInput(InputAction inputAction)
         {
-            if (keyCode == _inputManager.PlayerInputData.ShowMouse)
+            if (inputAction.InputType != EInputType.ShowMouse)
             {
-                _isPaused = !_isPaused;
-                UpdateCameraInputs();
+                return;
             }
+
+            _isPaused = !_isPaused;
+            UpdateCameraInputs();
         }
 
         public void UpdateCameraInputs()

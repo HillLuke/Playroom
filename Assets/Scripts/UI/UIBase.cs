@@ -8,7 +8,7 @@ namespace Assets.Scripts.UI
     public class UIBase : MonoBehaviour, IPointerClickHandler
     {
         public bool ShowByDefault = true;
-        public bool ListenForKey;         
+        public EInputType ToggleAction;
 
         protected UIManager _UIManager;
         protected bool _isActive = false;

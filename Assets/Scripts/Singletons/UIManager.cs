@@ -44,14 +44,14 @@ namespace Assets.Scripts.Singletons
             base.Start();
         }
 
-        private void KeyPressed(KeyCode key)
+        private void KeyPressed(InputAction inputAction)
         {
-            if (key == _inputManager.PlayerInputData.Inventory)
+            if (inputAction.InputType == EInputType.Inventory)
             {
                 InvokeAction(ActionInventory);
             }
 
-            if (key == _inputManager.PlayerInputData.CloseAllUI)
+            if (inputAction.InputType == EInputType.CloseAllUI)
             {
                 InvokeAction(ActionCloseAllUI);
             }

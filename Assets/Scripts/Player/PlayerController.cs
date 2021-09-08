@@ -85,16 +85,6 @@ namespace Assets.Scripts.Player
             //Todo - move this in to some other controller/function to handle animation logic
             if (_inputManager != null)
             {
-                if (_inputManager.LeftClick)
-                {
-                    //Animator.SetTrigger("RightHandLeftClick");
-                }
-
-                if (_inputManager.DropFirstItem)
-                {
-                    CharacterInventory.DropFirstItem();
-                }
-
                 if (_inputManager.MovementVector.magnitude > 0f)
                 {
                     Animator.SetBool(AnimationParameters.MOVING, true);

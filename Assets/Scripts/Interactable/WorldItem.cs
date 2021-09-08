@@ -13,7 +13,7 @@ namespace Assets.Scripts.Interactable
 
         private GameObject _itemModel;
 
-        public override string InteractUIMessage => $"Pickup {ItemData.ItemName} ({_inputManager.PlayerInputData.Use})";
+        public override string InteractUIMessage => $"Pickup {ItemData.ItemName} ({_inputManager.PlayerInputData.Action_Use.KeyCode})";
 
         private void Start()
         {
