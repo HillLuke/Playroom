@@ -1,8 +1,13 @@
+using Assets.Scripts.Interfaces;
 using Assets.Scripts.Player;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class DeathCollider : MonoBehaviour
+public class DeathCollider : MonoBehaviour, IDrawGizmo
 {
+    [ShowInInspector]
+    public bool DrawGizmo { get; set; }
+
     private void OnTriggerEnter(Collider other)
     {
         var player = other.GetComponent<PlayerController>();
@@ -13,10 +18,13 @@ public class DeathCollider : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    public void OnDrawGizmos()
     {
-        var collider = gameObject.GetComponent<BoxCollider>();
-        Gizmos.color = Color.red;
-        Gizmos.DrawCube(gameObject.transform.position, collider.size);
+        if (DrawGizmo)
+        {
+            var collider = gameObject.GetComponent<BoxCollider>();
+            Gizmos.color = Color.red;
+            Gizmos.DrawCube(gameObject.transform.position, collider.size);
+        }
     }
 }

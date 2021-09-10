@@ -15,6 +15,8 @@ namespace Assets.Scripts.UI.Inventory
 
             if (CharacterInventory != null)
             {
+                CharacterInventory.ActionItemAdded -= CharacterInventory_ActionItemAdded;
+                CharacterInventory.ActionItemDropped -= CharacterInventory_ActionItemDropped;
                 CharacterInventory.ActionItemAdded += CharacterInventory_ActionItemAdded;
                 CharacterInventory.ActionItemDropped += CharacterInventory_ActionItemDropped;
             }
