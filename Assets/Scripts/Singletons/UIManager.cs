@@ -56,7 +56,7 @@ namespace Assets.Scripts.Singletons
                 {
                     ActionKeyPressed.Invoke(inputAction);
                 }
-            }            
+            }
         }
     }
 }

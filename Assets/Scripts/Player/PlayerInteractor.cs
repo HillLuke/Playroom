@@ -55,79 +55,77 @@ namespace Assets.Scripts.Player
 
         private void FixedUpdate()
         {
-            InteractPointFrom.transform.rotation = _camera.transform.rotation;
+            //InteractPointFrom.transform.rotation = _camera.transform.rotation;
 
-            Ray rayFromCamera = new Ray(_camera.transform.position, _camera.transform.forward);
-            RaycastHit raycastHitCamera;
-            Physics.Raycast(rayFromCamera, out raycastHitCamera, 20f);
+            //Ray rayFromCamera = new Ray(_camera.transform.position, _camera.transform.forward);
+            //RaycastHit raycastHitCamera;
+            //Physics.Raycast(rayFromCamera, out raycastHitCamera, 20f);
 
-            Ray ray = new Ray(InteractPointFrom.transform.position, InteractPointFrom.transform.forward);
-            RaycastHit raycastHit;
+            //Ray ray = new Ray(InteractPointFrom.transform.position, InteractPointFrom.transform.forward);
+            //RaycastHit raycastHit;
 
-            if (Physics.Raycast(rayFromCamera, out raycastHit, Range))
-            {
+            //if (Physics.Raycast(rayFromCamera, out raycastHit, Range))
+            //{
+            //    Vector3 fromPosition = InteractPointFrom.transform.position;
+            //    Vector3 toPosition = raycastHitCamera.point;
+            //    Vector3 direction = toPosition - fromPosition;
 
-                Vector3 fromPosition = InteractPointFrom.transform.position;
-                Vector3 toPosition = raycastHitCamera.point;
-                Vector3 direction = toPosition - fromPosition;
+            //    if (DebugDraw)
+            //    {
+            //        Debug.DrawRay(_camera.transform.position, _camera.transform.TransformDirection(Vector3.forward) * 20f, Color.red);
+            //        Debug.DrawRay(InteractPointFrom.transform.position, direction * raycastHit.distance, Color.blue);
+            //    }
 
-                if (DebugDraw)
-                {
-                    Debug.DrawRay(_camera.transform.position, _camera.transform.TransformDirection(Vector3.forward) * 20f, Color.red);
-                    Debug.DrawRay(InteractPointFrom.transform.position, direction * raycastHit.distance, Color.blue);
-                }
+            //    var templookingAt = raycastHit.collider.gameObject.GetComponentInParent<InteractableBase>();
 
-                var templookingAt = raycastHit.collider.gameObject.GetComponentInParent<InteractableBase>();
+            //    if (templookingAt != _lookingAt)
+            //    {
+            //        if (_lookingAt != null)
+            //        {
+            //            _lookingAt.LookAway(_player.gameObject);
+            //            _lookingAt = null;
+            //        }
 
-                if (templookingAt != _lookingAt)
-                {
-                    if (_lookingAt != null)
-                    {
-                        _lookingAt.LookAway(_player.gameObject);
-                        _lookingAt = null;
-                    }
+            //        _lookingAt = templookingAt;
+            //    }
+            //    else
+            //    {
+            //        if (_uIManager != null)
+            //        {
+            //            _uIManager.InteractText.text = string.Empty;
+            //        }
+            //    }
 
-                    _lookingAt = templookingAt;
-                }
-                else
-                {
-                    if (_uIManager != null)
-                    {
-                        _uIManager.InteractText.text = string.Empty;
-                    }
-                }
+            //    if (_lookingAt != null)
+            //    {
+            //        _lookingAt.LookAt(_player.gameObject);
+            //    }
 
-                if (_lookingAt != null)
-                {
-                    _lookingAt.LookAt(_player.gameObject);
-                }
+            //    if (_lookingAt != null && _inputManager.Interact)
+            //    {
+            //        if (Interact != null)
+            //        {
+            //            Interact.Invoke(_lookingAt.InteractType);
+            //        }
 
-                if (_lookingAt != null && _inputManager.Interact)
-                {
-                    if (Interact != null)
-                    {
-                        Interact.Invoke(_lookingAt.InteractType);
-                    }
-
-                    _lookingAt.Interact(_player.gameObject);
-                }
-            }
-            else
-            {
-                if (_lookingAt != null)
-                {
-                    _lookingAt.LookAway(_player.gameObject);
-                    _lookingAt = null;
-                }
-                else
-                {
-                    if (_uIManager != null)
-                    {
-                        _uIManager.InteractText.text = string.Empty;
-                    }
-                }
-            }
+            //        _lookingAt.Interact(_player.gameObject);
+            //    }
+            //}
+            //else
+            //{
+            //    if (_lookingAt != null)
+            //    {
+            //        _lookingAt.LookAway(_player.gameObject);
+            //        _lookingAt = null;
+            //    }
+            //    else
+            //    {
+            //        if (_uIManager != null)
+            //        {
+            //            _uIManager.InteractText.text = string.Empty;
+            //        }
+            //    }
+            //}
         }
-
     }
 }

@@ -1,5 +1,6 @@
 using Assets.Scripts.Player;
 using Assets.Scripts.Singletons;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,32 +12,48 @@ namespace Assets.Scripts.UI
         public EInputType ToggleInputType;
 
         protected UIManager _UIManager;
+
+        [ReadOnly]
+        [ShowInInspector]
         protected PlayerController _activePlayer;
+
+        [ReadOnly]
+        [ShowInInspector]
         protected bool _isActive = false;
 
         protected virtual void Start()
         {
-            _isActive = ShowByDefault;
-
             if (UIManager.instanceExists)
             {
                 _UIManager = UIManager.instance;
                 _UIManager.ActionPlayerChanged += SetPlayer;
-                _UIManager.ActionCloseAllUI += () => { _isActive = false; SetActive(); };
+                _UIManager.ActionCloseAllUI += () => { _isActive = false; ToggleActive(); };
                 SetPlayer(_UIManager.GetActivePlayer());
             }
         }
 
-        protected virtual void Awake() {}
-
-        protected void SetActive()
+        protected virtual void Awake()
         {
-            gameObject.SetActive(_isActive);
-
-            _isActive = !_isActive;
         }
 
-        public virtual void OnPointerClick(PointerEventData eventData) {}
+        protected void ToggleActive()
+        {
+            _isActive = !_isActive;
+            gameObject.SetActive(_isActive);
+
+            if (_isActive)
+            {
+                OnOpen();
+            }
+            else
+            {
+                OnClose();
+            }
+        }
+
+        public virtual void OnPointerClick(PointerEventData eventData)
+        {
+        }
 
         private void SetPlayer(PlayerController player)
         {
@@ -57,18 +74,28 @@ namespace Assets.Scripts.UI
 
         protected virtual void Setup()
         {
+            _UIManager.ActionKeyPressed -= KeyPressed;
             _UIManager.ActionKeyPressed += KeyPressed;
 
-            _isActive = ShowByDefault;
-            SetActive();
+            _isActive = !ShowByDefault;
+            ToggleActive();
         }
 
         protected virtual void KeyPressed(InputAction input)
         {
             if (input.InputType == ToggleInputType)
             {
-                SetActive();
+                ToggleActive();
+                Debug.Log($"Toggle on {nameof(this.gameObject)}");
             }
+        }
+
+        protected virtual void OnOpen()
+        {
+        }
+
+        protected virtual void OnClose()
+        {
         }
     }
 }

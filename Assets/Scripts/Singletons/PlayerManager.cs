@@ -8,6 +8,7 @@ namespace Assets.Scripts.Singletons
     public class PlayerManager : Singleton<PlayerManager>
     {
         public Action<PlayerController> ActionPlayerChanged;
+        public Action<PlayerController> ActionPlayerDeath;
 
         public PlayerController Player { get { return _player; } }
 
@@ -41,7 +42,21 @@ namespace Assets.Scripts.Singletons
                 {
                     ActionPlayerChanged.Invoke(Player);
                 }
+
+                _player.ActionDeath += PlayerDeath;
             }
+        }
+
+        private void PlayerDeath(PlayerController player)
+        {
+            if (ActionPlayerDeath != null)
+            {
+                ActionPlayerDeath.Invoke(_player);
+            }
+            _player.gameObject.SetActive(false);
+            Destroy(_player.gameObject);
+            _player = null;
+            SpawnPlayer();
         }
     }
 }

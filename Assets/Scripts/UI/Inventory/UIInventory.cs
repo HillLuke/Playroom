@@ -19,17 +19,40 @@ namespace Assets.Scripts.UI.Inventory
         [SerializeField]
         private UIInventoryItem _uIInventoryItemPrefab;
 
+        public void ItemClicked(PointerEventData eventData)
+        {
+        }
+
+        public override void OnPointerClick(PointerEventData eventData)
+        {
+            Debug.Log("click");
+        }
+
+        protected override void OnClose()
+        {
+            ClearSlots();
+            base.OnClose();
+        }
+
+        protected override void OnOpen()
+        {
+            ClearSlots();
+
+            for (int i = 0; i < CharacterInventory.InventorySize; i++)
+            {
+                _inventorySlots.Add(Instantiate(_uIInventoryItemPrefab, gameObject.transform));
+            }
+
+            base.OnOpen();
+        }
+
         protected override void Setup()
         {
-            CharacterInventory = _activePlayer?.CharacterInventory;
+            CharacterInventory = _activePlayer.GetComponent<CharacterInventory>();
 
             if (CharacterInventory != null)
             {
-                for (int i = 0; i < CharacterInventory.InventorySize; i++)
-                {
-                    _inventorySlots.Add(Instantiate(_uIInventoryItemPrefab, gameObject.transform));
-                }
-
+                CharacterInventory.ActionItemAdded -= CharacterInventory_ActionItemAdded;
                 CharacterInventory.ActionItemAdded += CharacterInventory_ActionItemAdded;
             }
             else
@@ -45,13 +68,14 @@ namespace Assets.Scripts.UI.Inventory
             _inventorySlots.Where(x => !x.HasItem).First().SetItem(item);
         }
 
-        public override void OnPointerClick(PointerEventData eventData)
+        private void ClearSlots()
         {
-            Debug.Log("click");
-        }
-
-        public void ItemClicked(PointerEventData eventData)
-        {
+            foreach (var item in _inventorySlots)
+            {
+                item.gameObject.SetActive(false);
+                Destroy(item.gameObject);
+            }
+            _inventorySlots = new List<UIInventoryItem>();
         }
     }
 }

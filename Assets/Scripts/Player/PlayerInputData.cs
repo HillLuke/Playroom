@@ -18,6 +18,7 @@ namespace Assets.Scripts.Player
 
         [Header("UI")]
         public InputAction UI_CloseAll = new InputAction { InputType = EInputType.UI_CloseAllUI, KeyCode = KeyCode.Escape };
+
         public InputAction UI_Inventory = new InputAction { InputType = EInputType.UI_Inventory, KeyCode = KeyCode.I };
         public InputAction UI_Character = new InputAction { InputType = EInputType.UI_Character, KeyCode = KeyCode.C };
         public InputAction UI_ShowMouse = new InputAction { InputType = EInputType.UI_ShowMouse, KeyCode = KeyCode.Tab };

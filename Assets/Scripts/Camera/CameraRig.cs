@@ -8,7 +8,7 @@ namespace Assets.Scripts.Camera
     public class CameraRig : MonoBehaviour
     {
         public CinemachineFreeLook FreeLookMovement;
-        public Cinemachine.CinemachineBrain Brain;
+        public CinemachineBrain Brain;
 
         private InputManager _inputManager;
         private PlayerManager _playerManager;
@@ -29,21 +29,19 @@ namespace Assets.Scripts.Camera
             {
                 _playerManager = PlayerManager.instance;
 
-                if (_playerManager.isInitialized)
+                _playerManager.ActionPlayerChanged += Initialize;
+
+                if (_playerManager.Player != null)
                 {
-                    Initialize();
-                }
-                else
-                {
-                    _playerManager.ActionInitialized += Initialize;
+                    Initialize(_playerManager.Player);
                 }
             }
         }
 
-        private void Initialize()
+        private void Initialize(PlayerController player)
         {
-            _follow = _playerManager.Player.GetComponent<PlayerCameraConfig>().Follow.transform;
-            _lookAt = _playerManager.Player.GetComponent<PlayerCameraConfig>().LookAt.transform;
+            _follow = player.GetComponent<PlayerCameraConfig>().Follow.transform;
+            _lookAt = player.GetComponent<PlayerCameraConfig>().LookAt.transform;
 
             FreeLookMovement.Follow = _follow;
             FreeLookMovement.LookAt = _lookAt;

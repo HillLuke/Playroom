@@ -14,5 +14,6 @@
         public static string JUMP => "JUMP";
         public static string FALLING => "FALLING";
         public static string LAND => "LAND";
+        public static string SPAWN => "SPAWN";
     }
 }

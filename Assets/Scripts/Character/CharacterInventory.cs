@@ -9,9 +9,8 @@ namespace Assets.Scripts.Character
 {
     public class CharacterInventory : MonoBehaviour
     {
-        public event Action<Item> ActionItemAdded;
-
-        public event Action<Item> ActionItemDropped;
+        public Action<Item> ActionItemAdded;
+        public Action<Item> ActionItemDropped;
 
         public int InventorySize = 20;
 

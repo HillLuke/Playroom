@@ -73,8 +73,8 @@ MonoBehaviour:
     Value: 45
     m_SpeedMode: 0
     m_MaxSpeed: 100
-    m_AccelTime: 0
-    m_DecelTime: 0
+    m_AccelTime: 0.1
+    m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
     m_InputAxisValue: 0
     m_InvertInput: 1
@@ -97,8 +97,8 @@ MonoBehaviour:
     Value: 0
     m_SpeedMode: 0
     m_MaxSpeed: 500
-    m_AccelTime: 0
-    m_DecelTime: 0
+    m_AccelTime: 0.1
+    m_DecelTime: 0.1
     m_InputAxisName: Mouse X
     m_InputAxisValue: 0
     m_InvertInput: 0
@@ -162,8 +162,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1244352100455064939}
-  m_LocalRotation: {x: -0.6618026, y: -0.00000019422568, z: 0.00000017145895, w: -0.7496782}
-  m_LocalPosition: {x: 0, y: 7, z: 2.5}
+  m_LocalRotation: {x: 0.41187382, y: -3e-45, z: -3e-45, w: -0.9112409}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1244352100523682328}
@@ -539,7 +539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: -0.106041, z: -6.012599}
+  m_FollowOffset: {x: 0, y: 0, z: -6}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -739,7 +739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: -0.106041, z: -6.012599}
+  m_FollowOffset: {x: 0, y: 0, z: -6}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -865,7 +865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: -0.106041, z: -6.012599}
+  m_FollowOffset: {x: 0, y: 0, z: -6}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0

@@ -13,6 +13,7 @@ namespace Assets.Scripts.Player
     public class PlayerController : MonoBehaviour
     {
         public Action<PlayerController> ActionReady;
+        public Action<PlayerController> ActionDeath;
 
         public Animator Animator;
 
@@ -35,6 +36,19 @@ namespace Assets.Scripts.Player
         private bool _wasJumping;
         private bool _isFalling;
         private bool _isReady;
+
+        public void Death()
+        {
+            if (ActionDeath != null)
+            {
+                ActionDeath.Invoke(this);
+            }
+        }
+
+        public void Spawn()
+        {
+            Animator.SetTrigger(AnimationParameters.SPAWN);
+        }
 
         private void Start()
         {
