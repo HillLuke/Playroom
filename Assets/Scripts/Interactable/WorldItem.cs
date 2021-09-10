@@ -1,5 +1,6 @@
 using Assets.Scripts.Character;
 using Assets.Scripts.Inventory.Items;
+using Assets.Scripts.Utilities;
 using UnityEngine;
 
 namespace Assets.Scripts.Interactable
@@ -13,7 +14,7 @@ namespace Assets.Scripts.Interactable
 
         private GameObject _itemModel;
 
-        public override string InteractUIMessage => $"Pickup {ItemData.ItemName} ({_inputManager.PlayerInputData.Action_Use.KeyCode})";
+        public override string InteractUIMessage => $"Pickup  {ItemData.ItemName} ({_inputManager.PlayerInputData.Action_Use.KeyCode})";
 
         private void Start()
         {
@@ -33,6 +34,16 @@ namespace Assets.Scripts.Interactable
             {
                 inventory.AddItem(ItemData);
                 Destroy(gameObject);
+            }
+        }
+
+        private void OnDrawGizmos()
+        {
+            var mesh = ItemData.WorldItem.GetComponentInChildren<MeshFilter>();
+            if (mesh != null)
+            {
+                Gizmos.color = GizmoColours.WORLD_ITEM;
+                Gizmos.DrawMesh(mesh.sharedMesh, gameObject.transform.position, gameObject.transform.rotation);
             }
         }
     }

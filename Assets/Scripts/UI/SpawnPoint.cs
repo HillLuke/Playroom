@@ -11,9 +11,12 @@ namespace Assets.Scripts.UI
 
         public void OnDrawGizmos()
         {
-            // Draw a yellow cube at the transform position
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawSphere(gameObject.transform.position, 0.5f);
+            if (DrawGizmo)
+            {
+                // Draw a yellow cube at the transform position
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawSphere(gameObject.transform.position, 0.5f);
+            }
         }
     }
 }

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Pickaxe
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: d6be61b0f85a224428eae57f70f76e1c, type: 3}
-  WorldItem: {fileID: 906232540041878983, guid: 80089e26e8c8cf5478a3abfe9334d271, type: 3}
+  WorldItem: {fileID: 3977730513406655857, guid: 50867a86e9c0b8e49b8667c6753cbbab, type: 3}
   ItemName: Pickaxe
   Description: Mines ores
   IsStackable: 0
   MaxStack: 0
   Damage: 4
-  WeaponEquipPrefab: {fileID: 906232540041878983, guid: 80089e26e8c8cf5478a3abfe9334d271, type: 3}
+  WeaponEquipPrefab: {fileID: 7124907018198648928, guid: dc5e95f2a09bf0844904ad59d5099507, type: 3}
