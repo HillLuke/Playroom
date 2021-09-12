@@ -99,6 +99,18 @@ namespace Assets.Scripts.Player
             //Todo - move this in to some other controller/function to handle animation logic
             if (_inputManager != null)
             {
+                Animator.SetFloat(AnimationParameters.MOVEMENT_MOUSE_X, _inputManager.CameraVector.x);
+                Animator.SetFloat(AnimationParameters.MOVEMENT_MOUSE_Y, _inputManager.CameraVector.y);
+
+                if (_inputManager.CameraVector.x != 0)
+                {
+                    Animator.SetBool(AnimationParameters.MOVEMENT_MOUSE_TURNING, true);
+                }
+                else
+                {
+                    Animator.SetBool(AnimationParameters.MOVEMENT_MOUSE_TURNING, false);
+                }
+
                 if (_inputManager.MovementVector.magnitude > 0f)
                 {
                     Animator.SetBool(AnimationParameters.MOVING, true);

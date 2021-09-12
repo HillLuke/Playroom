@@ -16,7 +16,7 @@ namespace Assets.Scripts.Singletons
 
         public PlayerInputData PlayerInputData;
         public Vector2 MovementVector => _hasControl ? _movment : Vector2.zero;
-        public Vector2 Camera => _hasControl ? _camera : Vector2.zero;
+        public Vector2 CameraVector => _hasControl ? _camera : Vector2.zero;
         public bool Jump => _hasControl ? _jump : false;
         public bool Run => _hasControl ? _run : false;
 
