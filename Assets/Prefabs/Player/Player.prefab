@@ -3379,9 +3379,8 @@ MonoBehaviour:
   LayerMask:
     serializedVersion: 2
     m_Bits: 128
-  InteractLayer: 7
-  InteractPointFrom: {fileID: 2262949624950574015}
-  Range: 6
+  _interactPointFrom: {fileID: 2262949624950574015}
+  _range: 1.2
 --- !u!114 &8353470846170905463
 MonoBehaviour:
   m_ObjectHideFlags: 0

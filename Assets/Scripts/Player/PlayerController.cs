@@ -70,7 +70,7 @@ namespace Assets.Scripts.Player
 
             if (CharacterInteractor != null)
             {
-                CharacterInteractor.Interact += CharacterInteractor_Interact;
+                CharacterInteractor.ActionInteract += CharacterInteractor_Interact;
             }
 
             _isReady = true;
@@ -85,10 +85,12 @@ namespace Assets.Scripts.Player
             switch (interactType)
             {
                 case Interactable.InteractableBase.EInteractType.Pickup:
+                    Animator.ResetTrigger(AnimationParameters.ACTION_PICKUP);
                     Animator.SetTrigger(AnimationParameters.ACTION_PICKUP);
                     break;
 
                 case Interactable.InteractableBase.EInteractType.Activate:
+                    Animator.ResetTrigger(AnimationParameters.ACTION_ACTIVATE);
                     Animator.SetTrigger(AnimationParameters.ACTION_ACTIVATE);
                     break;
             }

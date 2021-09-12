@@ -1,5 +1,6 @@
 using Assets.Scripts.Interactable;
 using Assets.Scripts.Singletons;
+using Assets.Scripts.Utilities;
 using System;
 using UnityEngine;
 using static Assets.Scripts.Interactable.InteractableBase;
@@ -9,18 +10,22 @@ namespace Assets.Scripts.Player
     public class PlayerInteractor : MonoBehaviour
     {
         public bool DebugDraw;
+        public LayerMask LayerMask;
+        public event Action<EInteractType> ActionInteract;
 
-        public GameObject InteractPointFrom;
-        public float Range;
-
-        public event Action<EInteractType> Interact;
+        [SerializeField]
+        private GameObject _interactPointFrom;
+        [SerializeField]
+        private float _range;
 
         private UnityEngine.Camera _camera;
         private PlayerController _player;
-        private InputManager _inputManager;
-        private UIManager _uIManager;
         private InteractableBase _lookingAt;
         private PlayerManager _playerManger;
+        private InputManager _inputManager;
+        private UIManager _uIManager;
+        private RaycastHit raycastHitCamera;
+        private Ray rayFromCamera;
 
         private void Start()
         {
@@ -28,23 +33,16 @@ namespace Assets.Scripts.Player
             {
                 _playerManger = PlayerManager.instance;
 
+                _playerManger.ActionPlayerChanged -= Setup;
                 _playerManger.ActionPlayerChanged += Setup;
                 Setup(_playerManger.Player);
             }
-        }
-
-        private void Setup(PlayerController player)
-        {
-            _player = player;
-        }
-
-        private void Awake()
-        {
-            _camera = UnityEngine.Camera.main;
 
             if (InputManager.instanceExists)
             {
                 _inputManager = InputManager.instance;
+
+                _inputManager.ActionKeyPressed += Interact;
             }
 
             if (UIManager.instanceExists)
@@ -53,79 +51,73 @@ namespace Assets.Scripts.Player
             }
         }
 
+        private void Interact(InputAction inputAction)
+        {
+            if (inputAction.InputType != EInputType.Action_Use)
+            {
+                return;
+            }
+
+            if (_lookingAt != null)
+            {
+                Debug.Log($"Interact : {_lookingAt.InteractUIMessage}");
+
+                if (ActionInteract != null)
+                {
+                    ActionInteract.Invoke(_lookingAt.InteractType);
+                }
+
+                _lookingAt.Interact(_player.gameObject);
+            }
+        }
+
+        private void Setup(PlayerController player)
+        {
+            _player = player;
+            _camera = UnityEngine.Camera.main;
+        }
+
         private void FixedUpdate()
         {
-            //InteractPointFrom.transform.rotation = _camera.transform.rotation;
+            rayFromCamera = new Ray(_camera.transform.position, _camera.transform.forward);
+            _interactPointFrom.transform.rotation = _camera.transform.rotation;
 
-            //Ray rayFromCamera = new Ray(_camera.transform.position, _camera.transform.forward);
-            //RaycastHit raycastHitCamera;
-            //Physics.Raycast(rayFromCamera, out raycastHitCamera, 20f);
+            Physics.Raycast(rayFromCamera, out raycastHitCamera, 20f, LayerMask);
+            float distance = Vector3.Distance(raycastHitCamera.point, _interactPointFrom.transform.position);
 
-            //Ray ray = new Ray(InteractPointFrom.transform.position, InteractPointFrom.transform.forward);
-            //RaycastHit raycastHit;
+            var templookingAt = raycastHitCamera.collider?.gameObject?.GetComponentInParent<InteractableBase>();
 
-            //if (Physics.Raycast(rayFromCamera, out raycastHit, Range))
-            //{
-            //    Vector3 fromPosition = InteractPointFrom.transform.position;
-            //    Vector3 toPosition = raycastHitCamera.point;
-            //    Vector3 direction = toPosition - fromPosition;
+            if (templookingAt == null || distance > _range)
+            {
+                if (_lookingAt != null)
+                {
+                    Debug.Log($"Stopped looking at {_lookingAt.InteractUIMessage}");
+                }
 
-            //    if (DebugDraw)
-            //    {
-            //        Debug.DrawRay(_camera.transform.position, _camera.transform.TransformDirection(Vector3.forward) * 20f, Color.red);
-            //        Debug.DrawRay(InteractPointFrom.transform.position, direction * raycastHit.distance, Color.blue);
-            //    }
+                _lookingAt = null;
+            }
+            else if(templookingAt != null && templookingAt != _lookingAt && distance <= _range)
+            {
+                _lookingAt = templookingAt;
+                Debug.Log($"Looking at {_lookingAt.InteractUIMessage}");
+            }
+        }
 
-            //    var templookingAt = raycastHit.collider.gameObject.GetComponentInParent<InteractableBase>();
+        private void OnDrawGizmos()
+        {
+            if (DebugDraw)
+            {
+                Gizmos.color = Color.green;
+                Gizmos.DrawSphere(raycastHitCamera.point, 0.2f);
+                Gizmos.color = Color.black;
+                if (_lookingAt != null)
+                {
+                    Gizmos.DrawSphere(raycastHitCamera.point, 0.2f);
+                }
 
-            //    if (templookingAt != _lookingAt)
-            //    {
-            //        if (_lookingAt != null)
-            //        {
-            //            _lookingAt.LookAway(_player.gameObject);
-            //            _lookingAt = null;
-            //        }
-
-            //        _lookingAt = templookingAt;
-            //    }
-            //    else
-            //    {
-            //        if (_uIManager != null)
-            //        {
-            //            _uIManager.InteractText.text = string.Empty;
-            //        }
-            //    }
-
-            //    if (_lookingAt != null)
-            //    {
-            //        _lookingAt.LookAt(_player.gameObject);
-            //    }
-
-            //    if (_lookingAt != null && _inputManager.Interact)
-            //    {
-            //        if (Interact != null)
-            //        {
-            //            Interact.Invoke(_lookingAt.InteractType);
-            //        }
-
-            //        _lookingAt.Interact(_player.gameObject);
-            //    }
-            //}
-            //else
-            //{
-            //    if (_lookingAt != null)
-            //    {
-            //        _lookingAt.LookAway(_player.gameObject);
-            //        _lookingAt = null;
-            //    }
-            //    else
-            //    {
-            //        if (_uIManager != null)
-            //        {
-            //            _uIManager.InteractText.text = string.Empty;
-            //        }
-            //    }
-            //}
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawWireSphere(_interactPointFrom.transform.position, _range);
+            }
         }
     }
 }

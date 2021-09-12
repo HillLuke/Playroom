@@ -10,7 +10,7 @@ namespace Assets.Scripts.UI.Inventory
 {
     public class UIInventory : UIBase
     {
-        public CharacterInventory CharacterInventory;
+        private CharacterInventory _characterInventory;
 
         [ReadOnly]
         [ShowInInspector]
@@ -38,22 +38,24 @@ namespace Assets.Scripts.UI.Inventory
         {
             ClearSlots();
 
-            for (int i = 0; i < CharacterInventory.InventorySize; i++)
+            for (int i = 0; i < _characterInventory.InventorySize; i++)
             {
                 _inventorySlots.Add(Instantiate(_uIInventoryItemPrefab, gameObject.transform));
             }
+
+            DrawInventory();
 
             base.OnOpen();
         }
 
         protected override void Setup()
         {
-            CharacterInventory = _activePlayer.GetComponent<CharacterInventory>();
+            _characterInventory = _activePlayer.GetComponent<CharacterInventory>();
 
-            if (CharacterInventory != null)
+            if (_characterInventory != null)
             {
-                CharacterInventory.ActionItemAdded -= CharacterInventory_ActionItemAdded;
-                CharacterInventory.ActionItemAdded += CharacterInventory_ActionItemAdded;
+                _characterInventory.ActionItemAdded -= CharacterInventory_ActionItemAdded;
+                _characterInventory.ActionItemAdded += CharacterInventory_ActionItemAdded;
             }
             else
             {
@@ -63,9 +65,23 @@ namespace Assets.Scripts.UI.Inventory
             base.Setup();
         }
 
+        private void DrawInventory()
+        {
+            for (int i = 0; i < _inventorySlots.Count; i++)
+            {
+                if (_characterInventory.Items.ElementAtOrDefault(i) != null)
+                {
+                    _inventorySlots[i].SetItem(_characterInventory.Items[i]);
+                }
+            }
+        }
+
         private void CharacterInventory_ActionItemAdded(Item item)
         {
-            _inventorySlots.Where(x => !x.HasItem).First().SetItem(item);
+            if (_isActive)
+            {
+                DrawInventory();
+            }
         }
 
         private void ClearSlots()

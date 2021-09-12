@@ -14,7 +14,7 @@ namespace Assets.Scripts.Character
 
         public int InventorySize = 20;
 
-        public List<Item> Items = new List<Item>();
+        public List<Item> Items;
 
         private WorldItemManager _worldItemManager;
 
@@ -24,6 +24,11 @@ namespace Assets.Scripts.Character
             {
                 _worldItemManager = WorldItemManager.instance;
             }
+        }
+
+        private void Awake()
+        {
+            Items = new List<Item>();
         }
 
         public bool AddItem(Item item)
