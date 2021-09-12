@@ -20,7 +20,8 @@ namespace Assets.Scripts.Interactable
         {
             if (ItemData != null && _itemModel == null)
             {
-                _itemModel = Instantiate(ItemData.WorldItem, _spawnLocation.transform);
+                _itemModel = Instantiate(ItemData.WorldItem, gameObject.transform);
+                _itemModel.layer = gameObject.layer;
                 _itemModel.AddComponent<BoxCollider>().isTrigger = true;
                 _itemModel.AddComponent<BoxCollider>();
             }
@@ -37,10 +38,11 @@ namespace Assets.Scripts.Interactable
             }
         }
 
+
         private void OnDrawGizmos()
         {
             var mesh = ItemData.WorldItem.GetComponentInChildren<MeshFilter>();
-            if (mesh != null)
+            if (mesh != null && mesh.sharedMesh != null)
             {
                 Gizmos.color = GizmoColours.WORLD_ITEM;
                 Gizmos.DrawMesh(mesh.sharedMesh, gameObject.transform.position, gameObject.transform.rotation);
