@@ -13,7 +13,7 @@ namespace Assets.Scripts.Interactable
         protected UIManager _uIManager;
         protected InputManager _inputManager;
 
-        protected virtual void Awake()
+        protected virtual void Start()
         {
             if (UIManager.instanceExists)
             {
@@ -28,21 +28,21 @@ namespace Assets.Scripts.Interactable
 
         public abstract void Interact(GameObject Interactor);
 
-        public virtual void LookAt(GameObject Interactor)
-        {
-            if (_uIManager != null)
-            {
-                _uIManager.InteractText.text = InteractUIMessage;
-            }
-        }
+        //public virtual void LookAt(GameObject Interactor)
+        //{
+        //    if (_uIManager != null)
+        //    {
+        //        _uIManager.InteractText.text = InteractUIMessage;
+        //    }
+        //}
 
-        public virtual void LookAway(GameObject Interactor)
-        {
-            if (_uIManager != null)
-            {
-                _uIManager.InteractText.text = string.Empty;
-            }
-        }
+        //public virtual void LookAway(GameObject Interactor)
+        //{
+        //    if (_uIManager != null)
+        //    {
+        //        _uIManager.InteractText.text = string.Empty;
+        //    }
+        //}
 
         public enum EInteractType
         {
