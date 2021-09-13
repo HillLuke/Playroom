@@ -11,8 +11,7 @@ namespace Assets.Scripts.Singletons
 
         public Action<PlayerController> ActionPlayerChanged;
         public Action<InputAction> ActionKeyPressed;
-
-        public TextMeshProUGUI InteractText;
+        public Action<string> ActionInteractor;
 
         private InputManager _inputManager;
         private PlayerManager _playerManger;
@@ -20,6 +19,14 @@ namespace Assets.Scripts.Singletons
         public PlayerController GetActivePlayer()
         {
             return _playerManger?.Player;
+        }
+
+        public void SetInteract(string interactNotice)
+        {
+            if (ActionInteractor != null)
+            {
+                ActionInteractor.Invoke(interactNotice);
+            }
         }
 
         protected override void Start()
@@ -35,10 +42,31 @@ namespace Assets.Scripts.Singletons
             {
                 _playerManger = PlayerManager.instance;
 
-                _playerManger.ActionPlayerChanged += x => { ActionPlayerChanged.Invoke(x); };
+                _playerManger.ActionPlayerChanged += PlayerChanged;
             }
-
+            Setup();
             base.Start();
+        }
+
+        protected override void Setup()
+        {
+            if (_inputManager.isSetup && _playerManger.isSetup)
+            {
+                base.Setup();
+            }
+            else
+            {
+                _inputManager.ActionSetup += Setup;
+                _playerManger.ActionSetup += Setup;
+            }
+        }
+
+        private void PlayerChanged(PlayerController playerController)
+        {
+            if (ActionPlayerChanged != null)
+            {
+                ActionPlayerChanged.Invoke(playerController);
+            }
         }
 
         private void KeyPressed(InputAction inputAction)
