@@ -26,6 +26,7 @@ namespace Assets.Scripts.Player
         private UIManager _uIManager;
         private RaycastHit raycastHitCamera;
         private Ray rayFromCamera;
+        private bool isLookingAtInteractable;
 
         private void Start()
         {
@@ -87,19 +88,24 @@ namespace Assets.Scripts.Player
 
             var templookingAt = raycastHitCamera.collider?.gameObject?.GetComponentInParent<InteractableBase>();
 
-            if (templookingAt == null || distance > _range)
+            if ((templookingAt == null || distance > _range) && isLookingAtInteractable)
             {
                 if (_lookingAt != null)
                 {
                     Debug.Log($"Stopped looking at {_lookingAt.InteractUIMessage}");
+                    _uIManager.SetInteract(string.Empty);
                 }
 
+                _uIManager.SetInteract(string.Empty);
                 _lookingAt = null;
+                isLookingAtInteractable = false;
             }
             else if(templookingAt != null && templookingAt != _lookingAt && distance <= _range)
             {
                 _lookingAt = templookingAt;
                 Debug.Log($"Looking at {_lookingAt.InteractUIMessage}");
+                _uIManager.SetInteract(_lookingAt.InteractUIMessage);
+                isLookingAtInteractable = true;
             }
         }
 
