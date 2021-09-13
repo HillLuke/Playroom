@@ -16,7 +16,7 @@ namespace Assets.Scripts.Interactable
 
         public override string InteractUIMessage => $"Pickup  {ItemData.ItemName} ({_inputManager.PlayerInputData.Action_Use.KeyCode})";
 
-        private void Start()
+        private void Awake()
         {
             if (ItemData != null && _itemModel == null)
             {
