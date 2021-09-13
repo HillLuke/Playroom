@@ -27,9 +27,15 @@ namespace Assets.Scripts.Singletons
                 Debug.LogError("Player has not been set.");
             }
 
+            Setup();
+            base.Awake();
+        }
+
+        protected override void Setup()
+        {
             SpawnPlayer();
 
-            base.Awake();
+            base.Setup();
         }
 
         private void SpawnPlayer()

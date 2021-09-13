@@ -68,12 +68,19 @@ namespace Assets.Scripts.Singletons
             {
                 Debug.LogError("PlayerInputData is null");
             }
+            Setup();
+            base.Awake();
+        }
 
+
+        protected override void Setup()
+        {
             ActionKeyPressed += ShowMouse;
             ActionKeyPressed += DebugAction;
 
             LockMouse();
-            base.Awake();
+
+            base.Setup();
         }
 
         private void DebugAction(InputAction inputAction)
