@@ -23,17 +23,28 @@ namespace Assets.Scripts.UI
 
         protected virtual void Start()
         {
+
             if (UIManager.instanceExists)
             {
                 _UIManager = UIManager.instance;
                 _UIManager.ActionPlayerChanged += SetPlayer;
                 _UIManager.ActionCloseAllUI += () => { _isActive = false; ToggleActive(); };
-                SetPlayer(_UIManager.GetActivePlayer());
             }
+
+            waitForSingletons();
         }
 
-        protected virtual void Awake()
+        private void waitForSingletons()
         {
+            if (_UIManager.isSetup)
+            {
+                SetPlayer(_UIManager.GetActivePlayer());
+            }
+            else
+            {
+                _UIManager.ActionSetup -= waitForSingletons;
+                _UIManager.ActionSetup += waitForSingletons;
+            }
         }
 
         protected void ToggleActive()
