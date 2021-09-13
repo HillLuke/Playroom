@@ -15,14 +15,14 @@ namespace Assets.Scripts.Interactable
             SceneManager.LoadScene(SceneData.SceneName, LoadSceneMode.Single);
         }
 
-        public override void LookAt(GameObject Interactor)
-        {
-            base.LookAt(Interactor);
-        }
+        //public override void LookAt(GameObject Interactor)
+        //{
+        //    base.LookAt(Interactor);
+        //}
 
-        public override void LookAway(GameObject Interactor)
-        {
-            base.LookAway(Interactor);
-        }
+        //public override void LookAway(GameObject Interactor)
+        //{
+        //    base.LookAway(Interactor);
+        //}
     }
 }
