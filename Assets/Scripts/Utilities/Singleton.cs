@@ -12,8 +12,11 @@ namespace Assets.Scripts.Utilities
     {
         [ReadOnly]
         public bool isInitialized = false;
+        [ReadOnly]
+        public bool isSetup = false;
 
         public Action ActionInitialized;
+        public Action ActionSetup;
 
         /// <summary>
         /// The static reference to the instance
@@ -30,6 +33,15 @@ namespace Assets.Scripts.Utilities
 
         protected virtual void Start()
         {
+        }
+
+        protected virtual void Setup()
+        {
+            isSetup = true;
+            if (ActionSetup != null)
+            {
+                ActionSetup.Invoke();
+            }
         }
 
         /// <summary>
