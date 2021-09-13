@@ -8,6 +8,7 @@ namespace Assets.Scripts.UI.Inventory
     {
         public TextMeshProUGUI Text;
         public float DestroyAfter = 2f;
+        public float FadeTime = 0.4f;
         public bool Fade = false;
 
         public void SetText(string text)
@@ -16,17 +17,11 @@ namespace Assets.Scripts.UI.Inventory
             StartCoroutine(FadeTextToFullAlpha(DestroyAfter));
         }
 
-        private void Update()
-        {
-            if (Fade)
-            {
-                Text.CrossFadeAlpha(0.0f, 2f, false);
-            }
-        }
-
         public IEnumerator FadeTextToFullAlpha(float time)
         {
             yield return new WaitForSeconds(time);
+            Text.CrossFadeAlpha(0.0f, 0.5f, true);
+            yield return new WaitForSeconds(FadeTime);
             Destroy(gameObject);
         }
     }

@@ -38,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -0.5}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 300, y: 200}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &6622867114914818498
 CanvasRenderer:
@@ -116,7 +116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73e59b435f7676e439b526fa1a72d00b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  ShowByDefault: 0
+  ToggleInputType: 0
   VerticalLayoutGroup: {fileID: 6622867114914818508}
   EffectUIDataToInit: {fileID: 1114396555618751045, guid: cffb0bba0cd1d424998aa5c9041346c0, type: 3}
 --- !u!1 &6622867115088053705
@@ -211,8 +212,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

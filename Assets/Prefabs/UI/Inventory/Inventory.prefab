@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowByDefault: 0
-  CharacterInventory: {fileID: 0}
+  ToggleInputType: 0
   _uIInventoryItemPrefab: {fileID: 2367968903570947394, guid: ac0d76c474375c34bac545536185f78b, type: 3}
 --- !u!114 &608560978310211966
 MonoBehaviour:
