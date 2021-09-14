@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.UI.Inventory
 {
-    public class UIInventory : UIBase
+    public class UIInventory : UIBase, IPointerClickHandler
     {
         private CharacterInventory _characterInventory;
 
@@ -21,11 +21,12 @@ namespace Assets.Scripts.UI.Inventory
 
         public void ItemClicked(PointerEventData eventData)
         {
+            Debug.Log($"UIInventory ItemClicked {eventData}");
         }
 
         public override void OnPointerClick(PointerEventData eventData)
         {
-            Debug.Log("click");
+            Debug.Log($"UIInventory OnPointerClick {eventData}");
         }
 
         protected override void OnClose()
@@ -69,9 +70,9 @@ namespace Assets.Scripts.UI.Inventory
         {
             for (int i = 0; i < _inventorySlots.Count; i++)
             {
-                if (_characterInventory.Items.ElementAtOrDefault(i) != null)
+                if (_characterInventory.Inventory.ElementAtOrDefault(i) != null)
                 {
-                    _inventorySlots[i].SetItem(_characterInventory.Items[i]);
+                    _inventorySlots[i].SetItem(_characterInventory.Inventory[i]);
                 }
             }
         }

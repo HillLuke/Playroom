@@ -3394,7 +3394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InventorySize: 20
-  Items: []
+  Inventory: []
 --- !u!114 &265346387040718436
 MonoBehaviour:
   m_ObjectHideFlags: 0

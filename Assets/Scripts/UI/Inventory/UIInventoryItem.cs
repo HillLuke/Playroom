@@ -27,6 +27,8 @@ namespace Assets.Scripts.UI.Inventory
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            Debug.Log($"UIInventoryItem OnPointerClick {eventData}");
+
             if (Clicked != null)
             {
                 Clicked.Invoke(eventData);
