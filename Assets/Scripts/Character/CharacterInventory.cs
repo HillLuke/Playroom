@@ -14,7 +14,7 @@ namespace Assets.Scripts.Character
 
         public int InventorySize = 20;
 
-        public List<Item> Items;
+        public Item[] Inventory;
 
         private WorldItemManager _worldItemManager;
 
@@ -28,39 +28,44 @@ namespace Assets.Scripts.Character
 
         private void Awake()
         {
-            Items = new List<Item>();
+            Inventory = new Item[InventorySize];
         }
 
         public bool AddItem(Item item)
         {
-            if (Items.Count >= InventorySize)
+            int index = Array.FindIndex(Inventory, x => x == null);
+
+            if (index != -1)
             {
-                return false;
-            }
-
-            Items.Add(item);
-
-            if (ActionItemAdded != null)
-            {
-                ActionItemAdded.Invoke(item);
-            }
-
-            return true;
-        }
-
-        public void DropFirstItem()
-        {
-            if (_worldItemManager != null && Items.Count > 0)
-            {
-                _worldItemManager.SpawnItem(Items.First(), gameObject);
+                Inventory[index] = item;
 
                 if (ActionItemAdded != null)
                 {
-                    ActionItemDropped.Invoke(Items.First());
+                    ActionItemAdded.Invoke(item);
                 }
 
-                Items.Remove(Items.First());
+                return true;
+            }
+            else
+            {
+                //TODO feedback to player they cant pickup
+                return false;
             }
         }
+
+        //public void DropFirstItem()
+        //{
+        //    if (_worldItemManager != null && Inventory.Count > 0)
+        //    {
+        //        _worldItemManager.SpawnItem(Inventory.First(), gameObject);
+
+        //        if (ActionItemAdded != null)
+        //        {
+        //            ActionItemDropped.Invoke(Inventory.First());
+        //        }
+
+        //        Inventory.Remove(Inventory.First());
+        //    }
+        //}
     }
 }

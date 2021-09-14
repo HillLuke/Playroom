@@ -31,9 +31,8 @@ namespace Assets.Scripts.Interactable
         {
             var inventory = Interactor.GetComponent<CharacterInventory>();
 
-            if (inventory != null)
+            if (inventory != null && inventory.AddItem(ItemData))
             {
-                inventory.AddItem(ItemData);
                 Destroy(gameObject);
             }
         }
