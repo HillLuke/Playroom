@@ -1,16 +1,16 @@
-using Assets.Scripts.Character;
-using Assets.Scripts.Inventory.Items;
+using Assets.Scripts.InventorySystem;
+using Assets.Scripts.InventorySystem.Items;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Assets.Scripts.UI.Inventory
+namespace Assets.Scripts.UI.InventorySystem
 {
-    public class UIInventory : UIBase, IPointerClickHandler
+    public class UIInventory : UIBase , IPointerClickHandler
     {
-        private CharacterInventory _characterInventory;
+        private Inventory _characterInventory;
 
         [ReadOnly]
         [ShowInInspector]
@@ -51,7 +51,7 @@ namespace Assets.Scripts.UI.Inventory
 
         protected override void Setup()
         {
-            _characterInventory = _activePlayer.GetComponent<CharacterInventory>();
+            _characterInventory = _activePlayer.GetComponent<Inventory>();
 
             if (_characterInventory != null)
             {
@@ -70,9 +70,9 @@ namespace Assets.Scripts.UI.Inventory
         {
             for (int i = 0; i < _inventorySlots.Count; i++)
             {
-                if (_characterInventory.Inventory.ElementAtOrDefault(i) != null)
+                if (_characterInventory.Items.ElementAtOrDefault(i) != null)
                 {
-                    _inventorySlots[i].SetItem(_characterInventory.Inventory[i]);
+                    _inventorySlots[i].SetItem(_characterInventory.Items[i]);
                 }
             }
         }

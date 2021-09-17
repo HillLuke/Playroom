@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Assets.Scripts.Inventory.Items
+namespace Assets.Scripts.InventorySystem.Items
 {
     [CreateAssetMenu(fileName = "Item", menuName = "Item/Base Item")]
     public class Item : ScriptableObject

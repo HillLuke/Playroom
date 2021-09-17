@@ -1,20 +1,18 @@
-using Assets.Scripts.Inventory.Items;
+using Assets.Scripts.InventorySystem.Items;
 using Assets.Scripts.Singletons;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-namespace Assets.Scripts.Character
+namespace Assets.Scripts.InventorySystem
 {
-    public class CharacterInventory : MonoBehaviour
+    public class Inventory : MonoBehaviour
     {
         public Action<Item> ActionItemAdded;
         public Action<Item> ActionItemDropped;
 
         public int InventorySize = 20;
 
-        public Item[] Inventory;
+        public Item[] Items;
 
         private WorldItemManager _worldItemManager;
 
@@ -28,16 +26,16 @@ namespace Assets.Scripts.Character
 
         private void Awake()
         {
-            Inventory = new Item[InventorySize];
+            Items = new Item[InventorySize];
         }
 
         public bool AddItem(Item item)
         {
-            int index = Array.FindIndex(Inventory, x => x == null);
+            int index = Array.FindIndex(Items, x => x == null);
 
             if (index != -1)
             {
-                Inventory[index] = item;
+                Items[index] = item;
 
                 if (ActionItemAdded != null)
                 {

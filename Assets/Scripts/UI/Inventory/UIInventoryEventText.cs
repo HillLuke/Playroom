@@ -2,7 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-namespace Assets.Scripts.UI.Inventory
+namespace Assets.Scripts.UI.InventorySystem
 {
     public class UIInventoryEventText : MonoBehaviour
     {

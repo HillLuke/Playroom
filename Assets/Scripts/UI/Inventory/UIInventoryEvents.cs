@@ -1,24 +1,25 @@
 using Assets.Scripts.Character;
-using Assets.Scripts.Inventory.Items;
+using Assets.Scripts.InventorySystem;
+using Assets.Scripts.InventorySystem.Items;
 using UnityEngine;
 
-namespace Assets.Scripts.UI.Inventory
+namespace Assets.Scripts.UI.InventorySystem
 {
     public class UIInventoryEvents : UIBase
     {
-        public CharacterInventory CharacterInventory;
+        public Inventory Inventory;
         public UIInventoryEventText UIInventoryEventText;
 
         protected override void Setup()
         {
-            CharacterInventory = _activePlayer?.CharacterInventory;
+            Inventory = _activePlayer?.Inventory;
 
-            if (CharacterInventory != null)
+            if (Inventory != null)
             {
-                CharacterInventory.ActionItemAdded -= CharacterInventory_ActionItemAdded;
-                CharacterInventory.ActionItemDropped -= CharacterInventory_ActionItemDropped;
-                CharacterInventory.ActionItemAdded += CharacterInventory_ActionItemAdded;
-                CharacterInventory.ActionItemDropped += CharacterInventory_ActionItemDropped;
+                Inventory.ActionItemAdded -= CharacterInventory_ActionItemAdded;
+                Inventory.ActionItemDropped -= CharacterInventory_ActionItemDropped;
+                Inventory.ActionItemAdded += CharacterInventory_ActionItemAdded;
+                Inventory.ActionItemDropped += CharacterInventory_ActionItemDropped;
             }
             else
             {

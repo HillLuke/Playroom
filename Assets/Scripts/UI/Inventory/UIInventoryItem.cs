@@ -1,11 +1,11 @@
-using Assets.Scripts.Inventory.Items;
+using Assets.Scripts.InventorySystem.Items;
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Image = UnityEngine.UI.Image;
 
-namespace Assets.Scripts.UI.Inventory
+namespace Assets.Scripts.UI.InventorySystem
 {
     public class UIInventoryItem : MonoBehaviour, IPointerClickHandler
     {

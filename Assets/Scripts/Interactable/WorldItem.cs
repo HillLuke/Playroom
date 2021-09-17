@@ -1,5 +1,6 @@
 using Assets.Scripts.Character;
-using Assets.Scripts.Inventory.Items;
+using Assets.Scripts.InventorySystem;
+using Assets.Scripts.InventorySystem.Items;
 using Assets.Scripts.Utilities;
 using UnityEngine;
 
@@ -29,7 +30,7 @@ namespace Assets.Scripts.Interactable
 
         public override void Interact(GameObject Interactor)
         {
-            var inventory = Interactor.GetComponent<CharacterInventory>();
+            var inventory = Interactor.GetComponent<Inventory>();
 
             if (inventory != null && inventory.AddItem(ItemData))
             {
