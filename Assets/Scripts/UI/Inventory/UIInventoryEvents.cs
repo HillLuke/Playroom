@@ -1,13 +1,12 @@
-using Assets.Scripts.Character;
-using Assets.Scripts.InventorySystem;
-using Assets.Scripts.InventorySystem.Items;
+using Assets.Scripts.Inventory;
+using Assets.Scripts.Inventory.Items;
 using UnityEngine;
 
-namespace Assets.Scripts.UI.InventorySystem
+namespace Assets.Scripts.UI.Inventory
 {
     public class UIInventoryEvents : UIBase
     {
-        public Inventory Inventory;
+        public ItemCollection Inventory;
         public UIInventoryEventText UIInventoryEventText;
 
         protected override void Setup()

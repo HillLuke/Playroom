@@ -1,6 +1,5 @@
-using Assets.Scripts.Character;
-using Assets.Scripts.InventorySystem;
-using Assets.Scripts.InventorySystem.Items;
+using Assets.Scripts.Inventory;
+using Assets.Scripts.Inventory.Items;
 using Assets.Scripts.Utilities;
 using UnityEngine;
 
@@ -17,7 +16,7 @@ namespace Assets.Scripts.Interactable
 
         public override string InteractUIMessage => $"Pickup  {ItemData.ItemName} ({_inputManager.PlayerInputData.Action_Use.KeyCode})";
 
-        private void Awake()
+        protected override void Awake()
         {
             if (ItemData != null && _itemModel == null)
             {
@@ -30,14 +29,13 @@ namespace Assets.Scripts.Interactable
 
         public override void Interact(GameObject Interactor)
         {
-            var inventory = Interactor.GetComponent<Inventory>();
+            var inventory = Interactor.GetComponent<ItemCollection>();
 
             if (inventory != null && inventory.AddItem(ItemData))
             {
                 Destroy(gameObject);
             }
         }
-
 
         private void OnDrawGizmos()
         {

@@ -1,6 +1,5 @@
 using Assets.Scripts.Interactable;
 using Assets.Scripts.Singletons;
-using Assets.Scripts.Utilities;
 using System;
 using UnityEngine;
 using static Assets.Scripts.Interactable.InteractableBase;
@@ -11,10 +10,12 @@ namespace Assets.Scripts.Player
     {
         public bool DebugDraw;
         public LayerMask LayerMask;
+
         public event Action<EInteractType> ActionInteract;
 
         [SerializeField]
         private GameObject _interactPointFrom;
+
         [SerializeField]
         private float _range;
 
@@ -100,7 +101,7 @@ namespace Assets.Scripts.Player
                 _lookingAt = null;
                 isLookingAtInteractable = false;
             }
-            else if(templookingAt != null && templookingAt != _lookingAt && distance <= _range)
+            else if (templookingAt != null && templookingAt != _lookingAt && distance <= _range)
             {
                 _lookingAt = templookingAt;
                 Debug.Log($"Looking at {_lookingAt.InteractUIMessage}");

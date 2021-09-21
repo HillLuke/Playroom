@@ -1,5 +1,5 @@
 using Assets.Scripts.Character;
-using Assets.Scripts.InventorySystem;
+using Assets.Scripts.Inventory;
 using Assets.Scripts.Singletons;
 using Assets.Scripts.Utilities;
 using Sirenix.OdinInspector;
@@ -24,7 +24,7 @@ namespace Assets.Scripts.Player
         public CharacterEquipment CharacterEquipment;
 
         [ReadOnly]
-        public Inventory Inventory;
+        public ItemCollection Inventory;
 
         [ReadOnly]
         public PlayerInteractor CharacterInteractor;
@@ -60,7 +60,7 @@ namespace Assets.Scripts.Player
                 CharacterEquipment = GetComponentInChildren<CharacterEquipment>();
             }
 
-            Inventory = GetComponent<Inventory>();
+            Inventory = GetComponent<ItemCollection>();
             CharacterInteractor = GetComponent<PlayerInteractor>();
             CharacterStats = GetComponent<CharacterStats>();
 

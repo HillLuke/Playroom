@@ -72,7 +72,6 @@ namespace Assets.Scripts.Singletons
             base.Awake();
         }
 
-
         protected override void Setup()
         {
             ActionKeyPressed += ShowMouse;

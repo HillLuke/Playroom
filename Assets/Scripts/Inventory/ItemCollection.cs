@@ -1,32 +1,34 @@
-using Assets.Scripts.InventorySystem.Items;
-using Assets.Scripts.Singletons;
+using Assets.Scripts.Inventory.Items;
 using System;
 using UnityEngine;
 
-namespace Assets.Scripts.InventorySystem
+namespace Assets.Scripts.Inventory
 {
-    public class Inventory : MonoBehaviour
+    public class ItemCollection : MonoBehaviour
     {
         public Action<Item> ActionItemAdded;
         public Action<Item> ActionItemDropped;
 
         public int InventorySize = 20;
 
+        public Item[] DefaultItems;
         public Item[] Items;
-
-        private WorldItemManager _worldItemManager;
 
         private void Start()
         {
-            if (WorldItemManager.instanceExists)
-            {
-                _worldItemManager = WorldItemManager.instance;
-            }
         }
 
         private void Awake()
         {
             Items = new Item[InventorySize];
+
+            if (DefaultItems != null && DefaultItems.Length <= Items.Length)
+            {
+                for (int i = 0; i < DefaultItems.Length; i++)
+                {
+                    Items[i] = DefaultItems[i];
+                }
+            }
         }
 
         public bool AddItem(Item item)
@@ -49,6 +51,10 @@ namespace Assets.Scripts.InventorySystem
                 //TODO feedback to player they cant pickup
                 return false;
             }
+        }
+
+        public void DropItem()
+        {
         }
 
         //public void DropFirstItem()

@@ -1,5 +1,5 @@
 ﻿using Assets.Scripts.Interactable;
-using Assets.Scripts.InventorySystem.Items;
+using Assets.Scripts.Inventory.Items;
 using Assets.Scripts.Utilities;
 using UnityEngine;
 

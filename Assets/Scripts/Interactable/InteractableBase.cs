@@ -26,6 +26,10 @@ namespace Assets.Scripts.Interactable
             }
         }
 
+        protected virtual void Awake()
+        {
+        }
+
         public abstract void Interact(GameObject Interactor);
 
         //public virtual void LookAt(GameObject Interactor)

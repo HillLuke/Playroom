@@ -1,7 +1,7 @@
+using Assets.Scripts.Inventory;
 using Assets.Scripts.Player;
 using Assets.Scripts.Utilities;
 using System;
-using TMPro;
 
 namespace Assets.Scripts.Singletons
 {
@@ -12,6 +12,7 @@ namespace Assets.Scripts.Singletons
         public Action<PlayerController> ActionPlayerChanged;
         public Action<InputAction> ActionKeyPressed;
         public Action<string> ActionInteractor;
+        public Action<ItemCollection> ActionOpenStorage;
 
         private InputManager _inputManager;
         private PlayerManager _playerManger;
@@ -26,6 +27,14 @@ namespace Assets.Scripts.Singletons
             if (ActionInteractor != null)
             {
                 ActionInteractor.Invoke(interactNotice);
+            }
+        }
+
+        public void OpenStorage(ItemCollection itemCollection)
+        {
+            if (ActionOpenStorage != null)
+            {
+                ActionOpenStorage.Invoke(itemCollection);
             }
         }
 

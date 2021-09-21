@@ -12,6 +12,7 @@ namespace Assets.Scripts.Utilities
     {
         [ReadOnly]
         public bool isInitialized = false;
+
         [ReadOnly]
         public bool isSetup = false;
 

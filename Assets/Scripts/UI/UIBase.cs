@@ -23,7 +23,6 @@ namespace Assets.Scripts.UI
 
         protected virtual void Start()
         {
-
             if (UIManager.instanceExists)
             {
                 _UIManager = UIManager.instance;
@@ -31,10 +30,10 @@ namespace Assets.Scripts.UI
                 _UIManager.ActionCloseAllUI += () => { _isActive = false; ToggleActive(); };
             }
 
-            waitForSingletons();
+            WaitForSingletons();
         }
 
-        private void waitForSingletons()
+        private void WaitForSingletons()
         {
             if (_UIManager.isSetup)
             {
@@ -42,8 +41,8 @@ namespace Assets.Scripts.UI
             }
             else
             {
-                _UIManager.ActionSetup -= waitForSingletons;
-                _UIManager.ActionSetup += waitForSingletons;
+                _UIManager.ActionSetup -= WaitForSingletons;
+                _UIManager.ActionSetup += WaitForSingletons;
             }
         }
 
