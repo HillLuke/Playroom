@@ -22,6 +22,7 @@ namespace Assets.Scripts.Player
         private UnityEngine.Camera _camera;
         private PlayerController _player;
         private InteractableBase _lookingAt;
+        private InteractableBase _interactingWith;
         private PlayerManager _playerManger;
         private InputManager _inputManager;
         private UIManager _uIManager;
@@ -64,6 +65,21 @@ namespace Assets.Scripts.Player
             {
                 Debug.Log($"Interact : {_lookingAt.InteractUIMessage}");
 
+                if (_interactingWith != null && _lookingAt != _interactingWith)
+                {
+                    _interactingWith.StopInteract();
+                    _interactingWith = null;
+                }
+
+                if (_lookingAt.MaintainRange)
+                {
+                    _interactingWith = _lookingAt;
+                }
+                else
+                {
+                    _interactingWith = null;
+                }
+
                 if (ActionInteract != null)
                 {
                     ActionInteract.Invoke(_lookingAt.InteractType);
@@ -77,6 +93,27 @@ namespace Assets.Scripts.Player
         {
             _player = player;
             _camera = UnityEngine.Camera.main;
+        }
+
+        private void Update()
+        {
+            if (_interactingWith != null)
+            {
+                var direction = _interactingWith.transform.position - _interactPointFrom.transform.position;
+                var ray = new Ray(_interactPointFrom.transform.position, direction);
+
+                RaycastHit hit;
+                Physics.Raycast(ray, out hit, _range, LayerMask);
+
+                Debug.DrawRay(_interactPointFrom.transform.position, direction, Color.red);
+                Debug.DrawLine(_interactPointFrom.transform.position, hit.point, Color.green);
+
+                if (hit.collider == null)
+                {
+                    _interactingWith.StopInteract();
+                    _interactingWith = null;
+                }
+            }
         }
 
         private void FixedUpdate()

@@ -10,6 +10,8 @@ namespace Assets.Scripts.Interactable
         //Todo Think of a naming structure for enums.
         public EInteractType InteractType;
 
+        public bool MaintainRange = false;
+
         protected UIManager _uIManager;
         protected InputManager _inputManager;
 
@@ -32,21 +34,7 @@ namespace Assets.Scripts.Interactable
 
         public abstract void Interact(GameObject Interactor);
 
-        //public virtual void LookAt(GameObject Interactor)
-        //{
-        //    if (_uIManager != null)
-        //    {
-        //        _uIManager.InteractText.text = InteractUIMessage;
-        //    }
-        //}
-
-        //public virtual void LookAway(GameObject Interactor)
-        //{
-        //    if (_uIManager != null)
-        //    {
-        //        _uIManager.InteractText.text = string.Empty;
-        //    }
-        //}
+        public virtual void StopInteract() { }
 
         public enum EInteractType
         {

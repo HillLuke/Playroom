@@ -9,11 +9,8 @@ namespace Assets.Scripts.UI.ItemCollections
         {
             _UIManager.ActionOpenStorage -= OpenStorage;
             _UIManager.ActionOpenStorage += OpenStorage;
-
-            if (_itemCollection == null)
-            {
-                Debug.LogError("ItemCollection is null");
-            }
+            _UIManager.ActionCloseStorage -= CloseStorage;
+            _UIManager.ActionCloseStorage += CloseStorage;
 
             base.Setup();
         }
@@ -22,6 +19,16 @@ namespace Assets.Scripts.UI.ItemCollections
         {
             _itemCollection = itemCollection;
             ToggleActive();
+        }
+
+        public void CloseStorage()
+        {
+            Debug.Log($"CloseStorage _isActive {_isActive}");
+            if (_isActive)
+            {
+                _itemCollection = null;
+                ToggleActive();
+            }
         }
     }
 }

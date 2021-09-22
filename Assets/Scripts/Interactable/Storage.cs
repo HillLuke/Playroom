@@ -7,11 +7,14 @@ namespace Assets.Scripts.Interactable
     {
         public override string InteractUIMessage => $"Open ({_inputManager.PlayerInputData.Action_Use.KeyCode})";
 
+        public SphereCollider Collider;
+
         private ItemCollection _itemCollection;
 
         protected override void Awake()
         {
             _itemCollection = gameObject.GetComponent<ItemCollection>();
+            MaintainRange = true;
 
             if (_itemCollection == null)
             {
@@ -25,5 +28,12 @@ namespace Assets.Scripts.Interactable
         {
             _uIManager.OpenStorage(_itemCollection);
         }
+
+        public override void StopInteract()
+        {
+            _uIManager.CloseStorage();
+            base.StopInteract();
+        }
+
     }
 }

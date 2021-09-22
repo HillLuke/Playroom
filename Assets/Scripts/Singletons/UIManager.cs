@@ -13,6 +13,7 @@ namespace Assets.Scripts.Singletons
         public Action<InputAction> ActionKeyPressed;
         public Action<string> ActionInteractor;
         public Action<ItemCollection> ActionOpenStorage;
+        public Action ActionCloseStorage;
 
         private InputManager _inputManager;
         private PlayerManager _playerManger;
@@ -35,6 +36,13 @@ namespace Assets.Scripts.Singletons
             if (ActionOpenStorage != null)
             {
                 ActionOpenStorage.Invoke(itemCollection);
+            }
+        }
+        public void CloseStorage()
+        {
+            if (ActionCloseStorage != null)
+            {
+                ActionCloseStorage.Invoke();
             }
         }
 
