@@ -3347,7 +3347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animator: {fileID: 2499139864212960264}
   CharacterEquipment: {fileID: 0}
-  CharacterInventory: {fileID: 0}
+  Inventory: {fileID: 0}
   CharacterInteractor: {fileID: 0}
   CharacterStats: {fileID: 0}
 --- !u!114 &2134928051671863414
@@ -3394,7 +3394,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InventorySize: 20
-  Inventory: []
+  CanDragIn: 1
+  CanDragOut: 1
+  CanDropItems: 1
+  DefaultItems: []
+  Items: []
 --- !u!114 &265346387040718436
 MonoBehaviour:
   m_ObjectHideFlags: 0

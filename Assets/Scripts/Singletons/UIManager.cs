@@ -2,6 +2,8 @@ using Assets.Scripts.Inventory;
 using Assets.Scripts.Player;
 using Assets.Scripts.Utilities;
 using System;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Singletons
 {
@@ -45,6 +47,7 @@ namespace Assets.Scripts.Singletons
                 ActionCloseStorage.Invoke();
             }
         }
+
 
         protected override void Start()
         {

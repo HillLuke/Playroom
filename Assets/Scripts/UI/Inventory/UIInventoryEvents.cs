@@ -15,10 +15,10 @@ namespace Assets.Scripts.UI.Inventory
 
             if (Inventory != null)
             {
-                Inventory.ActionItemAdded -= CharacterInventory_ActionItemAdded;
-                Inventory.ActionItemDropped -= CharacterInventory_ActionItemDropped;
-                Inventory.ActionItemAdded += CharacterInventory_ActionItemAdded;
-                Inventory.ActionItemDropped += CharacterInventory_ActionItemDropped;
+                Inventory.ActionItemAdded -= ItemAdded;
+                Inventory.ActionItemDropped -= ItemDropped;
+                Inventory.ActionItemAdded += ItemAdded;
+                Inventory.ActionItemDropped += ItemDropped;
             }
             else
             {
@@ -28,16 +28,16 @@ namespace Assets.Scripts.UI.Inventory
             base.Setup();
         }
 
-        private void CharacterInventory_ActionItemDropped(Item item)
+        private void ItemDropped(Item item)
         {
             var notification = Instantiate(UIInventoryEventText, gameObject.transform);
-            notification.SetText($"Dropped {item.ItemName}");
+            notification.SetText($"Dropped {item.ItemData.ItemName}");
         }
 
-        private void CharacterInventory_ActionItemAdded(Item item)
+        private void ItemAdded(Item item)
         {
             var notification = Instantiate(UIInventoryEventText, gameObject.transform);
-            notification.SetText($"Picked up {item.ItemName}");
+            notification.SetText($"Picked up {item.ItemData.ItemName}");
         }
     }
 }

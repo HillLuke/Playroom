@@ -71,14 +71,7 @@ namespace Assets.Scripts.Player
                     _interactingWith = null;
                 }
 
-                if (_lookingAt.MaintainRange)
-                {
-                    _interactingWith = _lookingAt;
-                }
-                else
-                {
-                    _interactingWith = null;
-                }
+                _interactingWith = _lookingAt;
 
                 if (ActionInteract != null)
                 {
@@ -141,6 +134,11 @@ namespace Assets.Scripts.Player
             else if (templookingAt != null && templookingAt != _lookingAt && distance <= _range)
             {
                 _lookingAt = templookingAt;
+                if (_lookingAt.InteractUIMessage.Contains("103"))
+                {
+                    Debug.Log($"Looking at {_lookingAt.InteractUIMessage}");
+                }
+
                 Debug.Log($"Looking at {_lookingAt.InteractUIMessage}");
                 _uIManager.SetInteract(_lookingAt.InteractUIMessage);
                 isLookingAtInteractable = true;

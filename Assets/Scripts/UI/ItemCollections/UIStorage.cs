@@ -18,6 +18,12 @@ namespace Assets.Scripts.UI.ItemCollections
         public void OpenStorage(ItemCollection itemCollection)
         {
             _itemCollection = itemCollection;
+
+            _itemCollection.ActionItemAdded -= Draw;
+            _itemCollection.ActionItemAdded += Draw;
+            _itemCollection.ActionItemRemoved -= Draw;
+            _itemCollection.ActionItemRemoved += Draw;
+
             ToggleActive();
         }
 

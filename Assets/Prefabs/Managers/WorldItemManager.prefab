@@ -43,6 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e144031717a96a4ea38ecb5ef5ed76f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInitialized: 0
+  isSetup: 0
   WorldItemPrefab: {fileID: 8911580136341460679, guid: af98d70fad99bb34096087b7537ce320, type: 3}
-  DropForce: 250
-  ForceMode: 0
+  DropForceForward: 80
+  DropForceUp: 50

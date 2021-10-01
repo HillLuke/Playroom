@@ -3,7 +3,7 @@
 namespace Assets.Scripts.Inventory.Items
 {
     [CreateAssetMenu(fileName = "Item", menuName = "Item/Weapon")]
-    public class Weapon : Item
+    public class Weapon : ItemData
     {
         public override ItemType ItemType { get => ItemType.Weapon; set => ItemType = value; }
 

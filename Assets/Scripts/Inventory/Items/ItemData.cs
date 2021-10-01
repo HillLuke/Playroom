@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Assets.Scripts.Inventory.Items
 {
     [CreateAssetMenu(fileName = "Item", menuName = "Item/Base Item")]
-    public class Item : ScriptableObject
+    public class ItemData : ScriptableObject
     {
         [HorizontalGroup("Split", 55, LabelWidth = 0)]
         [PreviewField(55, ObjectFieldAlignment.Left)]

@@ -10,8 +10,6 @@ namespace Assets.Scripts.Interactable
         //Todo Think of a naming structure for enums.
         public EInteractType InteractType;
 
-        public bool MaintainRange = false;
-
         protected UIManager _uIManager;
         protected InputManager _inputManager;
 

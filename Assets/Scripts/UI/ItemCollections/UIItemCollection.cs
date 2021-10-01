@@ -1,13 +1,17 @@
 using Assets.Scripts.Inventory;
+using Assets.Scripts.Inventory.Items;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.UI.ItemCollections
 {
-    public class UIItemCollection : UIBase
+    public class UIItemCollection : UIBase, IDropHandler
     {
+        public ItemCollection ItemCollection { get { return _itemCollection; } }
+
         private protected ItemCollection _itemCollection;
 
         [ReadOnly]
@@ -41,10 +45,7 @@ namespace Assets.Scripts.UI.ItemCollections
         {
             for (int i = 0; i < _slots.Count; i++)
             {
-                if (_itemCollection.Items.ElementAtOrDefault(i) != null)
-                {
-                    _slots[i].SetItem(_itemCollection.Items[i]);
-                }
+                _slots[i].SetItem(_itemCollection.Items[i], i);
             }
         }
 
@@ -57,5 +58,51 @@ namespace Assets.Scripts.UI.ItemCollections
             }
             _slots = new List<UIItemSlot>();
         }
+
+        private protected void Draw(Item item)
+        {
+            if (_isActive)
+            {
+                Draw();
+            }
+        }
+
+        public void StackOrSwap(UIItemSlot slot1, UIItemSlot slot2)
+        {
+            if (slot1.Item == slot2.Item)
+            {
+                slot1.Item.Stack++;
+            }
+            else
+            {
+                (
+                    slot1.UIItemCollection.ItemCollection.Items[slot1.Index],
+                    slot2.UIItemCollection.ItemCollection.Items[slot2.Index]
+                ) =
+                (
+                    slot2.UIItemCollection.ItemCollection.Items[slot2.Index],
+                    slot1.UIItemCollection.ItemCollection.Items[slot1.Index]
+                );
+            }
+
+            if (slot1.UIItemCollection != slot2.UIItemCollection)
+            {
+                //Refresh both collections
+                slot1.UIItemCollection.Draw();
+                slot2.UIItemCollection.Draw();
+            }
+            else
+            {
+                Draw();
+            }
+        }
+
+        #region Interfaces
+
+        public void OnDrop(PointerEventData eventData)
+        {
+        }
+
+        #endregion
     }
 }

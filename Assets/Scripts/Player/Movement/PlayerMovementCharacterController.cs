@@ -5,6 +5,8 @@ namespace Assets.Scripts.Player.Movement
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovementCharacterController : PlayerMovementBase
     {
+        public bool RotateWithCamera;
+
         private CharacterController _characterController;
         [SerializeField] private Vector3 _playerVelocity;
 
@@ -31,7 +33,10 @@ namespace Assets.Scripts.Player.Movement
 
         private void LateUpdate()
         {
-            UpdateOrientation();
+            if (RotateWithCamera)
+            {
+                UpdateOrientation();
+            }
         }
 
         protected override void CalculateJump()

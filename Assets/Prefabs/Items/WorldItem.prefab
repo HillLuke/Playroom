@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8750320974486237797}
   - component: {fileID: 8911580136341460679}
-  - component: {fileID: 454232968}
+  - component: {fileID: 4488287425684855546}
   m_Layer: 7
   m_Name: WorldItem
   m_TagString: Untagged
@@ -45,9 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractType: 0
-  ItemData: {fileID: 0}
-  _spawnLocation: {fileID: 0}
---- !u!54 &454232968
+  Item:
+    _itemData: {fileID: 0}
+    _stack: 0
+  _spawnLocation: {fileID: 8750320974486237816}
+--- !u!54 &4488287425684855546
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -3,7 +3,7 @@
 namespace Assets.Scripts.Inventory.Items
 {
     [CreateAssetMenu(fileName = "Item", menuName = "Item/Consumable")]
-    public class Consumable : Item
+    public class Consumable : ItemData
     {
         [SerializeReference]
         public ConsumableBehaviour ConsumableBehaviour; // Can be expanded in to a list to provide multiple behaviours to a single consumable

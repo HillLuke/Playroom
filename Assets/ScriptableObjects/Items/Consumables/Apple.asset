@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4571c46bd64de649bc826e4011111bf, type: 3}
   m_Name: Apple
   m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: 890d0f26c4d403a4d9d603a0e6a050a4, type: 3}
+  WorldItem: {fileID: 8438343259177613375, guid: 210a01aef30ad0c43b4d8616b1512d71, type: 3}
   ItemName: Apple
-  Description: An Apple
-  IsStackable: 0
-  MaxStack: 0
-  Image: {fileID: 0}
+  Description: Eat to restore health
+  IsStackable: 1
+  MaxStack: 99
   ConsumableBehaviour:
     id: 0
   references:

@@ -1,5 +1,6 @@
 using Assets.Scripts.Inventory.Items;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Inventory
@@ -8,26 +9,20 @@ namespace Assets.Scripts.Inventory
     {
         public Action<Item> ActionItemAdded;
         public Action<Item> ActionItemDropped;
+        public Action<Item> ActionItemRemoved;
 
         public int InventorySize = 20;
+        public bool CanDragIn;
+        public bool CanDragOut;
+        public bool CanDropItems;
 
-        public Item[] DefaultItems;
         public Item[] Items;
-
-        private void Start()
-        {
-        }
 
         private void Awake()
         {
-            Items = new Item[InventorySize];
-
-            if (DefaultItems != null && DefaultItems.Length <= Items.Length)
+            if (Items != null)
             {
-                for (int i = 0; i < DefaultItems.Length; i++)
-                {
-                    Items[i] = DefaultItems[i];
-                }
+                Array.Resize(ref Items, InventorySize);
             }
         }
 
@@ -48,28 +43,22 @@ namespace Assets.Scripts.Inventory
             }
             else
             {
-                //TODO feedback to player they cant pickup
                 return false;
+            }
+        }
+
+        public void RemoveItem(int index, Item item)
+        {            
+            Items[index] = null;
+
+            if (ActionItemRemoved != null)
+            {
+                ActionItemRemoved.Invoke(item);
             }
         }
 
         public void DropItem()
         {
         }
-
-        //public void DropFirstItem()
-        //{
-        //    if (_worldItemManager != null && Inventory.Count > 0)
-        //    {
-        //        _worldItemManager.SpawnItem(Inventory.First(), gameObject);
-
-        //        if (ActionItemAdded != null)
-        //        {
-        //            ActionItemDropped.Invoke(Inventory.First());
-        //        }
-
-        //        Inventory.Remove(Inventory.First());
-        //    }
-        //}
     }
 }

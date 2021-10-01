@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8143688738040101736}
   - component: {fileID: 2824469333812653754}
   - component: {fileID: 2904812704849039487}
-  m_Layer: 0
+  - component: {fileID: 1974040893}
+  m_Layer: 5
   m_Name: InventoryNotifications
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,9 +88,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowByDefault: 1
   ToggleInputType: 0
-  CharacterInventory: {fileID: 0}
+  Inventory: {fileID: 0}
   UIInventoryEventText: {fileID: 4474341495983584175, guid: ac85c16e8b69b6b408d1f7f8f2458fb1, type: 3}
 --- !u!114 &2904812704849039487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8143688738040101742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
+--- !u!114 &1974040893
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

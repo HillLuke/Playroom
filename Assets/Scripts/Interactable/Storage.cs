@@ -14,7 +14,6 @@ namespace Assets.Scripts.Interactable
         protected override void Awake()
         {
             _itemCollection = gameObject.GetComponent<ItemCollection>();
-            MaintainRange = true;
 
             if (_itemCollection == null)
             {
