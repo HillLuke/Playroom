@@ -42,11 +42,11 @@ namespace Assets.Scripts.Singletons
 
         [ReadOnly]
         [ShowInInspector]
-        private bool _mouseLocked = false;
+        private bool _isMouseShown = false;
 
         private void Update()
         {
-            _movment.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            _movment.Set(Input.GetAxisRaw(PlayerInputData.Horizontal), Input.GetAxisRaw(PlayerInputData.Vertical));
 
             _jump = Input.GetKeyDown(PlayerInputData.Movement_Jump.KeyCode);
             _run = Input.GetKey(PlayerInputData.Movement_Run.KeyCode);
@@ -58,7 +58,7 @@ namespace Assets.Scripts.Singletons
         {
             if (_hasControl)
             {
-                _camera.Set(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+                _camera.Set(Input.GetAxis(PlayerInputData.XAxis), Input.GetAxis(PlayerInputData.YAxis));
             }
         }
 
@@ -74,10 +74,11 @@ namespace Assets.Scripts.Singletons
 
         protected override void Setup()
         {
-            ActionKeyPressed += ShowMouse;
+            ActionKeyPressed += KeyPressed;
             ActionKeyPressed += DebugAction;
 
-            LockMouse();
+            HideMouse();
+            ReleaseControl();
 
             base.Setup();
         }
@@ -87,29 +88,30 @@ namespace Assets.Scripts.Singletons
             Debug.Log("Action " + inputAction.InputType);
         }
 
-        private void ShowMouse(InputAction inputAction)
+        private void KeyPressed(InputAction inputAction)
         {
-            if (inputAction.InputType != EInputType.UI_ShowMouse)
+            if (inputAction.InputType == EInputType.UI_ShowMouse)
             {
-                return;
+                ToggleMouseAndControl();
             }
-            LockMouse();
+            if (inputAction.InputType == EInputType.UI_CloseAllUI)
+            {
+                HideMouse();
+                ReleaseControl();
+            }
         }
 
-        private void LockMouse()
+        private void ToggleMouseAndControl()
         {
-            _mouseLocked = !_mouseLocked;
-            if (_mouseLocked)
+            if (!_isMouseShown)
             {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                ReleaseControl();
+                ShowMouse();
+                LockControl();
             }
             else
             {
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
-                LockControl();
+                HideMouse();
+                ReleaseControl();
             }
         }
 
@@ -146,6 +148,20 @@ namespace Assets.Scripts.Singletons
         public void ReleaseControl()
         {
             _hasControl = true;
+        }
+
+        public void ShowMouse()
+        {
+            _isMouseShown = true;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+
+        public void HideMouse()
+        {
+            _isMouseShown = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 }

@@ -32,7 +32,15 @@ namespace Assets.Scripts.Interactable
         {
             var inventory = Interactor.GetComponent<ItemCollection>();
 
-            if (inventory != null && inventory.AddItem(Item))
+            if (inventory != null)
+            {
+                var used = inventory.AddItem(Item);
+                if (used > 0)
+                {
+                    Item.Stack -= used;
+                }
+            }
+            if (Item.Stack <= 0)
             {
                 Destroy(gameObject);
             }
@@ -50,11 +58,6 @@ namespace Assets.Scripts.Interactable
 
         private string InteractMessage()
         {
-            if (Item.Stack == 103)
-            {
-                Item.Stack = 99;
-            }
-
             if (Item.Stack > 1)
             {
                 return $"Pickup {Item.ItemData.ItemName} x {Item.Stack} ({_inputManager.PlayerInputData.Action_Use.KeyCode})";

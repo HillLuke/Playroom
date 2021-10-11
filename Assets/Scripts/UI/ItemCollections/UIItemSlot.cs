@@ -1,10 +1,8 @@
 using Assets.Scripts.Inventory;
-using Assets.Scripts.Inventory.Items;
 using Assets.Scripts.Singletons;
 using Assets.Scripts.Utilities;
 using Sirenix.OdinInspector;
 using System;
-using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,7 +10,7 @@ using Image = UnityEngine.UI.Image;
 
 namespace Assets.Scripts.UI.ItemCollections
 {
-    public class UIItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+    public class UIItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         public Action<PointerEventData> Clicked;
 
@@ -44,8 +42,10 @@ namespace Assets.Scripts.UI.ItemCollections
         {
             _item = item;
             _slotIcon.overrideSprite = item?.ItemData?.Icon ?? null;
+            var alpha = (_slotIcon.overrideSprite == null) ? 0f : 255f;
+            _slotIcon.color = new Color(_slotIcon.color.r, _slotIcon.color.g, _slotIcon.color.b, alpha);
             _index = index;
-            if (item != null && item?.Stack != 0)
+            if (item != null && item.ItemData != null && item.ItemData.IsStackable && item.Stack != 0)
             {
                 _stack.text = item.Stack.ToString();
                 _stack.gameObject.SetActive(true);
@@ -60,7 +60,8 @@ namespace Assets.Scripts.UI.ItemCollections
 
         public void OnDrop(PointerEventData eventData)
         {
-            if (_parentContainer.ItemCollection.CanDragIn)
+            Debug.Log("UIItemSlot OnDrop");
+            if (_parentContainer.ItemCollection.CanDragIn && _dragManager.DragObject != null)
             {
                 _parentContainer.StackOrSwap(this, _dragManager.DragObject.UIItemSlot);
             }
@@ -68,6 +69,7 @@ namespace Assets.Scripts.UI.ItemCollections
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            Debug.Log("UIItemSlot OnBeginDrag");
             if (Item != null && _parentContainer.ItemCollection.CanDragOut)
             {
                 _dragManager.SetDragObject(this);
@@ -80,26 +82,11 @@ namespace Assets.Scripts.UI.ItemCollections
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            //Type type = EventSystem.current.currentInputModule.GetType();
-            //MethodInfo methodInfo;
-            //methodInfo = type.GetMethod("GetLastPointerEventData", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-            //PointerEventData eventDataa = (PointerEventData)methodInfo.Invoke(EventSystem.current.currentInputModule, new object[] { PointerInputModule.kMouseLeftId });
+            Debug.Log("UIItemSlot OnEndDrag");
 
-            //if (eventData?.pointerEnter?.layer == (int)Layers.UI)
-            //{
-
-            //    if (_parentContainer != _dragManager.DragObject.UIItemCollection)
-            //    {
-            //        Debug.Log("Remove from container");
-            //        //_parentContainer.ItemCollection.RemoveItem(_index, Item);
-            //    }
-            //    else
-            //    {
-            //        Debug.Log("Not removing");
-            //    }
-            //}
-            
-            if (_parentContainer.ItemCollection.CanDropItems)
+            if (eventData?.pointerEnter?.layer != (int)Layers.UI ||
+                eventData?.pointerEnter?.gameObject.GetComponentInParent<UIItemCollection>() == null &&
+                _parentContainer.ItemCollection.CanDropItems)
             {
                 Debug.Log("Drop item");
                 var parentTransform = _parentContainer.ItemCollection.gameObject.GetComponentInParent<Transform>();
@@ -115,6 +102,24 @@ namespace Assets.Scripts.UI.ItemCollections
             }
 
             _dragManager.ClearDragObject();
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (eventData.button == PointerEventData.InputButton.Right)
+            {
+                _parentContainer.RightClick(_index, Item);
+            }
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+
         }
 
         #endregion

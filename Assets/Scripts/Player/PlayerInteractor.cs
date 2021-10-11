@@ -51,6 +51,10 @@ namespace Assets.Scripts.Player
             if (UIManager.instanceExists)
             {
                 _uIManager = UIManager.instance;
+                _uIManager.ActionCloseAllUI += () =>
+                {
+                    StopInteracting();
+                };
             }
         }
 
@@ -95,17 +99,21 @@ namespace Assets.Scripts.Player
                 var direction = _interactingWith.transform.position - _interactPointFrom.transform.position;
                 var ray = new Ray(_interactPointFrom.transform.position, direction);
 
-                RaycastHit hit;
-                Physics.Raycast(ray, out hit, _range, LayerMask);
+                RaycastHit PlayerInRangeOfInteractable;
+                Physics.Raycast(ray, out PlayerInRangeOfInteractable, _range, LayerMask);
 
                 Debug.DrawRay(_interactPointFrom.transform.position, direction, Color.red);
-                Debug.DrawLine(_interactPointFrom.transform.position, hit.point, Color.green);
+                Debug.DrawLine(_interactPointFrom.transform.position, PlayerInRangeOfInteractable.point, Color.green);
 
-                if (hit.collider == null)
+                if (PlayerInRangeOfInteractable.collider == null)
                 {
-                    _interactingWith.StopInteract();
-                    _interactingWith = null;
+                    StopInteracting();
                 }
+            }
+
+            if (_lookingAt != null)
+            {
+                _uIManager.SetInteract(_lookingAt.InteractUIMessage);
             }
         }
 
@@ -134,14 +142,16 @@ namespace Assets.Scripts.Player
             else if (templookingAt != null && templookingAt != _lookingAt && distance <= _range)
             {
                 _lookingAt = templookingAt;
-                if (_lookingAt.InteractUIMessage.Contains("103"))
-                {
-                    Debug.Log($"Looking at {_lookingAt.InteractUIMessage}");
-                }
-
-                Debug.Log($"Looking at {_lookingAt.InteractUIMessage}");
-                _uIManager.SetInteract(_lookingAt.InteractUIMessage);
                 isLookingAtInteractable = true;
+            }
+        }
+
+        private void StopInteracting()
+        {
+            if (_interactingWith != null)
+            {
+                _interactingWith.StopInteract();
+                _interactingWith = null;
             }
         }
 
@@ -152,6 +162,7 @@ namespace Assets.Scripts.Player
                 Gizmos.color = Color.green;
                 Gizmos.DrawSphere(raycastHitCamera.point, 0.2f);
                 Gizmos.color = Color.black;
+
                 if (_lookingAt != null)
                 {
                     Gizmos.DrawSphere(raycastHitCamera.point, 0.2f);

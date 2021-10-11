@@ -8,7 +8,7 @@ namespace Assets.Scripts.UI
 
         protected override void Setup()
         {
-            //_UIManager.ActionInteractor -= SetInteractText;
+            _UIManager.ActionInteractor -= SetInteractText;
             _UIManager.ActionInteractor += SetInteractText;
             base.Setup();
         }

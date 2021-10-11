@@ -1,8 +1,6 @@
 using Assets.Scripts.Inventory;
-using Assets.Scripts.Inventory.Items;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -21,6 +19,9 @@ namespace Assets.Scripts.UI.ItemCollections
         [SerializeField]
         private protected UIItemSlot _uIInventoryItemPrefab;
 
+        [SerializeField]
+        private protected GameObject _slotHolder;
+
         protected override void OnClose()
         {
             ClearSlots();
@@ -33,7 +34,7 @@ namespace Assets.Scripts.UI.ItemCollections
 
             for (int i = 0; i < _itemCollection.InventorySize; i++)
             {
-                _slots.Add(Instantiate(_uIInventoryItemPrefab, gameObject.transform));
+                _slots.Add(Instantiate(_uIInventoryItemPrefab, _slotHolder.transform));
             }
 
             Draw();
@@ -67,42 +68,54 @@ namespace Assets.Scripts.UI.ItemCollections
             }
         }
 
-        public void StackOrSwap(UIItemSlot slot1, UIItemSlot slot2)
+        public bool StackOrSwap(UIItemSlot target, UIItemSlot source)
         {
-            if (slot1.Item == slot2.Item)
+            var tempTarget = new Item(target?.Item?.ItemData, target?.Item?.Stack ?? 0);
+            var tempSource = new Item(source?.Item?.ItemData, source?.Item?.Stack ?? 0);
+            var isSameCollection = target.UIItemCollection == source.UIItemCollection;
+            var result = false;
+
+            if (isSameCollection)
             {
-                slot1.Item.Stack++;
+                result = target.UIItemCollection.ItemCollection.StackOrSwap(target.Index, source.Index);
             }
             else
             {
-                (
-                    slot1.UIItemCollection.ItemCollection.Items[slot1.Index],
-                    slot2.UIItemCollection.ItemCollection.Items[slot2.Index]
-                ) =
-                (
-                    slot2.UIItemCollection.ItemCollection.Items[slot2.Index],
-                    slot1.UIItemCollection.ItemCollection.Items[slot1.Index]
-                );
+                var used = target.UIItemCollection.ItemCollection.AddItem(target.Index, new Item(source.Item.ItemData, source.Item.Stack));
+                if (used > 0)
+                {
+                    source.Item.Stack -= used;
+                }
+
+                if (source.Item.Stack <= 0)
+                {
+                    source.UIItemCollection.ItemCollection.RemoveItem(source.Index, new Item(source.Item.ItemData, source.Item.Stack));
+                }
             }
 
-            if (slot1.UIItemCollection != slot2.UIItemCollection)
+            if (target.UIItemCollection != source.UIItemCollection)
             {
                 //Refresh both collections
-                slot1.UIItemCollection.Draw();
-                slot2.UIItemCollection.Draw();
+                target.UIItemCollection.Draw();
+                source.UIItemCollection.Draw();
             }
             else
             {
                 Draw();
             }
+
+            return result;
         }
+
+        public virtual void RightClick(int index, Item item) { }
 
         #region Interfaces
 
         public void OnDrop(PointerEventData eventData)
         {
+            Debug.Log("UIItemCollection OnDrop");
         }
 
-        #endregion
+        #endregion Interfaces
     }
 }

@@ -9,7 +9,9 @@ namespace Assets.Scripts.UI
     public class UIBase : MonoBehaviour, IPointerClickHandler
     {
         public bool ShowByDefault = false;
+        public bool ListenForCloseAll = false;
         public EInputType ToggleInputType;
+        public EUIElement UIActionToListenFor;
 
         protected UIManager _UIManager;
 
@@ -27,10 +29,33 @@ namespace Assets.Scripts.UI
             {
                 _UIManager = UIManager.instance;
                 _UIManager.ActionPlayerChanged += SetPlayer;
-                _UIManager.ActionCloseAllUI += () => { _isActive = false; ToggleActive(); };
+                if (ListenForCloseAll)
+                {
+                    _UIManager.ActionCloseAllUI += () => { OnClose(); };
+                }
+
+                if (UIActionToListenFor != EUIElement.NONE)
+                {
+                    _UIManager.ActionUIElementAction += UIElementActionListener;
+                }
             }
 
             WaitForSingletons();
+        }
+
+        private void UIElementActionListener(UIElementAction uIElementAction)
+        {
+            if (uIElementAction.InputType == UIActionToListenFor)
+            {
+                if (uIElementAction.Open)
+                {
+                    OnOpen();
+                }
+                else
+                {
+                    OnClose();
+                }
+            }
         }
 
         private void WaitForSingletons()
@@ -46,20 +71,6 @@ namespace Assets.Scripts.UI
             }
         }
 
-        protected void ToggleActive()
-        {
-            _isActive = !_isActive;
-            gameObject.SetActive(_isActive);
-
-            if (_isActive)
-            {
-                OnOpen();
-            }
-            else
-            {
-                OnClose();
-            }
-        }
 
         public virtual void OnPointerClick(PointerEventData eventData)
         {
@@ -87,25 +98,40 @@ namespace Assets.Scripts.UI
             _UIManager.ActionKeyPressed -= KeyPressed;
             _UIManager.ActionKeyPressed += KeyPressed;
 
-            _isActive = !ShowByDefault;
-            ToggleActive();
+            gameObject.SetActive(ShowByDefault);
         }
 
         protected virtual void KeyPressed(InputAction input)
         {
             if (input.InputType == ToggleInputType)
             {
-                ToggleActive();
+                OnToggle();
                 Debug.Log($"Toggle on {nameof(this.gameObject)}");
+            }
+        }
+
+        protected void OnToggle()
+        {
+            if (!gameObject.activeSelf)
+            {
+                OnOpen();
+            }
+            else
+            {
+                OnClose();
             }
         }
 
         protected virtual void OnOpen()
         {
+            _isActive = true;
+            gameObject.SetActive(_isActive);
         }
 
         protected virtual void OnClose()
         {
+            _isActive = false;
+            gameObject.SetActive(_isActive);
         }
     }
 }

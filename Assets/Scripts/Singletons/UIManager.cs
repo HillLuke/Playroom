@@ -1,12 +1,13 @@
-using Assets.Scripts.Inventory;
+using Assets.Scripts.Interactable;
 using Assets.Scripts.Player;
+using Assets.Scripts.UI.ItemCollections;
 using Assets.Scripts.Utilities;
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.Scripts.Singletons
 {
+
     public class UIManager : Singleton<UIManager>
     {
         public Action ActionCloseAllUI;
@@ -14,15 +15,33 @@ namespace Assets.Scripts.Singletons
         public Action<PlayerController> ActionPlayerChanged;
         public Action<InputAction> ActionKeyPressed;
         public Action<string> ActionInteractor;
-        public Action<ItemCollection> ActionOpenStorage;
+        public Action<Storage, GameObject> ActionOpenStorage;
         public Action ActionCloseStorage;
+        public Action<UIElementAction> ActionUIElementAction;
+        public Action<UIItemCollection> ActionInteractWithUICollection;
+        public Action<UIItemCollection> ActionStopInteractWithUICollection;
 
         private InputManager _inputManager;
-        private PlayerManager _playerManger;
+        private PlayerManager _playerManager;
 
         public PlayerController GetActivePlayer()
         {
-            return _playerManger?.Player;
+            return _playerManager?.Player;
+        }
+
+        public void InteractWithUICollection(UIItemCollection uIItemCollection)
+        {
+            if (ActionInteractWithUICollection != null)
+            {
+                ActionInteractWithUICollection.Invoke(uIItemCollection);
+            }
+        }
+        public void StopInteractWithUICollection(UIItemCollection uIItemCollection)
+        {
+            if (ActionStopInteractWithUICollection != null)
+            {
+                ActionStopInteractWithUICollection.Invoke(uIItemCollection);
+            }
         }
 
         public void SetInteract(string interactNotice)
@@ -33,13 +52,14 @@ namespace Assets.Scripts.Singletons
             }
         }
 
-        public void OpenStorage(ItemCollection itemCollection)
+        public void OpenStorage(Storage storage, GameObject Interactor)
         {
             if (ActionOpenStorage != null)
             {
-                ActionOpenStorage.Invoke(itemCollection);
+                ActionOpenStorage.Invoke(storage, Interactor);
             }
         }
+
         public void CloseStorage()
         {
             if (ActionCloseStorage != null)
@@ -47,7 +67,13 @@ namespace Assets.Scripts.Singletons
                 ActionCloseStorage.Invoke();
             }
         }
-
+        public void RaiseUIElementAction(UIElementAction uIElementAction)
+        {
+            if (ActionUIElementAction != null)
+            {
+                ActionUIElementAction.Invoke(uIElementAction);
+            }
+        }
 
         protected override void Start()
         {
@@ -60,9 +86,9 @@ namespace Assets.Scripts.Singletons
 
             if (PlayerManager.instanceExists)
             {
-                _playerManger = PlayerManager.instance;
+                _playerManager = PlayerManager.instance;
 
-                _playerManger.ActionPlayerChanged += PlayerChanged;
+                _playerManager.ActionPlayerChanged += PlayerChanged;
             }
             Setup();
             base.Start();
@@ -70,14 +96,14 @@ namespace Assets.Scripts.Singletons
 
         protected override void Setup()
         {
-            if (_inputManager.isSetup && _playerManger.isSetup)
+            if (_inputManager.isSetup && _playerManager.isSetup)
             {
                 base.Setup();
             }
             else
             {
                 _inputManager.ActionSetup += Setup;
-                _playerManger.ActionSetup += Setup;
+                _playerManager.ActionSetup += Setup;
             }
         }
 
@@ -106,5 +132,18 @@ namespace Assets.Scripts.Singletons
                 }
             }
         }
+    }
+
+    public enum EUIElement
+    {
+        NONE,
+        Inventory
+    }
+
+    [Serializable]
+    public struct UIElementAction
+    {
+        public EUIElement InputType;
+        public bool Open;
     }
 }

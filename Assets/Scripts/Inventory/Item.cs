@@ -7,11 +7,16 @@ namespace Assets.Scripts.Inventory
     [Serializable]
     public class Item
     {
-        public ItemData ItemData { get { return _itemData;} }
+        public ItemData ItemData { get { return _itemData; } }
 
-        public int Stack { 
-            get { ValidateStack(_stack); return _stack; } 
-            set { ValidateStack(value); } 
+        public bool HasItem { get { return _itemData != null && _stack > 0; } }
+
+        public int Stack
+        {
+            //get { ValidateStack(_stack); return _stack; } 
+            //set { ValidateStack(value); } 
+            get { return _stack; }
+            set { _stack = value; }
         }
 
         [SerializeField]
@@ -27,7 +32,7 @@ namespace Assets.Scripts.Inventory
 
         private void ValidateStack(int value)
         {
-            _stack = _itemData == null ? 0 : Mathf.Clamp(value, 1, _itemData.MaxStack == 0 ? 1 : _itemData.MaxStack);
+            _stack = _itemData == null ? 0 : Mathf.Clamp(value, 0, _itemData.MaxStack == 0 ? 0 : _itemData.MaxStack);
         }
 
     }

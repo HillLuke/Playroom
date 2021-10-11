@@ -1,8 +1,5 @@
-using Assets.Scripts.Singletons;
 using Assets.Scripts.UI.ItemCollections;
 using Assets.Scripts.Utilities;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,8 +20,10 @@ public class DragManager : Singleton<DragManager>
             _dragObject = new DragObject(itemSlot);
             _rectTransform.SetAsLastSibling();
             _image.sprite = itemSlot.Item.ItemData.Icon;
-            _rectTransform.sizeDelta = itemSlot.SlotIcon.GetComponent<RectTransform>().sizeDelta;
+            var rect = itemSlot.SlotIcon.GetComponent<RectTransform>();
+            _rectTransform.sizeDelta = new Vector2(rect.rect.width, rect.rect.height);
             _canvasGroup.alpha = 1f;
+            Debug.Log("SetDragObject");
         }
         else
         {
@@ -36,6 +35,7 @@ public class DragManager : Singleton<DragManager>
     {
         _canvasGroup.alpha = 0f;
         _dragObject = null;
+        Debug.Log("ClearDragObject");
     }
 
     protected override void Start()

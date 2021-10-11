@@ -3332,6 +3332,7 @@ MonoBehaviour:
   DebugLogging: 0
   LookAt: {fileID: 1270526335983895627}
   FollowTarget: {fileID: 1270526335983895627}
+  RotateWithCamera: 0
   _playerVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &4575902477315743061
 MonoBehaviour:
@@ -3397,8 +3398,7 @@ MonoBehaviour:
   CanDragIn: 1
   CanDragOut: 1
   CanDropItems: 1
-  DefaultItems: []
-  Items: []
+  _items: []
 --- !u!114 &265346387040718436
 MonoBehaviour:
   m_ObjectHideFlags: 0

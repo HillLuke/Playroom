@@ -26,6 +26,11 @@ namespace Assets.Scripts.Inventory.Items
         {
             return true;
         }
+
+        public override bool Equals(object other)
+        {
+            return ItemName.Equals(((ItemData)other).ItemName);
+        }
     }
 
     public enum ItemType
