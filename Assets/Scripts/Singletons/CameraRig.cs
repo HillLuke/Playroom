@@ -96,6 +96,10 @@ namespace Assets.Scripts.Camera
             {
                 TogglePause();
             }
+            if (inputAction.InputType == EInputType.UI_CloseAllUI)
+            {
+                ResumeCamera();
+            }
         }
 
         private void TogglePause()

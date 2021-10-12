@@ -19,6 +19,7 @@ namespace Assets.Scripts.Singletons
         public Vector2 CameraVector => _hasControl ? _camera : Vector2.zero;
         public bool Jump => _hasControl ? _jump : false;
         public bool Run => _hasControl ? _run : false;
+        public bool UIShift => _uIShift;
 
         [ReadOnly]
         [ShowInInspector]
@@ -44,12 +45,17 @@ namespace Assets.Scripts.Singletons
         [ShowInInspector]
         private bool _isMouseShown = false;
 
+        [ReadOnly]
+        [ShowInInspector]
+        private bool _uIShift = false;
+
         private void Update()
         {
             _movment.Set(Input.GetAxisRaw(PlayerInputData.Horizontal), Input.GetAxisRaw(PlayerInputData.Vertical));
 
             _jump = Input.GetKeyDown(PlayerInputData.Movement_Jump.KeyCode);
             _run = Input.GetKey(PlayerInputData.Movement_Run.KeyCode);
+            _uIShift = Input.GetKey(PlayerInputData.UI_Shift.KeyCode);
 
             CheckActionAndUIInputs();
         }

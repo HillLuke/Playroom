@@ -13,7 +13,7 @@ namespace Assets.Scripts.UI
         public EInputType ToggleInputType;
         public EUIElement UIActionToListenFor;
 
-        protected UIManager _UIManager;
+        protected UIManager _uIManager;
 
         [ReadOnly]
         [ShowInInspector]
@@ -27,16 +27,16 @@ namespace Assets.Scripts.UI
         {
             if (UIManager.instanceExists)
             {
-                _UIManager = UIManager.instance;
-                _UIManager.ActionPlayerChanged += SetPlayer;
+                _uIManager = UIManager.instance;
+                _uIManager.ActionPlayerChanged += SetPlayer;
                 if (ListenForCloseAll)
                 {
-                    _UIManager.ActionCloseAllUI += () => { OnClose(); };
+                    _uIManager.ActionCloseAllUI += () => { OnClose(); };
                 }
 
                 if (UIActionToListenFor != EUIElement.NONE)
                 {
-                    _UIManager.ActionUIElementAction += UIElementActionListener;
+                    _uIManager.ActionUIElementAction += UIElementActionListener;
                 }
             }
 
@@ -60,14 +60,14 @@ namespace Assets.Scripts.UI
 
         private void WaitForSingletons()
         {
-            if (_UIManager.isSetup)
+            if (_uIManager.isSetup)
             {
-                SetPlayer(_UIManager.GetActivePlayer());
+                SetPlayer(_uIManager.GetActivePlayer());
             }
             else
             {
-                _UIManager.ActionSetup -= WaitForSingletons;
-                _UIManager.ActionSetup += WaitForSingletons;
+                _uIManager.ActionSetup -= WaitForSingletons;
+                _uIManager.ActionSetup += WaitForSingletons;
             }
         }
 
@@ -95,8 +95,8 @@ namespace Assets.Scripts.UI
 
         protected virtual void Setup()
         {
-            _UIManager.ActionKeyPressed -= KeyPressed;
-            _UIManager.ActionKeyPressed += KeyPressed;
+            _uIManager.ActionKeyPressed -= KeyPressed;
+            _uIManager.ActionKeyPressed += KeyPressed;
 
             gameObject.SetActive(ShowByDefault);
         }

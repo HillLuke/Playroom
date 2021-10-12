@@ -19,6 +19,7 @@ namespace Assets.Scripts.Player
         public InputAction UI_Inventory = new InputAction { InputType = EInputType.UI_Inventory, KeyCode = KeyCode.I };
         public InputAction UI_Character = new InputAction { InputType = EInputType.UI_Character, KeyCode = KeyCode.C };
         public InputAction UI_ShowMouse = new InputAction { InputType = EInputType.UI_ShowMouse, KeyCode = KeyCode.Tab };
+        public InputAction UI_Shift = new InputAction { InputType = EInputType.UI_Shift, KeyCode = KeyCode.LeftShift };
 
         [Header("Camera")]
         public string YAxis = "Mouse Y";
@@ -43,7 +44,8 @@ namespace Assets.Scripts.Player
         UI_Inventory,
         UI_Character,
         UI_CloseAllUI,
-        UI_ShowMouse
+        UI_ShowMouse,
+        UI_Shift
     }
 
     [Serializable]

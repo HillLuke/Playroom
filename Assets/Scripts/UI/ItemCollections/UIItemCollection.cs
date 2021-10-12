@@ -11,6 +11,7 @@ namespace Assets.Scripts.UI.ItemCollections
         public ItemCollection ItemCollection { get { return _itemCollection; } }
 
         private protected ItemCollection _itemCollection;
+        private protected ItemCollection _interactingWith;
 
         [ReadOnly]
         [ShowInInspector]
@@ -107,7 +108,24 @@ namespace Assets.Scripts.UI.ItemCollections
             return result;
         }
 
-        public virtual void RightClick(int index, Item item) { }
+        public virtual void ShiftLeftClick(int index, Item item)
+        {
+            if (_interactingWith == null || item == null || item.ItemData == null || item.Stack <= 0)
+            {
+                return;
+            }
+
+            var used = _interactingWith.AddItem(-1, new Item(item.ItemData, item.Stack));
+            if (used > 0)
+            {
+                item.Stack -= used;
+            }
+
+            if (item.Stack <= 0)
+            {
+                _itemCollection.RemoveItem(index, new Item(item.ItemData, item.Stack));
+            }
+        }
 
         #region Interfaces
 

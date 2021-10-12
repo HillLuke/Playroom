@@ -53,10 +53,13 @@ namespace Assets.Scripts.Interactable
 
         public override void StopInteract()
         {
-            _isInteracting = false;
-            _uIManager.CloseStorage();
-            _cmeraRig.ResumeCamera();
-            base.StopInteract();
+            if (_isInteracting)
+            {
+                _isInteracting = false;
+                _uIManager.CloseStorage();
+                _cmeraRig.ResumeCamera();
+                base.StopInteract();
+            }
         }
 
     }

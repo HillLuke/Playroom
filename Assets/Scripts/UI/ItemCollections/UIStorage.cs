@@ -8,14 +8,13 @@ namespace Assets.Scripts.UI.ItemCollections
     {
         private Storage _storage;
         private GameObject _interactor;
-        private ItemCollection _interactorItemCollection;
 
         protected override void Setup()
         {
-            _UIManager.ActionOpenStorage -= OpenStorage;
-            _UIManager.ActionOpenStorage += OpenStorage;
-            _UIManager.ActionCloseStorage -= OnClose;
-            _UIManager.ActionCloseStorage += OnClose;
+            _uIManager.ActionOpenStorage -= OpenStorage;
+            _uIManager.ActionOpenStorage += OpenStorage;
+            _uIManager.ActionCloseStorage -= OnClose;
+            _uIManager.ActionCloseStorage += OnClose;
 
             base.Setup();
         }
@@ -45,30 +44,32 @@ namespace Assets.Scripts.UI.ItemCollections
 
             if (toLink != null)
             {
-                _interactorItemCollection = toLink;
+                _interactingWith = toLink;
             }
 
-            _UIManager.InteractWithUICollection(this);
+            _uIManager.InteractWithUICollection(this);
 
             OnOpen();
         }
 
         protected override void OnClose()
         {
-            Debug.Log($"CloseStorage _isActive {_isActive}");
-            _UIManager.StopInteractWithUICollection(this);
-            if (_itemCollection != null)
+            if (_isActive)
             {
-                _itemCollection.ActionItemAdded -= Draw;
-                _itemCollection.ActionItemRemoved -= Draw;
-                _itemCollection = null;
+                _uIManager.StopInteractWithUICollection(this);
+                if (_itemCollection != null)
+                {
+                    _itemCollection.ActionItemAdded -= Draw;
+                    _itemCollection.ActionItemRemoved -= Draw;
+                    _itemCollection = null;
+                }
             }
             base.OnClose();
         }
 
         public void TakeAll()
         {
-            if (_interactorItemCollection != null)
+            if (_interactingWith != null)
             {
                 for (int i = 0; i < _itemCollection.Items.Count; i++)
                 {
@@ -77,7 +78,7 @@ namespace Assets.Scripts.UI.ItemCollections
                     {
                         continue;
                     }
-                    var used = _interactorItemCollection.AddItem(item);
+                    var used = _interactingWith.AddItem(item);
                     if (used > 0)
                     {
                         item.Stack -= used;
@@ -90,27 +91,6 @@ namespace Assets.Scripts.UI.ItemCollections
                 _itemCollection.ReShuffle();
                 Draw();
             }
-        }
-
-        public override void RightClick(int index, Item item)
-        {
-            if (_interactor == null || item == null || item.ItemData == null || item.Stack <= 0)
-            {
-                return;
-            }
-
-            var used = _interactorItemCollection.AddItem(-1, new Item(item.ItemData, item.Stack));
-            if (used > 0)
-            {
-                item.Stack -= used;
-            }
-
-            if (item.Stack <= 0)
-            {
-                _itemCollection.RemoveItem(index, new Item(item.ItemData, item.Stack));
-            }
-
-            base.RightClick(index, item);
         }
     }
 }

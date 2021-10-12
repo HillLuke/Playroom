@@ -3,6 +3,7 @@ using Assets.Scripts.Singletons;
 using Assets.Scripts.Utilities;
 using Sirenix.OdinInspector;
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -29,13 +30,25 @@ namespace Assets.Scripts.UI.ItemCollections
 
         private Item _item;
         private DragManager _dragManager;
+        private InputManager _inputManager;
+        private UIManager _uIManager;
         private UIItemCollection _parentContainer;
         private int _index;
+        private Coroutine _delayTooltipCoroutine;
 
         private void Start()
         {
             _dragManager = DragManager.instance;
             _parentContainer = gameObject.GetComponentInParent<UIItemCollection>();
+
+            if (UIManager.instanceExists)
+            {
+                _uIManager = UIManager.instance;
+            }
+            if (InputManager.instanceExists)
+            {
+                _inputManager = InputManager.instance;
+            }
         }
 
         public void SetItem(Item item, int index)
@@ -56,11 +69,20 @@ namespace Assets.Scripts.UI.ItemCollections
             }
         }
 
+        private void SetTooltip(Item item)
+        {
+            if (_delayTooltipCoroutine != null)
+            {
+                StopCoroutine(_delayTooltipCoroutine);
+            }
+
+            _delayTooltipCoroutine = StartCoroutine(Tooltip(item != null ? 0.2f : 0f, item));
+        }
+
         #region Interfaces
 
         public void OnDrop(PointerEventData eventData)
         {
-            Debug.Log("UIItemSlot OnDrop");
             if (_parentContainer.ItemCollection.CanDragIn && _dragManager.DragObject != null)
             {
                 _parentContainer.StackOrSwap(this, _dragManager.DragObject.UIItemSlot);
@@ -69,10 +91,10 @@ namespace Assets.Scripts.UI.ItemCollections
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            Debug.Log("UIItemSlot OnBeginDrag");
             if (Item != null && _parentContainer.ItemCollection.CanDragOut)
             {
                 _dragManager.SetDragObject(this);
+                SetTooltip(null);
             }
         }
 
@@ -82,13 +104,10 @@ namespace Assets.Scripts.UI.ItemCollections
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            Debug.Log("UIItemSlot OnEndDrag");
-
             if (eventData?.pointerEnter?.layer != (int)Layers.UI ||
                 eventData?.pointerEnter?.gameObject.GetComponentInParent<UIItemCollection>() == null &&
                 _parentContainer.ItemCollection.CanDropItems)
             {
-                Debug.Log("Drop item");
                 var parentTransform = _parentContainer.ItemCollection.gameObject.GetComponentInParent<Transform>();
 
                 if (parentTransform == null)
@@ -106,20 +125,35 @@ namespace Assets.Scripts.UI.ItemCollections
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (eventData.button == PointerEventData.InputButton.Right)
+            if (eventData.button == PointerEventData.InputButton.Left && _inputManager.UIShift)
             {
-                _parentContainer.RightClick(_index, Item);
+                _parentContainer.ShiftLeftClick(_index, Item);
             }
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-
+            if (_dragManager.DragObject == null)
+            {
+                SetTooltip(_item);
+            }
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            SetTooltip(null);
+        }
 
+        private IEnumerator Tooltip(float delay, Item item)
+        {
+            float time = 0.0f;
+            yield return true;
+            while (time < delay)
+            {
+                time += Time.deltaTime;
+                yield return true;
+            }
+            _uIManager?.HoverOverItem(item);
         }
 
         #endregion

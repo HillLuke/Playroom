@@ -1,4 +1,5 @@
 using Assets.Scripts.Interactable;
+using Assets.Scripts.Inventory;
 using Assets.Scripts.Player;
 using Assets.Scripts.UI.ItemCollections;
 using Assets.Scripts.Utilities;
@@ -20,6 +21,7 @@ namespace Assets.Scripts.Singletons
         public Action<UIElementAction> ActionUIElementAction;
         public Action<UIItemCollection> ActionInteractWithUICollection;
         public Action<UIItemCollection> ActionStopInteractWithUICollection;
+        public Action<Item> ActionTooltipItem;
 
         private InputManager _inputManager;
         private PlayerManager _playerManager;
@@ -27,6 +29,14 @@ namespace Assets.Scripts.Singletons
         public PlayerController GetActivePlayer()
         {
             return _playerManager?.Player;
+        }
+
+        public void HoverOverItem(Item item)
+        {
+            if (ActionTooltipItem != null)
+            {
+                ActionTooltipItem.Invoke(item);
+            }
         }
 
         public void InteractWithUICollection(UIItemCollection uIItemCollection)

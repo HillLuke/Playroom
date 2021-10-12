@@ -2,14 +2,19 @@ using Assets.Scripts.UI.ItemCollections;
 using Assets.Scripts.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class DragManager : Singleton<DragManager>
 {
     public DragObject DragObject { get { return _dragObject; } }
 
+    [SerializeField]
+    private Image _image;
+    [SerializeField]
+    private TextMeshProUGUI _stack;
+
     private Canvas _canvas;
     private CanvasGroup _canvasGroup;
-    private Image _image;
     private RectTransform _rectTransform;
     private DragObject _dragObject;
 
@@ -22,6 +27,15 @@ public class DragManager : Singleton<DragManager>
             _image.sprite = itemSlot.Item.ItemData.Icon;
             var rect = itemSlot.SlotIcon.GetComponent<RectTransform>();
             _rectTransform.sizeDelta = new Vector2(rect.rect.width, rect.rect.height);
+            if (itemSlot.Item.Stack > 1)
+            {
+                _stack.SetText(itemSlot.Item.Stack.ToString());
+                _stack.gameObject.SetActive(true);
+            }
+            else
+            {
+                _stack.gameObject.SetActive(false);
+            }
             _canvasGroup.alpha = 1f;
             Debug.Log("SetDragObject");
         }
