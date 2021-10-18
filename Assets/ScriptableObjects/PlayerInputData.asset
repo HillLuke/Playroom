@@ -36,7 +36,14 @@ MonoBehaviour:
   UI_ShowMouse:
     InputType: 8
     KeyCode: 9
+  UI_Shift:
+    InputType: 9
+    KeyCode: 304
   YAxis: Mouse Y
   XAxis: Mouse X
-  HorizontalSensitivity: 500
-  VerticalSensitivity: 100
+  Horizontal: Horizontal
+  Vertical: Vertical
+  HorizontalSensitivity: 1
+  VerticalSensitivity: 1
+  HorizontalBase: 2
+  VerticalBase: 100

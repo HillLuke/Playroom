@@ -5,15 +5,13 @@ namespace Assets.Scripts.Player.Movement
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovementCharacterController : PlayerMovementBase
     {
-        public bool RotateWithCamera;
-
         private CharacterController _characterController;
         [SerializeField] private Vector3 _playerVelocity;
 
         protected override void Awake()
         {
-            base.Awake();
             _characterController = GetComponent<CharacterController>();
+            base.Awake();
         }
 
         protected override void FixedUpdate()
@@ -28,16 +26,9 @@ namespace Assets.Scripts.Player.Movement
                 _movementData.ResetJumps();
             }
 
-            //UpdateOrientation();
+            UpdateOrientation();
         }
 
-        private void LateUpdate()
-        {
-            if (RotateWithCamera)
-            {
-                UpdateOrientation();
-            }
-        }
 
         protected override void CalculateJump()
         {
@@ -93,12 +84,10 @@ namespace Assets.Scripts.Player.Movement
 
         private void UpdateOrientation()
         {
-            //Make the player always face forward
-            float yaw = _camera.transform.rotation.eulerAngles.y;
-            //Use 1 in Slerp to make rotation instant
-            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, yaw, 0), 1f);
-
-            transform.rotation = Quaternion.Euler(transform.rotation.x, yaw, transform.rotation.z);
+            var rotInput = new Vector2(_inputManager.CameraVector.x, _inputManager.CameraVector.y);
+            var rot = transform.eulerAngles;
+            rot.y += rotInput.x * (_inputManager.PlayerInputData.HorizontalSensitivity * _inputManager.PlayerInputData.HorizontalBase);
+            transform.rotation = Quaternion.Euler(rot);
         }
     }
 }

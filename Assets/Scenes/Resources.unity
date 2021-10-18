@@ -752,6 +752,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5461325588707027730, guid: 8d8de9a78460ef5419e80c7ab034309e, type: 3}
+      propertyPath: ListenForCloseAll
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5907866367620150770, guid: 8d8de9a78460ef5419e80c7ab034309e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1249,9 +1253,49 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 168736826588957441, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
+      propertyPath: m_BindingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 168736826588957441, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
+      propertyPath: m_FollowOffset.y
+      value: 2.639749
+      objectReference: {fileID: 0}
+    - target: {fileID: 168736826588957441, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
+      propertyPath: m_FollowOffset.z
+      value: -4.404516
+      objectReference: {fileID: 0}
     - target: {fileID: 381852643235583844, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
-      propertyPath: m_Orbits.Array.data[0].m_Radius
-      value: 3
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 381852643235583844, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
+      propertyPath: m_BindingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 381852643235583844, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
+      propertyPath: m_YAxis.m_MaxSpeed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 381852643235583844, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
+      propertyPath: m_XAxis.m_InputAxisName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1244352100455064940, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.9112409
+      objectReference: {fileID: 0}
+    - target: {fileID: 1244352100455064940, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.41187382
+      objectReference: {fileID: 0}
+    - target: {fileID: 1244352100455064940, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -3e-45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1244352100455064940, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -3e-45
       objectReference: {fileID: 0}
     - target: {fileID: 1244352100523682328, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_RootOrder
@@ -1300,6 +1344,30 @@ PrefabInstance:
     - target: {fileID: 1244352100523682329, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
       propertyPath: m_Name
       value: CameraRig
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312392532201094459, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
+      propertyPath: m_BindingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312392532201094459, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
+      propertyPath: m_FollowOffset.y
+      value: 2.639749
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312392532201094459, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
+      propertyPath: m_FollowOffset.z
+      value: -4.404516
+      objectReference: {fileID: 0}
+    - target: {fileID: 3468116300135072596, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
+      propertyPath: m_BindingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3468116300135072596, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
+      propertyPath: m_FollowOffset.y
+      value: 2.639749
+      objectReference: {fileID: 0}
+    - target: {fileID: 3468116300135072596, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}
+      propertyPath: m_FollowOffset.z
+      value: -4.404516
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b3126eb66a12964c8163c4ffd293921, type: 3}

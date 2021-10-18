@@ -10,14 +10,10 @@ namespace Assets.Scripts.Player.Movement
 
         // Where the camera will centre on
         public GameObject LookAt;
-
         public GameObject FollowTarget;
-
-        public InputManager InputManager => _inputManager;
 
         protected CharacterStats _movementData;
         protected InputManager _inputManager;
-        protected UnityEngine.Camera _camera;
 
         protected virtual void Start()
         {
@@ -25,9 +21,8 @@ namespace Assets.Scripts.Player.Movement
             {
                 _inputManager = InputManager.instance;
             }
-            _movementData = GetComponent<CharacterStats>();
-            _camera = UnityEngine.Camera.main;
 
+            _movementData = GetComponent<CharacterStats>();
             _inputManager.ReleaseControl();
         }
 

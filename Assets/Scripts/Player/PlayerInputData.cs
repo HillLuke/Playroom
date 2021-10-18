@@ -30,8 +30,12 @@ namespace Assets.Scripts.Player
         public string Vertical = "Vertical";
 
         [Header("Sensitivity")]
-        public float HorizontalSensitivity = 500f;
-        public float VerticalSensitivity = 100f;
+        public float HorizontalSensitivity = 1f;
+        public float VerticalSensitivity = 1f;
+
+        [Header("Movement")]
+        public float HorizontalBase = 3f;
+        public float VerticalBase = 500f;
     }
 
     public enum EInputType

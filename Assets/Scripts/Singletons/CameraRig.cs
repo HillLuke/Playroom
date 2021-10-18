@@ -56,15 +56,12 @@ namespace Assets.Scripts.Camera
             _isPaused = true;
             FreeLookMovement.m_YAxis.m_InputAxisName = string.Empty;
             FreeLookMovement.m_YAxis.m_InputAxisValue = 0f;
-            FreeLookMovement.m_XAxis.m_InputAxisName = string.Empty;
-            FreeLookMovement.m_XAxis.m_InputAxisValue = 0f;
         }
 
         public void ResumeCamera()
         {
             _isPaused = false;
             FreeLookMovement.m_YAxis.m_InputAxisName = _inputManager.PlayerInputData.YAxis;
-            FreeLookMovement.m_XAxis.m_InputAxisName = _inputManager.PlayerInputData.XAxis;
         }
 
         public void ConfigCamera()
@@ -72,13 +69,11 @@ namespace Assets.Scripts.Camera
             FreeLookMovement.Follow = _follow;
             FreeLookMovement.LookAt = _lookAt;
 
+            FreeLookMovement.m_XAxis.m_InputAxisName = string.Empty;
+            FreeLookMovement.m_XAxis.m_InputAxisValue = 0f;
+
             FreeLookMovement.m_YAxis.m_MaxValue = 90f;
-
-            FreeLookMovement.m_XAxis.m_MaxSpeed = _inputManager.PlayerInputData.HorizontalSensitivity;
-            FreeLookMovement.m_YAxis.m_MaxSpeed = _inputManager.PlayerInputData.VerticalSensitivity;
-
-            FreeLookMovement.m_XAxis.Value = 0f;
-            FreeLookMovement.m_YAxis.Value = 50f;
+            FreeLookMovement.m_YAxis.m_MaxSpeed = _inputManager.PlayerInputData.VerticalSensitivity * _inputManager.PlayerInputData.VerticalBase;
         }
 
         private void Initialize(PlayerController player)
