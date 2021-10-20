@@ -10,21 +10,9 @@ namespace Assets.Scripts.Interactable
         public Item Item;
         public override string InteractUIMessage => InteractMessage();
 
-        [SerializeField]
-        private GameObject _spawnLocation;
-        private GameObject _itemModel;
-
 
         protected override void Start()
         {
-            if (Item != null && Item?.ItemData != null && _itemModel == null)
-            {
-                _itemModel = Instantiate(Item.ItemData.WorldItem, gameObject.transform);
-                _itemModel.layer = gameObject.layer;
-                _itemModel.AddComponent<BoxCollider>().isTrigger = true;
-                _itemModel.AddComponent<BoxCollider>();
-            }
-
             base.Start();
         }
 

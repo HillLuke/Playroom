@@ -1,3 +1,4 @@
+using Assets.Scripts.Interactable;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace Assets.Scripts.Inventory.Items
         [PreviewField(55, ObjectFieldAlignment.Left)]
         public Sprite Icon;
 
-        public GameObject WorldItem;
+        public WorldItem WorldItem;
 
         public string ItemName;
         public string Description;

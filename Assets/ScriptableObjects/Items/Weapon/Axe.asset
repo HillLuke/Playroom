@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Axe
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: d6be61b0f85a224428eae57f70f76e1c, type: 3}
-  WorldItem: {fileID: 6861424946946605823, guid: 2ff0a40b26d9ec1449bae9e6fff59eca, type: 3}
+  WorldItem: {fileID: 5260125435367113100, guid: 230d77a29f51adf4cb337d4006c2d7a5, type: 3}
   ItemName: Axe
   Description: Chops wood
   IsStackable: 0

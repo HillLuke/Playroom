@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pickaxe
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: 722ef2605ac8303438ed3ae28263a3c7, type: 3}
-  WorldItem: {fileID: 3977730513406655857, guid: 50867a86e9c0b8e49b8667c6753cbbab, type: 3}
+  WorldItem: {fileID: 4804401941913782158, guid: 1a6a6df419ef9dc48a0bb515189f162e, type: 3}
   ItemName: Pickaxe
   Description: Mines ores
   IsStackable: 0

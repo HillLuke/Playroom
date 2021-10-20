@@ -13,7 +13,12 @@ namespace Assets.Scripts.Singletons
 
         public void SpawnItem(Item item, GameObject parent)
         {
-            var temp = Instantiate(WorldItemPrefab, parent.transform.position + Vector3.up * 0.3f, parent.transform.rotation);
+            if (item == null || item.ItemData == null || item.Stack <= 0)
+            {
+                return;
+            }
+
+            var temp = Instantiate(item.ItemData.WorldItem ?? WorldItemPrefab, parent.transform.position + Vector3.up * 0.3f, parent.transform.rotation);
             temp.Item = item;
             temp.GetComponent<Rigidbody>().AddForce(parent.transform.forward * DropForceForward);
             temp.GetComponent<Rigidbody>().AddForce(parent.transform.up * DropForceUp);
